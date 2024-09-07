@@ -1,5 +1,5 @@
 .main{
-    min-height: calc(100vh - 370px);
+    min-height: calc(100vh - 308px); /* 152 + 120.38*/
 }
 
 .container{
@@ -64,6 +64,6 @@ mat-icon.filled {
 
 @media (max-width: 768px) {
     .main{
-        min-height: calc(100vh - 500px);
+        min-height: calc(100vh - 445px);
     }
-}
+} 
