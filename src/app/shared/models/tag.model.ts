@@ -1,4 +1,4 @@
-export class Tag{
-    name!: string;
-    count!: number;
+export interface Tag{
+    name: string;
+    count: number;
 }

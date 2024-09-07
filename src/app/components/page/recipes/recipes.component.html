@@ -1,31 +1,35 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <app-header></app-header>
-<app-not-found
-[visible]="recipes.length === 0">
-</app-not-found>
 <page-title [title]="pageTitle"></page-title>
-<div class="container">
-    <li *ngFor="let recipe of recipes.slice(0,recipesShownNumber)">
-    <a routerLink="/recipe/{{recipe.id}}">
-        <img [src]="recipe.imageUrl" [alt]="recipe.title">
-        <p class="tags" *ngFor="let tag of recipe.tags">
-            <mat-icon class="material-symbols-outlined">label_imporant</mat-icon>{{ tag }}
-        </p>
-        <div *ngIf="recipe.ratings.length">
-            <star-rating [starRating]="calculateAverageRating(recipe.ratings)"></star-rating>
-        </div>
-        <h2> {{ recipe.title }}</h2>
-    </a></li>
+<div class="main">
+    <app-not-found
+    [visible]="recipes.length === 0">
+    </app-not-found>
+    <div class="container">
+        <li *ngFor="let recipe of recipes.slice(0,recipesShownNumber)">
+        <a routerLink="/recipe/{{recipe.id}}">
+            <img [src]="recipe.imageUrl" [alt]="recipe.title">
+            <p class="tags" *ngFor="let tag of recipe.tags">
+                <mat-icon class="material-symbols-outlined">label_imporant</mat-icon>{{ tag }}
+            </p>
+            <div *ngIf="recipe.ratings.length">
+                <star-rating [starRating]="calculateAverageRating(recipe.ratings)"></star-rating>
+            </div>
+            <h2> {{ recipe.title }}</h2>
+        </a></li>
+    </div>
+    
+    <div class="button-container" *ngIf="this.recipes.length > this.recipesShownNumber">
+        <button 
+        class="button-end" 
+        (click)="onShowMoreRecipes()">Show More</button>
+    </div>
+    
 </div>
 
-<div class="button-container" *ngIf="this.recipes.length > this.recipesShownNumber">
-    <button 
-    class="button-end" 
-    (click)="onShowMoreRecipes()">Show More</button>
-</div>
-
+  
 <button type="button" (click)="storeRecipes()">Store recipes on Firebase</button>
-
-
+ 
 <app-footer></app-footer>
+
 

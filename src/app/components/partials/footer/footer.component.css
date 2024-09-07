@@ -2,11 +2,11 @@ footer{
     display:flex;
     flex-direction: column;
     padding:1rem;
-    margin-top:2rem;
     background-color: black;
     color:white;
     align-items: center;
     gap:0.5rem 0rem;
+    height:120px;
 }
 
 p{
@@ -50,4 +50,11 @@ p{
 
 .credentials > div > a:hover{
     text-decoration: none;
+}
+
+
+@media (max-width: 768px) {
+    footer{
+        height:200px;
+    }
 }
