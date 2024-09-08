@@ -37,7 +37,7 @@ export class AuthComponent {
 
 
   navigateBack(){
-    this.router.navigateByUrl("../")
+    this.router.navigateByUrl("")
   }
 
   changeAuthMode(){

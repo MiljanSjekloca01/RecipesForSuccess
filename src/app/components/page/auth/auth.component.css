@@ -1,8 +1,7 @@
 .container{
     display:flex;
+    min-height: 100%;
     background: linear-gradient(0deg, rgb(226, 212, 252), rgb(201, 219, 255) 50%, rgb(226, 212, 252));
-    width:100%;
-    height:100%;
     justify-content: center;
     align-items: center;
 }
@@ -21,7 +20,6 @@
     flex:1;
     flex-direction: column;
     padding:2rem;
-    min-width: 300px;
 }
 
 header{
@@ -130,4 +128,12 @@ button.change-mode{
 
 input:-webkit-autofill { 
     -webkit-background-clip: text;
+}
+
+
+@media screen and (max-width:750px){
+    .inner-container{
+        margin: 2rem 0.5rem;
+        flex-direction: column;
+    }
 }

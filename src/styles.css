@@ -7,17 +7,15 @@
 
 html{
     font-size: 16px;  
-    display:flex;
-    flex-direction: column;
     /*Jersey25 Quicksand  font-family: "Sedan",sans-serif;*/
 }
 
 body{
-    display:flex;
-    flex-direction: column;  
-    min-height: 100vh;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+
+html, body { height: 100%; }
 
 a{
     color:black;
@@ -27,3 +25,11 @@ a{
 li{
     list-style: none;
 }
+
+/*
+@media(max-width: 480px){
+    body{
+        display:table;
+    }
+}
+*/

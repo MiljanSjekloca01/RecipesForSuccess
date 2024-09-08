@@ -91,6 +91,8 @@
     justify-content: center;
 }
 
+/*  Ingredients  */
+
 .main-content > .ingredients{
     font-size: 1.2rem;
     padding:3rem 5rem;
@@ -104,12 +106,12 @@
     margin:1rem 0;
 }
 
+/*  Directions  */
 
 .main-content > .directions{
     display:flex;
     flex-direction: column;
     flex:1;
-    min-width:400px;
 }
 
 .main-content > .directions > h3,
@@ -120,6 +122,7 @@
 
 .main-content > .directions > div > p{
     margin:0.4rem;
+    word-wrap: break-word;
 }
 
 .page-divider{
@@ -130,6 +133,7 @@
     font-weight: bold;
     text-decoration: underline;
     text-underline-offset: 1rem;
+    line-height: 3rem;
 }
 
 /*   Review  */
@@ -141,7 +145,7 @@
     padding:1.5rem;
     border: 0.3rem solid darkred;
     border-radius:10%;
-    width:fit-content;
+    max-width: fit-content;
     margin:auto;
     word-wrap: break-word;
     box-shadow: 2px 0px 40px rgb(0, 24, 24);
@@ -262,8 +266,10 @@ mat-icon.thump_up:hover{
 }
 
 
-
-
-
-
+@media screen and (max-width:650px){
+    .ingredients{
+        padding:0;
+        margin-bottom:1rem;
+    }
+}
 
