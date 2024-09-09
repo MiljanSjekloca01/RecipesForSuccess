@@ -1,7 +1,7 @@
 :host{
     display:flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100%;
 }
 
 .main{
@@ -11,13 +11,14 @@
 .container{
     padding:1rem 0rem;
     display:grid;
-    grid-template-columns: repeat(auto-fit,minmax(320px,auto));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 450px));
+    justify-content: center;
     gap:2rem;
 }
 
 .container > li {
   width:300px;
-  margin:auto;
+  margin:auto
 }
 
 .container > li:hover > a > img {
@@ -65,4 +66,12 @@ img{
 
 mat-icon.filled {
     color: #8b0000;
+}
+
+
+app-header{
+    position:sticky;
+    top:0;
+    left:0;
+    background-color: white;
 }
