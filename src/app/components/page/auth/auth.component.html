@@ -5,8 +5,11 @@
                 <h2>{{ authMode==="login" ? "Login" : "Register"}}</h2>
                 <p>Unlock your inner chef!</p>
                 <p>Make your own recipes and share your feedback</p>
+                <div id="error" *ngIf="error">
+                    <mat-icon id="error">error</mat-icon><p>{{ error }}</p>
+                </div>
             </header>
-            <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)" (change)="removeErrorMessage()">
                 <div *ngIf="authMode == 'register'" class="user-register-container">
                     <div class="input-container">
                         <mat-icon>person</mat-icon>

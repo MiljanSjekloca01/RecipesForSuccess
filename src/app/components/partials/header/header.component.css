@@ -19,6 +19,10 @@
     padding:0.5rem;
 }
 
+.auth-header-list > li > a#logout{
+    cursor: pointer;
+}
+
 .auth-header-list > li > a:hover{
     border-radius: 10%;
     border-bottom: 0.1px solid slategray;

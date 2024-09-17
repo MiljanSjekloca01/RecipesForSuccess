@@ -11,10 +11,13 @@ import { SearchBarComponent } from "./components/partials/searchBar/searchBar.co
 import { NotFoundComponent } from "./components/partials/not-found/not-found.component";
 import { RecipeDetailComponent } from "./components/page/recipe-detail/recipe-detail.component";
 import { AuthComponent } from "./components/page/auth/auth.component";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { StarRatingComponent } from "./components/partials/star-rating/star-rating.component";
 import { FooterComponent } from "./components/partials/footer/footer.component";
 import { PageTitleComponent } from "./components/partials/page-title/page-title.component";
+import { AuthInterceptorService } from "./components/page/auth/auth.interceptor";
+import { AccountComponent } from "./components/page/account/account.component";
+import { CreateRecipeComponent } from "./components/page/create-recipe/create-recipe.component";
 
 @NgModule({
     declarations:[
@@ -27,7 +30,10 @@ import { PageTitleComponent } from "./components/partials/page-title/page-title.
         AuthComponent,
         StarRatingComponent,
         FooterComponent,
-        PageTitleComponent
+        PageTitleComponent,
+        AccountComponent,
+        CreateRecipeComponent
+
     ],
     imports:[
         BrowserModule,
@@ -37,7 +43,9 @@ import { PageTitleComponent } from "./components/partials/page-title/page-title.
         HttpClientModule
     ],
     providers:[
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
+    
   ],
     bootstrap: [AppComponent]
 })

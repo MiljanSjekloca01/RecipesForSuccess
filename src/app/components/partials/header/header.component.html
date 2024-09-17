@@ -1,9 +1,10 @@
 <div class="header-container">
     
     <ul class="auth-header-list">
-        <li><a href="#">My Account</a></li>
-        <li><a routerLink="/auth/login">Login</a></li>
-        <li><a routerLink="/auth/register">Register</a></li>
+        <li><a routerLink="/account">My Account</a></li>
+        <li *ngIf="!isAuthenticated"><a routerLink="/auth/login">Login</a></li>
+        <li *ngIf="!isAuthenticated"><a routerLink="/auth/register">Register</a></li>
+        <li *ngIf="isAuthenticated"><a (click)="onLogout()" id="logout">Logout</a></li>
     </ul>
     
     <div class="nav-header">

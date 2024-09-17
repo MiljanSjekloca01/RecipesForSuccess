@@ -6,7 +6,7 @@ import { Component, Input } from "@angular/core";
     <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" 
     [ngStyle]="{ 'color': (star <= starRating) ? filledStarColor : starColor }">star</mat-icon>
     `,
-    styles:".filled { color: darkred; }"
+    // styles:".filled { color: darkred; }"
 })
 
 export class StarRatingComponent{

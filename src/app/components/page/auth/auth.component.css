@@ -40,6 +40,22 @@ header > p{
     margin:0.5rem;
 }
 
+div#error{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    color:darkred
+
+}
+
+div#error > mat-icon{
+    font-size: 2rem;
+    padding-bottom: 0.5rem;
+    margin-right: 1rem;
+}
+
+
+
 
 mat-icon{
     width:2rem;
@@ -125,6 +141,10 @@ button.change-mode{
     margin:0.3rem auto;
 }
 
+.error-container > div#error{
+    display:flex;
+    flex-direction: column;
+}
 
 input:-webkit-autofill { 
     -webkit-background-clip: text;

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthResponseData } from '../../../shared/interfaces/auth-response.interface';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -10,10 +13,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AuthComponent {
 
   authMode: string = "login" || "register";
+  error: string = null;
 
-
-
-  constructor(private router:Router,activeRoute: ActivatedRoute){
+  constructor(private router:Router,activeRoute: ActivatedRoute,private authService: AuthService){
     if(activeRoute.snapshot.url[1].path === "login"){
       this.authMode = "login";
     }else this.authMode = "register";
@@ -25,12 +27,18 @@ export class AuthComponent {
       console.log(form.value);
       const email = form.value.email;
       const password = form.value.password;
+      this.error = null;
+      let authObservable: Observable<AuthResponseData>;
       if(this.authMode === "login"){
-
+        authObservable = this.authService.login(email,password)
       }else if(this.authMode ==="register"){
-        const firstName = form.value.firstName;
-        const lastName = form.value.lastName;
+        const displayName = form.value.firstName + " " + form.value.lastName
+        authObservable = this.authService.signUp(email,password)
       }
+      
+      authObservable.subscribe( resData => {
+        this.router.navigate(["/account"])
+      }, errorMessage => { this.error = errorMessage;})
 
     }else return
   }
@@ -43,5 +51,9 @@ export class AuthComponent {
   changeAuthMode(){
     this.authMode = this.authMode === "login" ? "register" : "login"
     this.router.navigateByUrl("/auth/" + this.authMode)
+  }
+
+  removeErrorMessage(){
+    if(this.error) this.error = null;
   }
 }

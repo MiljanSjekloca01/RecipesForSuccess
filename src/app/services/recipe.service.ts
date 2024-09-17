@@ -23,7 +23,7 @@ export class RecipeService {
             this.http.post<{name : string}>("https://recipesforsucces-cdfa9-default-rtdb.europe-west1.firebasedatabase.app/recipes.json",recipe).subscribe())
     }
 
-
+    // Resolver
     getRecipesFromDatabase(): Observable<Recipe[]> {
         return this.http.get<{ [id: string]: Recipe }>(environment.FIREBASE_RECIPES_URL)
         .pipe(

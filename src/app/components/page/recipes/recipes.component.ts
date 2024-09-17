@@ -28,7 +28,6 @@ export class RecipesComponent implements OnInit,OnDestroy{
       }else if(param.search || param.search === ""){
         this.recipes = this.recipeService.getRecipesBySearch(param.search)
         if(this.recipes.length) this.pageTitle = "Results for " + param.search
-        else this.pageTitle = "No"
       }else{
         this.recipes = this.recipeService.getRecipes();
       }
