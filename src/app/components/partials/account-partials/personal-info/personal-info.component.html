@@ -1,0 +1,83 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div class="header">
+        <div class="header-top">
+            <h1>Personal Info</h1>
+            <button type="submit" [disabled]="!f.valid || !pressed || !isDataDifferent">SAVE CHANGES</button>
+        </div>
+        <p>The Personal Info page allows users to view and update their basic information. Additionally, you can provide extra details such as your favorite cuisine and dietary preferences, enabling a more personalized experience when browsing recipes.</p>
+    </div>
+    <div class="toggle-info">
+        <h3>My Account Info</h3>
+        <button *ngIf="!pressed" (click)="pressed = !pressed" type="button"><mat-icon>keyboard_arrow_down</mat-icon></button>
+        <button *ngIf="pressed" (click)="pressed = !pressed" type="button"><mat-icon>keyboard_arrow_up</mat-icon></button>
+    </div>
+    <div *ngIf="pressed">
+        <div class="form-control">
+            <label>Email Address*</label>
+            <input type="email" [value]="user.email" disabled>
+            <div class="error">
+                <p>* Currently not updateable.</p>
+            </div>
+        </div>
+
+        <div class="form-control">
+            <label for="firstName">First Name</label>
+            <input 
+                id="firstName" 
+                name="firstName" 
+                type="text" 
+                required 
+                minlength="2" 
+                [(ngModel)]="user.firstName"
+                (input)="checkIfDataChanged()"
+                #firstName="ngModel" 
+                placeholder="First Name">
+            <div *ngIf="firstName.invalid && firstName.touched" class="error">
+                <p>* First name is required and must be at least 2 characters long.</p>
+            </div>
+        </div>
+
+        <div class="form-control">
+            <label for="lastName">Last Name</label>
+            <input 
+                id="lastName" 
+                name="lastName" 
+                type="text" 
+                required 
+                minlength="2" 
+                [(ngModel)]="user.lastName" 
+                (input)="checkIfDataChanged()"
+                #lastName="ngModel" 
+                placeholder="Last Name">
+            <div *ngIf="lastName.invalid && lastName.touched" class="error">
+                <p>* Last name is required and must be at least 2 characters long.</p>
+            </div>
+        </div>
+        <div class="form-control">
+            <label for="favoriteCuisine">Favorite Cuisine</label>
+            <select 
+                id="favoriteCuisine" 
+                name="favoriteCuisine" 
+                [(ngModel)]="user.favoriteCuisine"
+                (change)="checkIfDataChanged()"
+                #favoriteCuisine="ngModel">
+                <option value="">Select Cuisine</option>
+                <option *ngFor="let cuisine of cuisines" [value]="cuisine">{{ cuisine }}</option>
+            </select>
+        </div>
+
+        <div class="form-control">
+            <label for="dietaryPreference">Dietary Preference</label>
+            <select 
+                id="dietaryPreference" 
+                name="dietaryPreference" 
+                [(ngModel)]="user.dietaryPreference"
+                (change)="checkIfDataChanged()"
+                #dietaryPreference>
+                <option value="">Select Dietary Preference</option>
+                <option *ngFor="let preference of dietaryPreferences" [value]="preference">{{ preference }}</option>
+            </select>
+        </div>
+    </div>
+</form>
+

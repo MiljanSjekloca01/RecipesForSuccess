@@ -1,0 +1,86 @@
+.account{
+    display:flex;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 100vh;
+    background-color: whitesmoke;
+    margin-top:0.2rem;
+    justify-content: space-around;
+}
+
+
+.navigation-container{
+    display:flex;
+    flex-direction: column;
+    background-color: white;
+    height: max-content;
+    width: 320px;
+    box-shadow: rgb(30, 17, 0) 0px 0px 0.5rem;
+    margin: 2rem auto;
+}
+
+
+.greeting{
+    display:flex;
+    align-items: center;
+    gap:0.5rem;
+    padding:1.5rem;
+    padding-bottom: 1.7rem;
+    border-bottom: 1px solid gray;
+}
+
+
+.greeting > mat-icon{
+    min-width: 4rem;
+    min-height: 4rem;
+    font-size: 4rem;
+    color:rgb(185, 103, 3);
+}
+
+.navigation-list > ul > li{
+    display:flex;
+    align-items: center;
+    padding:1.5rem;
+    border-bottom: 1px solid gray;
+    cursor: pointer;
+    gap:1rem;
+}
+
+.navigation-list > ul > li > mat-icon{
+    color:rgb(185, 103, 3);
+    width: 2rem;
+    height:2rem;
+    font-size:2rem;
+
+}
+
+.navigation-list > ul > li:hover{
+    background-color: rgb(200, 200, 200);
+}
+
+.navigation-list > ul > li:hover > a{
+    color:rgb(185, 103, 3);
+}
+
+.navigation-list > ul > li > a{
+    font-size: 1.2rem;
+}
+
+.active-parent{
+    border-left: 0.45rem solid rgb(185, 103, 3);
+}
+
+.navigation-list > ul > li.active-parent > a {
+    font-size:1.3rem;
+    color:rgb(185, 103, 3);
+}
+
+
+.content{
+    width: calc(100vw - 600px);
+    background-color: white;
+    margin: 2rem auto;
+    min-width: 320px;
+    padding:2rem;
+    box-shadow: rgb(30, 17, 0) 0px 0px 0.5rem;
+}

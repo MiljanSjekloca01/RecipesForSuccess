@@ -6,7 +6,8 @@ import { AuthComponent } from "./components/page/auth/auth.component";
 import { RecipesDataResolver } from "./components/page/recipes/recipes.resolver";
 import { AuthGuard } from "./components/page/auth/auth.guard";
 import { AccountComponent } from "./components/page/account/account.component";
-import { CreateRecipeComponent } from "./components/page/create-recipe/create-recipe.component";
+import { CreateRecipeComponent } from "./components/partials/account-partials/create-recipe/create-recipe.component";
+import { PersonalInfoComponent } from "./components/partials/account-partials/personal-info/personal-info.component";
 
 
 const routes: Routes = [
@@ -18,8 +19,12 @@ const routes: Routes = [
     {path: "auth/login",component: AuthComponent},
     {path: "auth/register",component: AuthComponent},
 
-    {path: "account",canActivate:[AuthGuard],component: AccountComponent},
-    {path: "account/create-recipe",canActivate:[AuthGuard],component: CreateRecipeComponent},
+    {path: "account",canActivate:[AuthGuard],component: AccountComponent, children: [
+        { path: "", redirectTo:"profile"},
+        { path: "profile",component: PersonalInfoComponent},
+        {path: "create-recipe",component: CreateRecipeComponent}   
+    ]},
+    
     {path: "**",component: RecipesComponent},
 ]
 

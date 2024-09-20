@@ -17,7 +17,8 @@ import { FooterComponent } from "./components/partials/footer/footer.component";
 import { PageTitleComponent } from "./components/partials/page-title/page-title.component";
 import { AuthInterceptorService } from "./components/page/auth/auth.interceptor";
 import { AccountComponent } from "./components/page/account/account.component";
-import { CreateRecipeComponent } from "./components/page/create-recipe/create-recipe.component";
+import { CreateRecipeComponent } from "./components/partials/account-partials/create-recipe/create-recipe.component";
+import { PersonalInfoComponent } from "./components/partials/account-partials/personal-info/personal-info.component";
 
 @NgModule({
     declarations:[
@@ -32,7 +33,8 @@ import { CreateRecipeComponent } from "./components/page/create-recipe/create-re
         FooterComponent,
         PageTitleComponent,
         AccountComponent,
-        CreateRecipeComponent
+        CreateRecipeComponent,
+        PersonalInfoComponent
 
     ],
     imports:[
