@@ -80,7 +80,7 @@
     width: calc(100vw - 600px);
     background-color: white;
     margin: 2rem auto;
-    min-width: 320px;
+    min-width: calc(320px - 4rem);
     padding:2rem;
     box-shadow: rgb(30, 17, 0) 0px 0px 0.5rem;
 }
