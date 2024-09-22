@@ -31,9 +31,9 @@ export const sample_recipes:Recipe[] = [
             
         ],
         reviews:[
-           { user_id: "Alice Keys",commentText: "Amazing,i just made this recipe myself and im enjoying it",rating: 1},
-           { user_id: "Draymond Green", commentText: "Followed exactly and it came out so delicious! Thank you so much for a healthy, eclectic, flavorful meal!!",rating: 1},
-           { user_id: "Stephan Tries", commentText: "Great meal !",rating: 1},
+           { user_id: "Alice Keys",commentText: "Amazing,i just made this recipe myself and im enjoying it",rating: 1, by: "Alice Keys"},
+           { by:"Draymond Green" ,user_id: "Draymond Green", commentText: "Followed exactly and it came out so delicious! Thank you so much for a healthy, eclectic, flavorful meal!!",rating: 1},
+           { by:"Stephan Tries", user_id: "Stephan Tries", commentText: "Great meal !",rating: 1},
         ],
         ratings:[],
     },

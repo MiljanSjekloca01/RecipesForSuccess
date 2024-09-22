@@ -67,24 +67,25 @@
             [(ngModel)]="comment"></textarea>
             <div class="comment-buttons">
                 <button type="button" (click)="comment = '';clickedStarIndex = 0">Cancel</button> 
-                <button type="submit" [disabled]="!clickedStarIndex && !comment" (click)="onSubmit(clickedStarIndex,comment)">Submit</button>
+                <button type="submit" [disabled]="!clickedStarIndex && !comment || !user" (click)="onSubmit(clickedStarIndex,comment)">Submit</button>
             </div>
         <div *ngIf="recipe.reviews" class="review-container">
-            <div *ngFor="let review of recipe.reviews.slice(0, 6)" class="comments">
-                <div *ngIf="review.commentText" class="comment">
+            <div *ngFor="let review of recipe.reviews.slice().reverse().slice(0, recipesCommentNumber)" class="comments">
+                <div class="comment">
                     <div class="comments-header">
-                        <h4>{{review.user_id}}</h4>
+                        <h4>{{review.by}}</h4>
                         <div *ngIf="review.rating">
                             <star-rating  [starRating]="review.rating"></star-rating>
                         </div>
                     </div>
-                    <p>{{review.commentText}}</p>
-                    <div class="likes">
+                    <p *ngIf="review.commentText">{{review.commentText}}</p>
+                    <div class="likes" *ngIf="review.commentText">
                         <mat-icon class="thump_up" (click)="onLikeClicked(review.id)">thumb_up</mat-icon><p>{{ review.likes }}</p>
                     </div>
                 </div>
             </div>
-            <button type="button">Load more comments</button>
+            <button type="button" (click)="recipesCommentNumber = recipesCommentNumber + 2" *ngIf="recipe.reviews.length > recipesCommentNumber">Load more comments</button>
+            <button type="button" (click)="recipesCommentNumber = 2" *ngIf="recipe.reviews.length <= recipesCommentNumber && recipesCommentNumber > 2">Show less</button>
         </div>
     </div>
 

@@ -1,7 +1,9 @@
-import { Component, OnInit, numberAttribute } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../../../services/recipe.service';
 import { Recipe } from '../../../shared/models/recipes.model';
+import { AuthService } from '../../../services/auth.service';
+import { User } from '../../../shared/models/user.model';
 
 
 @Component({
@@ -16,15 +18,17 @@ export class RecipeDetailComponent implements OnInit{
   ratingText: string;
   comment: string = "";
   userHaveRated: boolean;
-  currentUserId="UserForPractice";
+  user: User;
   maxCommentsPerUser = 4;
+  recipesCommentNumber = 2;
 
-  constructor(activedRoute: ActivatedRoute,private recipeService: RecipeService){
+  constructor(activedRoute: ActivatedRoute,private recipeService: RecipeService,private authService: AuthService){
     activedRoute.params.subscribe( param => {
       if(param.id){
         this.recipe = this.recipeService.getRecipeById(param.id);
       }
     })
+    this.authService.user.subscribe(user => this.user = user)
   }
 
   ngOnInit(){
@@ -32,21 +36,22 @@ export class RecipeDetailComponent implements OnInit{
   }
 
   onSubmit(rating: number,comment: string){
+    if(!this.user) return;
     if(comment){
       if (this.countUserComments() >= this.maxCommentsPerUser) {
         alert(`You have reached the maximum limit of ${this.maxCommentsPerUser} comments.`);
         return;
       }
     }
-
+    const userName = this.user.firstName + " " + this.user.lastName
     if(rating && comment){
-      this.recipeService.createReview(this.recipe.id,rating,comment);
+      this.recipeService.createReview(this.recipe.id,rating,comment,this.user.id,userName);
       this.userHaveRated = true;
     }else if(rating && !comment){
-      this.recipeService.createReview(this.recipe.id,rating,null);
+      this.recipeService.createReview(this.recipe.id,rating,null,this.user.id,userName);
       this.userHaveRated = true;
     }else{
-      this.recipeService.createReview(this.recipe.id,null,comment);
+      this.recipeService.createReview(this.recipe.id,null,comment,this.user.id,userName);
     }
     
     this.clickedStarIndex = 0;
@@ -55,7 +60,7 @@ export class RecipeDetailComponent implements OnInit{
   }
   
   onStarClicked(star:number){
-    this.clickedStarIndex = star;
+   this.clickedStarIndex = star;
    const ratingTexts = {
     1: "Bad recipe !",
     2: "Didn't like it",
@@ -68,9 +73,9 @@ export class RecipeDetailComponent implements OnInit{
 
 
   findIfUserHaveRatedRecipe(){
-    if(this.currentUserId && this.recipe.reviews){
+    if(this.user.id && this.recipe.reviews){
       return this.recipe.reviews.some(review => {
-       return review.rating && review.user_id === this.currentUserId
+       return review.rating && review.user_id === this.user.id
       })
     }
     return false;
@@ -89,8 +94,8 @@ export class RecipeDetailComponent implements OnInit{
   }
 
   countUserComments(): number {
-    if (this.currentUserId && this.recipe.reviews) {
-      return this.recipe.reviews.filter(review => review.user_id === this.currentUserId && review.commentText).length;
+    if (this.user.id && this.recipe.reviews) {
+      return this.recipe.reviews.filter(review => review.user_id === this.user.id && review.commentText).length;
     }
     return 0;
   }

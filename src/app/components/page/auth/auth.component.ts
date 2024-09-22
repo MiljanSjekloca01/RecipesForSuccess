@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, first } from 'rxjs';
 import { AuthResponseData } from '../../../shared/interfaces/auth-response.interface';
 import { AuthService } from '../../../services/auth.service';
 
@@ -32,8 +32,7 @@ export class AuthComponent {
       if(this.authMode === "login"){
         authObservable = this.authService.login(email,password)
       }else if(this.authMode ==="register"){
-        const displayName = form.value.firstName + " " + form.value.lastName
-        authObservable = this.authService.signUp(email,password)
+        authObservable = this.authService.signUp(email,password,form.value.firstName,form.value.lastName)
       }
       
       authObservable.subscribe( resData => {

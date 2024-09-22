@@ -14,7 +14,6 @@ export class PageTitleComponent implements OnChanges{
   aboutPage: string;
 
   ngOnChanges(): void {
-    console.log(this.title)
     switch(this.title){
       case "lunch":
         this.aboutPage = "Don’t forget about lunch! We know you need tasty, easy lunches to get you through your day—whether you’re at work, school, or home. Browse pasta salads, quick soups, and sandwiches galore!"

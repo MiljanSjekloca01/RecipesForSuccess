@@ -20,18 +20,14 @@ export class PersonalInfoComponent implements OnInit{
 
   ngOnInit(): void {
     this.authService.user.subscribe(user => {
-      this.user = user;
-      if(!user.dietaryPreference) user.dietaryPreference = "";
-      if(!user.favoriteCuisine) user.favoriteCuisine = "";
-      user.firstName = "sss";
-      user.lastName = "sss";
+      this.user = JSON.parse(JSON.stringify(user));
       this.oldData = JSON.parse(JSON.stringify(user));
     })
   }
 
   onSubmit(form: NgForm){
-    if(form.valid){
-      console.log("Form submitted",this.user)
+    if(form.valid && this.isDataDifferent){
+      alert("Unfortunately, Firebase Auth REST API does not support updating user data.");
     }
   }
 

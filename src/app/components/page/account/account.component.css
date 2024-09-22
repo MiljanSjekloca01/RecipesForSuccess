@@ -37,6 +37,10 @@
     color:rgb(185, 103, 3);
 }
 
+.greeting > h3{
+    word-break: break-all;
+}
+
 .navigation-list > ul > li{
     display:flex;
     align-items: center;

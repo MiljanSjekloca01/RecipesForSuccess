@@ -83,14 +83,16 @@ export class RecipeService {
     }
 
 
-    createReview(id: string, rating: number,commentText: string){
-        const reviewData: Review = { user_id: "UserForPractice"}
+    createReview(id: string, rating: number,commentText: string,userId: string,userName: string){
+        const reviewData: Review = { user_id: userId, by: userName}
+        console.log(reviewData);
         if(rating) reviewData.rating = rating;
         if(commentText) reviewData.commentText = commentText;
 
         if(rating || commentText){
             this.http.post<{reviewId: string}>(`https://recipesforsucces-cdfa9-default-rtdb.europe-west1.firebasedatabase.app/recipes/${id}/reviews.json`,
             reviewData).subscribe( responseData => {
+                console.log(responseData);
                 const recipeIndex = this.recipes.findIndex(recipe => recipe.id === id);
                 if( recipeIndex !== -1){
                     reviewData.id = responseData.reviewId

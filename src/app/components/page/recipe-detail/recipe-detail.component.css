@@ -183,6 +183,8 @@ button{
     margin:0.5rem;
     border-radius: 1rem;
     float: inline-end;
+    font-size: 1rem;
+ 
 }
 
 button:hover{
