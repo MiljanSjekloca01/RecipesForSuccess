@@ -219,6 +219,10 @@ mat-icon.thump_up:hover{
     cursor:pointer;
 }
 
+mat-icon.thump_up.liked {
+    color: darkred;
+}
+
 
 .comments > div > p {
     max-width:400px;

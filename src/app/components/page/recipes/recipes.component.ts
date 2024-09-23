@@ -19,7 +19,6 @@ export class RecipesComponent implements OnInit,OnDestroy{
   pageTitle = "All";
 
   ngOnInit(){
-
     this.routeSubscription = this.activeRoute.params.subscribe( param => {
       this.recipesShownNumber = 4;
       if(param.tag){

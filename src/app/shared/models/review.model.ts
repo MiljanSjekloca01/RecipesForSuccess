@@ -3,6 +3,6 @@ export interface Review {
     user_id: string;
     commentText?: string;
     rating?: number;
-    likes?: number;
+    likes?: {userId: string}[];
     by: string;
 }

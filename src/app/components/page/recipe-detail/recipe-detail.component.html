@@ -80,7 +80,13 @@
                     </div>
                     <p *ngIf="review.commentText">{{review.commentText}}</p>
                     <div class="likes" *ngIf="review.commentText">
-                        <mat-icon class="thump_up" (click)="onLikeClicked(review.id)">thumb_up</mat-icon><p>{{ review.likes }}</p>
+                        <mat-icon
+                        class="thump_up"
+                        [ngClass]="{'liked': likedReviews[review.id]}" 
+                        (click)="handleLikeClick(review)">
+                        thumb_up
+                        </mat-icon> 
+                        <p>{{ review.likes?.length}}</p>
                     </div>
                 </div>
             </div>

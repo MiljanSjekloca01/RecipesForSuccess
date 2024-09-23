@@ -36,7 +36,12 @@ export class RecipeService {
                 if (recipe.reviews) {
                     recipe.reviews = Object.entries(recipe.reviews).map(([reviewsId,review]) => {
                         if(review.rating) recipe.ratings.push(review.rating);
-                        
+
+                        if(review.likes){
+                            review.likes = Object.entries(review.likes).map( ([likeId,like]) => {
+                               return {...like}
+                            })   
+                        }
                         return {...review,id: reviewsId}
                     })
                 }else{ recipe.reviews = []; }
@@ -83,25 +88,18 @@ export class RecipeService {
     }
 
 
-    createReview(id: string, rating: number,commentText: string,userId: string,userName: string){
-        const reviewData: Review = { user_id: userId, by: userName}
-        console.log(reviewData);
-        if(rating) reviewData.rating = rating;
-        if(commentText) reviewData.commentText = commentText;
-
-        if(rating || commentText){
-            this.http.post<{reviewId: string}>(`https://recipesforsucces-cdfa9-default-rtdb.europe-west1.firebasedatabase.app/recipes/${id}/reviews.json`,
-            reviewData).subscribe( responseData => {
-                console.log(responseData);
-                const recipeIndex = this.recipes.findIndex(recipe => recipe.id === id);
-                if( recipeIndex !== -1){
-                    reviewData.id = responseData.reviewId
-                    this.recipes[recipeIndex].reviews.push(reviewData)
-                    if(reviewData.rating) this.recipes[recipeIndex].ratings.push(reviewData.rating)
-                    
-                }
-            })
+    createReview(reviewData: Review,id: string){
+        if(reviewData.rating || reviewData.commentText){
+            return this.http.post<{name: string}>(
+                `https://recipesforsucces-cdfa9-default-rtdb.europe-west1.firebasedatabase.app/recipes/${id}/reviews.json`,
+                reviewData) 
         }
     }
 
+    addLikeToComment(recipeId: string, reviewId: string, likeData: { userId: string }) {
+        return this.http.post<{ name: string }>(
+            `${environment.FIREBASE_BASE_RECIPES_URL}${recipeId}/reviews/${reviewId}/likes.json`,
+            likeData
+        )
+    }
 }
