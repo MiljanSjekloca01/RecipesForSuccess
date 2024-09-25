@@ -99,6 +99,7 @@
     display:flex;
     flex-direction: column;
     border-radius: 10%;
+    min-width: 270px;
 }
 
 .main-content > .ingredients > ul > li {
@@ -112,6 +113,7 @@
     display:flex;
     flex-direction: column;
     flex:1;
+    min-width: 300px;
 }
 
 .main-content > .directions > h3,

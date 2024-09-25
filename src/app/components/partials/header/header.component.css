@@ -53,7 +53,7 @@ h1{
 .nav-list > ul > li > a{
     display:flex;
     margin:0.5rem 1rem;
-    font-size:1.5rem;
+    font-size:1.6rem;
     align-items: center;
 }
 
@@ -71,8 +71,9 @@ h1{
    display: flex;
    flex-direction: column;
    padding:2rem;
-   background-color: rgba(17, 17, 17, 0.5);
-   border-top-right-radius:1rem;   
+   background-color: rgba(17, 17, 17, 0.7); 
+   border-radius: 0.2rem;
+   font-size: 1.2rem;  
 }
 
 .nav-list > ul > li > div > a {
@@ -87,3 +88,13 @@ h1{
 }
 
 
+@media screen and (max-width: 576px) {
+    .nav-list > ul > li:hover > .nutrition-dropdown-content,
+    .nav-list > ul > li:hover > .recipes-dropdown-content {
+        padding-top: 2.8rem;
+    }
+
+    .nav-list > ul > li > a{
+       margin-bottom: 1rem;
+    }
+}

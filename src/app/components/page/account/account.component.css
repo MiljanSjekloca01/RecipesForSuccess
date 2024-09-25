@@ -88,3 +88,14 @@
     padding:2rem;
     box-shadow: rgb(30, 17, 0) 0px 0px 0.5rem;
 }
+
+
+@media  screen and (max-width: 1024px) {
+    .account{
+        flex-direction: column;
+    }
+    
+    .content{
+        width: calc(100% - 8rem);
+    }
+}

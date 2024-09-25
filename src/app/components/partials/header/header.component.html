@@ -17,11 +17,7 @@
                 <li>
                     <a routerLink="/" class="dropdown">Recipes <mat-icon>expand_circle_down</mat-icon></a>
                     <div class="recipes-dropdown-content">
-                        <a routerLink="/tag/breakfast" >Breakfasts</a>
-                        <a routerLink="/tag/lunch">Lunchs</a>
-                        <a routerLink="/tag/dinner">Dinners</a>
-                        <a routerLink="/tag/drink">Drinks</a>
-                        <a routerLink="/tag/dessert">Desserts</a>
+                        <a *ngFor="let tag of tags" [routerLink]="['/tag/', tag | lowercase]">{{ tag }}</a>
                     </div>
                 </li>
 

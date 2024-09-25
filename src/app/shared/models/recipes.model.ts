@@ -15,9 +15,8 @@ export interface Recipe{
     steps?:string[]
     reviews?: Review[];
     ratings?: number[];
-    //userId?: number | string;
+    userId?: string;
     //nutrition: Maybe
-    //reviews:
     //publishedOnDate
 }
 

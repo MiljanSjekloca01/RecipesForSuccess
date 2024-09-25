@@ -22,7 +22,7 @@ const routes: Routes = [
     {path: "account",canActivate:[AuthGuard],component: AccountComponent, children: [
         { path: "", redirectTo:"profile"},
         { path: "profile",component: PersonalInfoComponent},
-        {path: "create-recipe",component: CreateRecipeComponent}   
+        { path: "create-recipe",component: CreateRecipeComponent}   
     ]},
     
     {path: "**",component: RecipesComponent},
