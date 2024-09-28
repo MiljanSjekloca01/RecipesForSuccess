@@ -25,12 +25,14 @@
 
 .title{
     display:flex;
+    align-items: center;
     justify-content: center;
     margin:1rem;
     font-size: 2rem;
     font-weight: bold;
     flex-wrap: wrap;
     color:darkred;
+    text-align: center;
 }
 
 .title > p {
@@ -39,7 +41,6 @@
 
 .top-content{
     display:flex;
-    flex-wrap: wrap;
 }
 
 .top-content > .image-container{
@@ -71,9 +72,9 @@
     font-weight: 500;
 }
 
+.top-content > .description > div > p,
 .top-content > .description > p{
-    margin:1rem 0.5rem;
-    
+    margin:1rem 0.5rem; 
 }
 
  h3{
@@ -83,10 +84,11 @@
 
 
 .main-content{
+    margin-top:0.5rem;
     display:flex;
     padding:1rem;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: start;
     word-wrap: break-word;
     justify-content: center;
 }
@@ -95,7 +97,7 @@
 
 .main-content > .ingredients{
     font-size: 1.2rem;
-    padding:3rem 5rem;
+    padding:0 5rem;
     display:flex;
     flex-direction: column;
     border-radius: 10%;
@@ -114,6 +116,7 @@
     flex-direction: column;
     flex:1;
     min-width: 300px;
+    gap:0.3rem;
 }
 
 .main-content > .directions > h3,
@@ -159,7 +162,7 @@
     resize: none;
     height:5rem;
     padding:1rem;
-    max-width:375px;
+    max-width:450px;
     border-radius:0.5rem;
     outline:none;
     border:none;
@@ -169,8 +172,11 @@
 }
 
 .review > h3#title{
+    display:flex;
     font-size:2rem;
     margin-bottom: 0.7rem;
+    text-align: center;
+    max-width: 450px;
 }
 
 .review > p {
@@ -273,14 +279,31 @@ mat-icon.thump_up.liked {
     border-radius: 1rem;
 }
 
+h4.alreadyRated{
+    margin-bottom: 1rem;
+}
+
 
 @media screen and (max-width:650px){
-    .ingredients{
-        padding:0;
+    .main-content > .ingredients{
+        padding:0 1rem;
         margin-bottom:1rem;
     }
 }
 
-h4.alreadyRated{
-    margin-bottom: 1rem;
+@media screen and (max-width:850px){
+    .top-content{
+        display:flex;
+        flex-direction: column;
+    }
+
+    .top-content > .description {
+        margin-top: 1.5rem;
+    }
+
+    .top-content > .description > div > p,
+    .top-content > .description > p{
+        text-align: center;
+    }
+
 }

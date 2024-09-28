@@ -25,8 +25,15 @@
         <div class="description">
             <h3>Description</h3><p>{{ recipe.description }}</p>
             <h3>Preparation time</h3><p>Preparation time: {{ recipe.prepTime }} mins</p>
-            <div *ngIf="recipe.cousine">
-                <h3>Cousine</h3><p>{{ recipe.cousine }}</p></div>  
+            <div *ngIf="recipe.cookTime">
+                <h3>Cook time</h3><p>Cook time: {{ recipe.cookTime }} mins</p>
+            </div>
+            <div *ngIf="recipe.cuisine">
+                <h3>Cousine</h3><p>{{ recipe.cuisine }}</p>  
+            </div>
+            <div *ngIf="recipe.servings">
+                <h3>Servings</h3><p>Servings for {{ recipe.servings }}</p>  
+            </div>
         </div>
     </div>
 
@@ -51,7 +58,7 @@
     <div class="review">
         <h3>{{recipe.owner}}</h3>
         <h3 id="title">{{recipe.title}}</h3>
-        <div *ngIf="!userHaveRated; else alreadyRated">
+        <div *ngIf="!userHaveRated && user.id !== recipe.userId; else alreadyRated">
             <h4>Your rating</h4>
             <div class="rating">
                 <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" [ngClass]="{ 'filled': star <= clickedStarIndex }"
@@ -59,7 +66,7 @@
                 <span *ngIf="clickedStarIndex >= 1">{{ ratingText }}</span>
             </div>
         </div>
-        <ng-template #alreadyRated> <h4 class="alreadyRated"> Thank you for rating this recipe </h4> </ng-template>
+        <ng-template #alreadyRated> <h4 *ngIf="userHaveRated" class="alreadyRated"> Thank you for rating this recipe </h4> </ng-template>
         
         <!-- to be done -->
         <h4>Your review</h4>
