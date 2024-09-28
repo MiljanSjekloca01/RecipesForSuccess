@@ -17,6 +17,8 @@ export class CreateRecipeComponent {
   dishTypes: string[] = [ 'Pizza', 'Salad', 'Pasta', 'Burger', 'Sushi', 'Steak', 'Tacos', 'Soup', 'Curry', 'Sandwich', 'Seafood', 'Vegetarian', 'Grilled Chicken', 'Fried Rice' ];
   prepTimeMax: number;
   prepTimeMin: number;
+  cookTimeMin: number;
+  cookTimeMax: number;
   meal: string = "";
   dishType: string = "";
   recipe: Recipe = {
@@ -39,8 +41,10 @@ export class CreateRecipeComponent {
 
   constructor(private authService: AuthService,private recipeService: RecipeService,private router: Router){
     this.authService.user.subscribe(user => {
-      this.recipe.userId = user.id
-      this.recipe.owner = user.firstName + " " + user.lastName
+      if(user){
+        this.recipe.userId = user.id
+        this.recipe.owner = user.firstName + " " + user.lastName
+      }
     })
   }
 
@@ -75,6 +79,7 @@ export class CreateRecipeComponent {
       this.recipe.prepTime = this.prepTimeMin.toString() + "-" + this.prepTimeMax.toString();
       this.recipe.tags.push(this.meal);
       if(this.dishType) this.recipe.tags.push(this.dishType);
+      if(this.cookTimeMin && this.cookTimeMax) this.recipe.cookTime = `${this.cookTimeMin}-${this.cookTimeMax}`
       this.recipeService.createRecipe(this.recipe).subscribe({
         next: (resData) => {
           this.recipe.id = resData.name;

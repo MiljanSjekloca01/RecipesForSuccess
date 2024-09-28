@@ -51,12 +51,21 @@
   <div class="form-control">
     <label for="preparationTime">Preparation Time (minutes)*</label>
     <div class="preparation-time">
-      <input type="number" name="prepMin" [(ngModel)]="prepTimeMin" min="1" max="600" placeholder="Min time" required #prepMin="ngModel">
+      <input type="number" name="prepTimeMin" [(ngModel)]="prepTimeMin" min="1" max="600" placeholder="Min time" required #prepMin="ngModel">
       <span> - </span>
-      <input type="number" name="prepMax" [(ngModel)]="prepTimeMax" min="2" max="600" placeholder="Max time" required #prepMax="ngModel">
+      <input type="number" name="prepTimeMax" [(ngModel)]="prepTimeMax" min="2" max="600" placeholder="Max time" required #prepMax="ngModel">
     </div>
     <div *ngIf="(prepMin.invalid || prepMax.invalid) && (prepMin.touched || prepMax.touched)"  class="error">
       <p>* Preparation time is required and maximum is 600min/10h.</p>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="cookTime">Cook time (optional)</label>
+    <div class="preparation-time">
+      <input type="number" name="cookTimeMin" [(ngModel)]="cookTimeMin" min="1" max="600" placeholder="Min time" required #cookMin="ngModel">
+      <span> - </span>
+      <input type="number" name="cookTimeMax" [(ngModel)]="cookTimeMax" min="2" max="600" placeholder="Max time" required #cookMax="ngModel">
     </div>
   </div>
 

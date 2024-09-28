@@ -93,13 +93,13 @@ export class AuthService implements OnInit{
 
 
     logout(){
+        if(this.router.url.includes("account")) this.router.navigate([""]);
+        
         localStorage.removeItem("userData");
         this.user.next(null);
-        this.router.navigate([""]);
         if(this.tokenExpirationTimer){
             clearTimeout(this.tokenExpirationTimer);
         }
-        
     }
 
     private handleAuthentication(email: string, userId: string, token: string, expiresIn: string,firstName: string,lastName:string,favoriteCuisine: string,dietaryPreference: string) {
