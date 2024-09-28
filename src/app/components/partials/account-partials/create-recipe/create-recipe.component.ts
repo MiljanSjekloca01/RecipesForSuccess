@@ -1,10 +1,98 @@
 import { Component } from '@angular/core';
+import { Recipe } from '../../../../shared/models/recipes.model';
+import { NgForm } from '@angular/forms';
+import { AuthService } from '../../../../services/auth.service';
+import { RecipeService } from '../../../../services/recipe.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-recipe',
   templateUrl: './create-recipe.component.html',
   styleUrl: './create-recipe.component.css'
 })
+
 export class CreateRecipeComponent {
+  cuisines: string[] = ['Italian', 'Mexican', 'Chinese', 'Indian', 'French', 'Japanese', 'Mediterranean', 'Serbian'];
+  meals: string[] = ["Breakfast","Dinner","Lunch","Drink","Dessert","Snack","Appetizer"];
+  dishTypes: string[] = [ 'Pizza', 'Salad', 'Pasta', 'Burger', 'Sushi', 'Steak', 'Tacos', 'Soup', 'Curry', 'Sandwich', 'Seafood', 'Vegetarian', 'Grilled Chicken', 'Fried Rice' ];
+  prepTimeMax: number;
+  prepTimeMin: number;
+  meal: string = "";
+  dishType: string = "";
+  recipe: Recipe = {
+    id: '',
+    title: "",
+    description: '',
+    imageUrl: '',
+    prepTime: '',
+    cuisine: '',
+    owner: '',
+    tags: [],
+    servings: "",
+    ingredients: [""],
+    steps:[""],
+    reviews: [],
+    ratings: [],
+    userId: ""
+
+  };
+
+  constructor(private authService: AuthService,private recipeService: RecipeService,private router: Router){
+    this.authService.user.subscribe(user => {
+      this.recipe.userId = user.id
+      this.recipe.owner = user.firstName + " " + user.lastName
+    })
+  }
+
+  addIngredient() {
+    if (this.recipe.ingredients) {
+      this.recipe.ingredients.push('');
+    }
+  }
+
+  removeIngredient(index: number) {
+    if (this.recipe.ingredients) {
+      this.recipe.ingredients.splice(index, 1);
+    }
+  }
+
+  addDirection() {
+    if (this.recipe.steps) {
+      this.recipe.steps.push(''); 
+    }
+  }
+
+  removeDirection(index: number) {
+    if (this.recipe.steps) {
+      this.recipe.steps.splice(index, 1);
+    }
+  }
+
+  cancel(form: NgForm) { form.reset(); }
+
+  onSubmit(form: NgForm) {
+    if(form.valid){
+      this.recipe.prepTime = this.prepTimeMin.toString() + "-" + this.prepTimeMax.toString();
+      this.recipe.tags.push(this.meal);
+      if(this.dishType) this.recipe.tags.push(this.dishType);
+      this.recipeService.createRecipe(this.recipe).subscribe({
+        next: (resData) => {
+          this.recipe.id = resData.name;
+          this.recipeService.recipeAdded.next(this.recipe);
+        },
+        error: (err) => {
+          alert("Error creating reciep: " + err);
+        },
+        complete: () => {
+          alert("Recipe succesfully created");
+          this.router.navigate(["/", this.recipe.id]);
+        }
+      })
+    } 
+  }
+
+  trackByFn(index: number, item: any) {
+    return index; 
+  }
 
 }
