@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, Subject, catchError, map, sample, throwError } from "rxjs";
+import { Observable, Subject, catchError, map, sample, switchMap, throwError } from "rxjs";
 import { Recipe } from "../shared/models/recipes.model";
 import { sample_recipes } from "../data";
 import { HttpClient } from "@angular/common/http";
@@ -8,10 +8,14 @@ import { Review } from "../shared/models/review.model";
 
 @Injectable({providedIn:"root"})
 export class RecipeService {
-    recipesChanged = new Subject<Recipe[]>
+    recipeAdded = new Subject<Recipe>
     private recipes: Recipe[] = [];
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient){
+        this.recipeAdded.subscribe(recipe => {
+            this.recipes.push(recipe);
+        })
+    }
 
     getRecipes(){
         return this.recipes.slice();
@@ -87,11 +91,29 @@ export class RecipeService {
         return this.recipes.find( recipe => recipe.id === id)
     }
 
+    createRecipe(recipe: Recipe) {
+        if (this.recipes.length === 0) {
+          return this.getRecipesFromDatabase().pipe(
+            switchMap(() => {
+              return this.http.post<{ name: string }>(
+                environment.FIREBASE_RECIPES_URL,
+                recipe
+              );
+            })
+          );
+        } else {
+          return this.http.post<{ name: string }>(
+            environment.FIREBASE_RECIPES_URL,
+            recipe
+          );
+        }
+      }
+
 
     createReview(reviewData: Review,id: string){
         if(reviewData.rating || reviewData.commentText){
             return this.http.post<{name: string}>(
-                `https://recipesforsucces-cdfa9-default-rtdb.europe-west1.firebasedatabase.app/recipes/${id}/reviews.json`,
+                `${environment.FIREBASE_BASE_RECIPES_URL}${id}/reviews.json`,
                 reviewData) 
         }
     }

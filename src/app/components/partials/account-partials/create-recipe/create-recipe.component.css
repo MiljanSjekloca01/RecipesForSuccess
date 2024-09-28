@@ -1,0 +1,273 @@
+*{
+  box-sizing: border-box;
+}
+
+.header {
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    padding-bottom: 2rem;
+    border-bottom: 0.15rem solid;
+    border-image: linear-gradient(to left, rgb(136, 69, 1), rgb(33, 19, 0)) 1;
+}
+
+
+.header-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1rem;
+    width:100%;
+    gap:1rem;
+    background-image: url("https://nishkaresearch.com/wp-content/uploads/2021/12/Food.jpeg");
+    background-repeat: no-repeat;
+    min-height: 150px;
+    background-size: cover;
+    background-position: right;
+}
+
+.header-top > div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    min-height: 150px;
+    min-width: calc(320px - 4rem);
+    width:30%;
+    background-color: rgba(0, 0, 0, 0.6);
+
+}
+
+.header-top > div > h1 > mat-icon{
+    font-size: 2.4rem;
+    min-height: 2.4rem;
+    min-width: 2.4rem;
+}
+
+.header-top > div > h1 {
+    font-size: 2.1rem;
+    border-bottom: 1px solid white;
+    border-bottom-left-radius: 1rem;
+}
+
+.header > p {
+    color:black;
+    line-height: 1.5rem;
+    font-size: larger;
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.hover-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-text {
+  display: none;
+  position: absolute;
+  top: -4.8rem; 
+  right: 0;
+  background-color: rgba(106, 106, 106, 1);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  z-index: 10;
+  width:200px;
+  
+}
+
+.tooltip-arrow {
+  position: absolute;
+  bottom: -0.7rem; /* Pozicija trougla */
+  right: 0.75rem;
+  border-left: 1rem solid transparent;
+  border-right: 1rem solid transparent;
+  border-top: 1rem solid rgba(106, 106, 106, 1); /* Boja trougla */
+}
+
+.hover-wrapper:hover .hover-text {
+  display: block;
+}
+
+
+.form-control {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-control label {
+    display:block;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .input-with-icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .input-with-icon input{
+    width:100%;
+    padding-right: 3rem;
+  }
+
+  input,select,textarea{
+    padding: 1.2rem;
+    border: 0.15rem solid gray;
+    border-radius: 5px;
+    color: gray;
+    font-size: large;
+  }
+   
+  .input-with-icon mat-icon {
+    margin-left: -2.5rem;
+    color: gray;
+  }
+  
+  .form-control textarea {
+    padding: 1rem;
+    border: 0.15rem solid gray;
+    border-radius: 5px;
+    max-width: 100%;
+    max-height: 150px;
+    min-height: 100px;
+    min-width: 200px;
+    font-size:large;
+  }
+
+  .image-preview{
+    display: flex;
+  }
+  
+  .image-preview img {
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    min-width: 262px;
+    width: 300px;
+    min-height:200px;
+    height:240px;
+
+  }
+  
+  .form-control > .preparation-time input {
+    width: calc(50% - 7px);
+    padding: 1.2rem;
+  }
+  
+  .error {
+    margin-top:0.5rem;
+    margin-left: 0.5rem;
+    color: gray;
+  }
+  
+ 
+  
+  .buttons button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button {
+    height: 2.5rem;
+}
+
+.directions-section,
+.ingredients-section{
+    gap: 1rem;
+}
+
+.delete-button{
+    background:transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.directions-section > div > div >  button > mat-icon,
+.ingredients-section > div > div >  button > mat-icon {
+    font-size: 2.2rem;
+    min-width: 2.2rem;
+    min-height: 2.2rem;
+    color: black;
+    margin-left:1rem;
+}
+
+.direction,
+.ingredient{
+    display:flex;
+    align-items: center;
+}
+
+.direction > textarea,
+.ingredient > input{
+  width: calc(100% - 3.2rem);
+}
+
+
+
+
+.add-button{
+  width:20%;
+  min-width: calc(300px - 2rem);
+  padding:1.2rem 0rem;
+  border: 3px solid rgb(182, 36, 0);
+  background-color: transparent;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.add-button:hover{
+  background-color: rgb(182, 36, 0);
+  color:white;
+}
+
+.buttons{
+  display:flex;
+  flex-direction: row;
+  gap:3rem;
+  justify-content: end;
+  align-items: center;
+  max-width:100%;
+}
+
+.buttons > button{
+  padding: 1.5rem 3rem;
+  background-color: rgb(182, 100, 0);
+  cursor: pointer;
+  font-size: 1.5rem;
+  color:white;
+  font-weight: bold;
+  border:none;
+  border-radius: 0.5rem;  
+}
+
+.buttons > button:hover{
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 1024px){
+    .header > p{
+        text-align: center;
+    }
+
+    .buttons {
+      flex-direction: column;
+      justify-content: center;
+      gap:1rem;
+    }
+
+/* .header-top{
+        justify-content: center;
+    }
+    .form-control label{
+        text-align: center;
+    }
+*/
+
+}

@@ -1,1 +1,125 @@
-<p>create-recipe works!</p>
+<div class="header">
+  <div class="header-top">
+      <div>
+          <h1><mat-icon>add</mat-icon>Add a recipe</h1>
+      </div>
+  </div>
+  <p>Welcome to the recipe creation page! Follow the steps below to add your favorite recipe to our collection. Share your culinary skills with the world!</p>
+</div>
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <div class="form-control">
+    <label for="title">Title*</label>
+    <div class="input-with-icon">
+      <input id="title" name="title" type="text" required minlength="2" maxlength="40" placeholder="Recipe Title" [(ngModel)]="recipe.title" #title="ngModel"/>
+      <div class="hover-wrapper">
+        <mat-icon class="icon-with-hover">info</mat-icon>
+        <div class="hover-text">Be descriptive — but don't get crazy. Choose a short title that captures the essence.
+          <div class="tooltip-arrow"></div>
+        </div>
+
+    </div>
+    </div>
+    <div *ngIf="title.invalid && title.touched" class="error">
+      <p>* Title is required and must be between 2-40 characters long.</p>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="description">Description*</label>
+    <textarea id="description" name="description" rows="4" required minlength="30" maxlength="500" [(ngModel)]="recipe.description" #description="ngModel" placeholder="Describe your recipe"></textarea>
+    <div *ngIf="description.invalid && description.touched" class="error">
+      <p>* Description cannot exceed 500 characters or have less then 30.</p>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="imageUrl">Image URL*</label>
+    <div class="input-with-icon">
+      <input id="imageUrl" name="imageUrl" type="text" [(ngModel)]="recipe.imageUrl" #imageUrl="ngModel" placeholder="Image URL" required>
+      <mat-icon>image</mat-icon>
+    </div>
+    <div *ngIf="imageUrl.invalid && imageUrl.touched || (imageUrl.touched && !recipe.imageUrl?.match('\\.(jpg|jpeg|png)(\\?.*)?$'))" class="error">
+      <p>* Invalid Image URL - ( Image URL must be .jpg, .jpeg, or .png )</p>
+    </div>
+
+    <div class="image-preview" *ngIf="recipe.imageUrl">
+      <img [src]="recipe.imageUrl" alt="Image preview">
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="preparationTime">Preparation Time (minutes)*</label>
+    <div class="preparation-time">
+      <input type="number" name="prepMin" [(ngModel)]="prepTimeMin" min="1" max="600" placeholder="Min time" required #prepMin="ngModel">
+      <span> - </span>
+      <input type="number" name="prepMax" [(ngModel)]="prepTimeMax" min="2" max="600" placeholder="Max time" required #prepMax="ngModel">
+    </div>
+    <div *ngIf="(prepMin.invalid || prepMax.invalid) && (prepMin.touched || prepMax.touched)"  class="error">
+      <p>* Preparation time is required and maximum is 600min/10h.</p>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="cuisine">Cuisine</label>
+    <select id="cuisine" name="cuisine" [(ngModel)]="recipe.cuisine">
+      <option value="">Select Cuisine</option>
+      <option *ngFor="let cuisine of cuisines" [value]="cuisine">{{ cuisine }}</option>
+    </select>
+  </div>
+
+  <div class="form-control">
+    <label for="meal">Meal*</label>
+    <select id="meal" name="meal" [(ngModel)]="meal" required #mealRef="ngModel">
+      <option value="">Select Meal</option>
+      <option *ngFor="let meal of meals" [value]="meal">{{ meal }}</option>
+    </select>
+    <div *ngIf="meal === '' && mealRef.touched" class="error"> <p>* Meal is required.</p> </div>
+  </div>
+
+  <div class="form-control">
+    <label for="dishType">Dish Type</label>
+    <select id="dishType" name="dishType" [(ngModel)]="dishType">
+      <option value="">Select Dish Type</option>
+      <option *ngFor="let dish of dishTypes" [value]="dish">{{ dish }}</option>
+    </select>
+  </div>
+  <!-- Ingredients Section -->
+<div class="form-control ingredients-section">
+  <label>Ingredients*</label>
+  <div *ngFor="let ingredient of recipe.ingredients; let i = index; trackBy: trackByFn">
+    <div class="ingredient">
+      <input type="text" name="ingredientasafsaf{{i}}" [(ngModel)]="recipe.ingredients[i]" maxlength="80" required placeholder="Add ingredient" />
+      <button type="button" (click)="removeIngredient(i)" class="delete-button">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </div>
+  </div>
+  <button type="button" (click)="addIngredient()" class="add-button">ADD INGREDIENT</button>
+</div>
+
+<!-- Directions Section -->
+<div class="form-control directions-section">
+<label>Directions*</label>
+<div *ngFor="let step of recipe.steps; let i = index; trackBy: trackByFn">
+  <label>Step {{ i + 1 }}</label>
+  <div class="direction">
+    <textarea rows="3" maxlength="400" minlength="10" name="stepasfasf{{i}}" [(ngModel)]="recipe.steps[i]" placeholder="Add description step" required></textarea>
+    <button type="button" (click)="removeDirection(i)" class="delete-button">
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </div>
+</div>
+<button type="button" (click)="addDirection()" class="add-button">ADD STEP</button>
+</div>
+
+  <div class="form-control">
+    <label for="servings">Servings</label>
+    <input id="servings" name="servings" type="number" min="1" max="10" [(ngModel)]="recipe.servings">
+  </div>
+
+  <div class="form-control buttons">
+    <button type="button" (click)="cancel(f)">Cancel</button>
+    <button type="submit" [disabled]="!f.valid">Submit Recipe</button>
+  </div>
+</form>

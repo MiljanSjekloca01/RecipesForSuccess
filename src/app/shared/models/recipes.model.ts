@@ -6,7 +6,7 @@ export interface Recipe{
     description: string;
     imageUrl: string; // dodati Upload kasnije
     prepTime: string;
-    cousine?: string;
+    cuisine?: string;
     type?: "public" | "private";
     owner: string;
     tags: string[];
@@ -16,6 +16,7 @@ export interface Recipe{
     reviews?: Review[];
     ratings?: number[];
     userId?: string;
+    cookTime?: string;
     //nutrition: Maybe
     //publishedOnDate
 }
