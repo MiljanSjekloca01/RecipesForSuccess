@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, Subject, catchError, map, sample, switchMap, throwError } from "rxjs";
+import { Observable, Subject, catchError, map, of, switchMap, throwError } from "rxjs";
 import { Recipe } from "../shared/models/recipes.model";
 import { sample_recipes } from "../data";
 import { HttpClient } from "@angular/common/http";
@@ -124,4 +124,16 @@ export class RecipeService {
             likeData
         )
     }
+
+    getRecipesByIds(recipeIds: string[]): Observable<Recipe[]> {
+        if (this.recipes.length === 0) {
+            return this.getRecipesFromDatabase().pipe(
+                map(recipes => recipes.filter(recipe => recipeIds.includes(recipe.id)))
+            );
+        }
+
+        return of(this.recipes.filter(recipe => recipeIds.includes(recipe.id)));
+    }
+
+
 }

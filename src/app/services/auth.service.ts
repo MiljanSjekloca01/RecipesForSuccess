@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from "@angular/core";
-import { BehaviorSubject, catchError,map,mergeMap,switchMap,tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError,map,mergeMap,switchMap,take,tap, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { User } from "../shared/models/user.model";
 import { environment } from "../../environments/environment";
@@ -20,16 +20,16 @@ export class AuthService implements OnInit{
     constructor( private http: HttpClient, private router: Router){}
     ngOnInit(): void { }
 
-    signUp(email: string, password: string, firstName: string, lastName: string,favoriteCuisine = "",dietaryPreference = "") {
+    signUp(email: string, password: string, firstName: string, lastName: string,favoriteCuisine = "",dietaryPreference = "",favoriteRecipes = [],firebaseId = "") {
         const signupData = { email, password, returnSecureToken: true };
-        let user = { id: "", firstName, lastName, email, favoriteCuisine, dietaryPreference}
+        let user = { id: "", firstName, lastName, email, favoriteCuisine, dietaryPreference, favoriteRecipes, firebaseId}
         return this.http.post<AuthResponseData>(this.SIGNUP_URL, signupData).pipe(
             catchError(this.handleError),
             mergeMap(resData => {
                 user.id = resData.localId
                 return this.createUserInDatabase(user).pipe(
                     map(() => {
-                        return { ...resData, firstName, lastName, favoriteCuisine, dietaryPreference};
+                        return { ...resData, firstName, lastName, favoriteCuisine, dietaryPreference, favoriteRecipes, firebaseId: user.firebaseId};
                     })
                 );
             }),
@@ -42,15 +42,21 @@ export class AuthService implements OnInit{
                     result.firstName,
                     result.lastName,
                     result.favoriteCuisine,
-                    result.dietaryPreference
+                    result.dietaryPreference,
+                    result.favoriteRecipes,
+                    result.firebaseId
+                    
                 );
             })
         );
     }
     
-    private createUserInDatabase(user: {id: string, firstName: string, lastName:string, email: string, favoriteCuisine: string, dietaryPreference: string}) {
-        return this.http.post(environment.FIREBASE_CREATE_USER_URL, user).pipe(
-            catchError(this.handleError)
+    private createUserInDatabase(user: {id: string, firstName: string, lastName:string, email: string, favoriteCuisine: string, dietaryPreference: string, firebaseId: string}) {
+        return this.http.post<{name: string}>(environment.FIREBASE_CREATE_USER_URL, user).pipe(
+            catchError(this.handleError),
+            tap(response => {
+                user.firebaseId = response.name;
+            })
         );
     }
 
@@ -75,36 +81,60 @@ export class AuthService implements OnInit{
                     result.firstName,
                     result.lastName,
                     result.favoriteCuisine,
-                    result.dietaryPreference
+                    result.dietaryPreference,
+                    result.favoriteRecipes,
+                    result.firebaseId
                 );
             })
         );
     }
 
     private getUserFromDatabase(userId: string) {
-        return this.http.get<User>("https://recipesforsucces-cdfa9-default-rtdb.europe-west1.firebasedatabase.app/users.json").pipe(
+        return this.http.get<{ [key: string]: User }>(environment.FIREBASE_CREATE_USER_URL).pipe(
             map(usersData => {
-                const usersArray: User[] = Object.values(usersData);
-                return usersArray.find(user => user.id === userId);
+                
+                const usersEntries = Object.entries(usersData);
+                
+                const userEntry = usersEntries.find(([firebaseId, user]) => user.id === userId);
+                const [firebaseId, user] = userEntry;  
+                
+                if (user.favoriteRecipes) {
+                    const favoriteRecipeIds = Object.values(user.favoriteRecipes as any as {recipeId: string}[]).map(obj => obj.recipeId);
+                    console.log(favoriteRecipeIds)
+                    user.favoriteRecipes = favoriteRecipeIds;
+                }
+
+                user.firebaseId = firebaseId
+                return user;
+              
             }),
             catchError(this.handleError)
         );
     }
 
 
-    logout(){
-        if(this.router.url.includes("account")) this.router.navigate([""]);
-        
-        localStorage.removeItem("userData");
-        this.user.next(null);
-        if(this.tokenExpirationTimer){
-            clearTimeout(this.tokenExpirationTimer);
+    logout() {
+        if (this.router.url.includes("account")) {
+            this.router.navigate([""]).then(() => {
+                localStorage.removeItem("userData");
+                this.user.next(null);
+                if (this.tokenExpirationTimer) {
+                    clearTimeout(this.tokenExpirationTimer);
+                }
+            });
+        } else {
+
+            localStorage.removeItem("userData");
+            this.user.next(null);
+            if (this.tokenExpirationTimer) {
+                clearTimeout(this.tokenExpirationTimer);
+            }
         }
     }
 
-    private handleAuthentication(email: string, userId: string, token: string, expiresIn: string,firstName: string,lastName:string,favoriteCuisine: string,dietaryPreference: string) {
+    private handleAuthentication(email: string, userId: string, token: string, expiresIn: string,firstName: string,lastName:string,favoriteCuisine: string,dietaryPreference: string,favoriteRecipes: string[],firebaseId: string) {
         const expirationDate = new Date( new Date().getTime() + +expiresIn * 1000)
-        const user = new User(email,userId,token,expirationDate,firstName,lastName,favoriteCuisine,dietaryPreference);
+        const user = new User(email,userId,token,expirationDate,firstName,lastName,favoriteCuisine,dietaryPreference,favoriteRecipes,firebaseId);
         this.user.next(user);
         this.autoLogout(+expiresIn * 1000);
 
@@ -156,19 +186,33 @@ export class AuthService implements OnInit{
             firstName: string,
             lastName: string,
             favoriteCuisine: string,
-            dietaryPreference: string
+            dietaryPreference: string,
+            favoriteRecipes: string[],
+            firebaseId: string;
         } = JSON.parse(localStorage.getItem("userData"));
         if(!userData){
             return;
         }
         
-        const loadedUser = new User(userData.email,userData.id,userData._token, new Date(userData._tokenExpirationDate),userData.firstName,userData.lastName,userData.favoriteCuisine,userData.dietaryPreference)
+        const loadedUser = new User(userData.email,userData.id,userData._token, new Date(userData._tokenExpirationDate),userData.firstName,userData.lastName,userData.favoriteCuisine,userData.dietaryPreference,userData.favoriteRecipes,userData.firebaseId)
         const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime()
         this.autoLogout(expirationDuration)
         
         if(loadedUser.token){
             this.user.next(loadedUser);
         }
+    }
+
+    addRecipeToFavorites(recipeId: string) {
+        return this.user.pipe(
+            take(1), 
+            switchMap(user => {
+                if (!user) { return throwError('User not found'); }
+
+                const favoriteRecipe = { recipeId };
+                return this.http.post<{ name: string }>( `${environment.FIREBASE_BASE_USERS_URL}/${user.firebaseId}/favoriteRecipes.json`, favoriteRecipe )
+            })
+        );
     }
 }
 
