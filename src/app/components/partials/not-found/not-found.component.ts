@@ -11,10 +11,10 @@ export class NotFoundComponent {
   constructor(private router: Router){}
 
   @Input()
-  imageUrl: string = "https://cdni.iconscout.com/illustration/premium/thumb/not-found-7621869-6167023.png?f=webp"
+  imageUrl: string = "https://www.pngarts.com/files/4/Sorry-Transparent-Images.png"
   
   @Input()
-  title: string = "There is no such recipe";
+  title: string = "Sorry, but we can't find the recipe you're looking for!";
 
   @Input()
   visible: boolean = false;

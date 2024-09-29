@@ -33,6 +33,13 @@ export class PageTitleComponent implements OnChanges{
       case "breakfast":
         this.aboutPage = "Start your day with our delicious breakfast recipes, ranging from quick and easy options to hearty and filling meals designed to energize and satisfy."
         break;
+      case "appetizer":
+        this.aboutPage = "Kick off your meal with our delectable appetizer recipes! From savory bites to delightful dips, these small plates are perfect for sharing or enjoying on your own. Elevate your gatherings with flavors that will tantalize your taste buds and set the stage for an unforgettable dining experience.";
+        break;
+      case "snack":
+        this.aboutPage = "Craving a quick bite? Our snack recipes are here to satisfy your hunger between meals! Discover easy-to-make options, from healthy snacks to indulgent treats, that will keep your energy up and your taste buds happy. Perfect for any time of day, these snacks are designed to delight!";
+        break;
+
       default:
         this.aboutPage = "";
         break;
