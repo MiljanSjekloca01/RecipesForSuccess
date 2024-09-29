@@ -6,7 +6,7 @@
     [visible]="recipes.length === 0">
     </app-not-found>
     <div class="container">
-        <li *ngFor="let recipe of recipes.slice(0,recipesShownNumber)">
+        <li *ngFor="let recipe of recipes.slice().reverse().slice(0,recipesShownNumber)">
         <a routerLink="/recipe/{{recipe.id}}">
             <img [src]="recipe.imageUrl" [alt]="recipe.title">
             <p class="tags" *ngFor="let tag of recipe.tags">
@@ -14,6 +14,7 @@
             </p>
             <div *ngIf="recipe.ratings.length">
                 <star-rating [starRating]="calculateAverageRating(recipe.ratings)"></star-rating>
+                <p> {{ recipe.ratings.length }} {{ recipe.ratings.length === 1 ? 'Rating' : 'Ratings' }} </p>
             </div>
             <h2> {{ recipe.title }}</h2>
         </a></li>
@@ -27,7 +28,6 @@
     
 </div>
 
-<button type="button" (click)="storeRecipes()">Store recipes on Firebase</button>
  
 <app-footer></app-footer>
 

@@ -14,11 +14,24 @@
     grid-template-columns: repeat(auto-fit, minmax(320px, 450px));
     justify-content: center;
     gap:2rem;
+    margin-bottom: 1rem;
 }
 
 .container > li {
   width:300px;
   margin:auto
+}
+
+.container > li > a > div {
+    display:flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.container > li > a > div > p{
+    color:rgb(91, 0, 0);
+    font-size:large;
+    font-weight: bold;
 }
 
 .container > li:hover > a > img {
@@ -46,11 +59,13 @@ img{
 }
 
 .button-end{
-    margin:auto;
+    margin-inline: auto;
+    margin-bottom: 2rem;
     padding: 1rem 5rem;
     background-color: white;
     border:1px solid darkred;
     border-radius: 1rem;
+    cursor: pointer;
 }
 
 .button-end:hover{

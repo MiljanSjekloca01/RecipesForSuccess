@@ -14,13 +14,13 @@ export class RecipesComponent implements OnInit,OnDestroy{
   constructor(private recipeService: RecipeService,private activeRoute: ActivatedRoute){}
 
   recipes: Recipe[] = [];
-  recipesShownNumber: number = 4;
+  recipesShownNumber: number = 8;
   routeSubscription: Subscription;
   pageTitle = "All";
 
   ngOnInit(){
     this.routeSubscription = this.activeRoute.params.subscribe( param => {
-      this.recipesShownNumber = 4;
+      this.recipesShownNumber = 8;
       if(param.tag){
         this.pageTitle = param.tag
         this.recipes = this.recipeService.getRecipesByTag(param.tag)
@@ -30,7 +30,13 @@ export class RecipesComponent implements OnInit,OnDestroy{
       }else{
         this.recipes = this.recipeService.getRecipes();
       }
+
     })
+
+    this.recipeService.recipeAdded.subscribe(recipe => {
+      this.recipes.push(recipe);
+    });
+
   }
 
   onShowMoreRecipes(){

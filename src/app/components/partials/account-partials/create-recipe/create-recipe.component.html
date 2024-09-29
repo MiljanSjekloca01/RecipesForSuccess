@@ -49,7 +49,7 @@
   </div>
 
   <div class="form-control">
-    <label for="preparationTime">Preparation Time (minutes)*</label>
+    <label>Preparation Time (minutes)*</label>
     <div class="preparation-time">
       <input type="number" name="prepTimeMin" [(ngModel)]="prepTimeMin" min="1" max="600" placeholder="Min time" required #prepMin="ngModel">
       <span> - </span>
@@ -61,7 +61,7 @@
   </div>
 
   <div class="form-control">
-    <label for="cookTime">Cook time (optional)</label>
+    <label>Cook time (optional)</label>
     <div class="preparation-time">
       <input type="number" name="cookTimeMin" [(ngModel)]="cookTimeMin" min="1" max="600" placeholder="Min time" required #cookMin="ngModel">
       <span> - </span>
@@ -124,7 +124,7 @@
 
   <div class="form-control">
     <label for="servings">Servings</label>
-    <input id="servings" name="servings" type="number" min="1" max="10" [(ngModel)]="recipe.servings">
+    <input id="servings" name="servings" type="number" min="1" max="20" [(ngModel)]="recipe.servings">
   </div>
 
   <div class="form-control buttons">

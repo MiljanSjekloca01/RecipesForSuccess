@@ -21,6 +21,10 @@
     <div class="top-content">
         <div class="image-container">
             <img [src]="recipe.imageUrl" [alt]="recipe.title">
+            <button  *ngIf="(this.user?.id !== this.recipe.userId) && !savedRecipe" (click)="addToFavorite(this.recipe.id)">
+                <mat-icon class="center-icon">favorite</mat-icon>
+                <p>S A V E </p>
+            </button>
         </div>
         <div class="description">
             <h3>Description</h3><p>{{ recipe.description }}</p>
@@ -58,7 +62,7 @@
     <div class="review">
         <h3>{{recipe.owner}}</h3>
         <h3 id="title">{{recipe.title}}</h3>
-        <div *ngIf="!userHaveRated && user.id !== recipe.userId; else alreadyRated">
+        <div *ngIf="!userHaveRated && user?.id !== recipe.userId; else alreadyRated">
             <h4>Your rating</h4>
             <div class="rating">
                 <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" [ngClass]="{ 'filled': star <= clickedStarIndex }"

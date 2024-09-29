@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from '../../../services/recipe.service';
 import { Recipe } from '../../../shared/models/recipes.model';
 import { AuthService } from '../../../services/auth.service';
@@ -20,12 +20,13 @@ export class RecipeDetailComponent implements OnInit{
   comment: string = "";
   userHaveRated: boolean;
   user: User;
+  savedRecipe: boolean;
   maxCommentsPerUser = 4;
   recipesCommentNumber = 2;
   likedReviews: { [key: string]: boolean } = {};
 
-  constructor(activedRoute: ActivatedRoute,private recipeService: RecipeService,private authService: AuthService){
-    activedRoute.params.subscribe( param => {
+  constructor(activedRoute: ActivatedRoute,private recipeService: RecipeService,private authService: AuthService,private router: Router){
+      activedRoute.params.subscribe( param => {
       if(param.id){
         this.recipe = this.recipeService.getRecipeById(param.id);
       }
@@ -36,6 +37,8 @@ export class RecipeDetailComponent implements OnInit{
   ngOnInit(){
     this.userHaveRated = this.findIfUserHaveRatedRecipe();
     this.cacheLikedReviews();
+    this.savedRecipe = this.user.favoriteRecipes?.includes(this.recipe.id);
+    console.log(this.savedRecipe);
   }
 
   cacheLikedReviews() {
@@ -140,6 +143,25 @@ export class RecipeDetailComponent implements OnInit{
     } else {
         alert("You have already liked this comment.");
     }
-}
+  }
+
+  addToFavorite(recipeId: string){
+    if(this.user){
+      this.savedRecipe = true;
+      this.authService.addRecipeToFavorites(recipeId).subscribe({
+        next: res => {
+          this.user.favoriteRecipes.push(recipeId);
+          localStorage.setItem("userData", JSON.stringify(this.user));
+
+        },error: err => {
+          alert('Error adding recipe to favorites:' + err)
+        },complete: () => {
+          alert("Recipe successfully added to favorites");
+        }
+      })
+    }else{
+      this.router.navigate(["/auth/login"])
+    }
+  }
 
 }

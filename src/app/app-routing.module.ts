@@ -8,6 +8,7 @@ import { AuthGuard } from "./components/page/auth/auth.guard";
 import { AccountComponent } from "./components/page/account/account.component";
 import { CreateRecipeComponent } from "./components/partials/account-partials/create-recipe/create-recipe.component";
 import { PersonalInfoComponent } from "./components/partials/account-partials/personal-info/personal-info.component";
+import { FavoriteRecipesComponent } from "./components/partials/account-partials/favorite-recipes/favorite-recipes.component";
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
     {path: "account",canActivate:[AuthGuard],component: AccountComponent, children: [
         { path: "", redirectTo:"profile"},
         { path: "profile",component: PersonalInfoComponent},
-        { path: "create-recipe",component: CreateRecipeComponent}   
+        { path: "create-recipe",component: CreateRecipeComponent},
+        { path: "favorite-recipes", component: FavoriteRecipesComponent}   
     ]},
     
     {path: "**",component: RecipesComponent},
