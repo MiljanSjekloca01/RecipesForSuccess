@@ -1,0 +1,31 @@
+<div class="header">
+    <div class="header-top">
+        <div>
+            <h1><mat-icon>segment</mat-icon>Personal Receipts</h1>
+        </div>
+    </div>
+    <p>These are the recipes you've shared with our community. Take a moment to revisit your favorite culinary creations.</p>
+</div>
+<div class="container" *ngIf="recipes">
+    <li *ngFor="let recipe of recipes">
+    <a routerLink="/recipe/{{recipe.id}}">
+        <img [src]="recipe.imageUrl" [alt]="recipe.title">
+        <p class="tags" *ngFor="let tag of recipe.tags">
+            <mat-icon class="material-symbols-outlined">label_imporant</mat-icon>{{ tag }}
+        </p>
+        <div *ngIf="recipe.ratings.length" class="rating">
+            <star-rating [starRating]="calculateAverageRating(recipe.ratings)"></star-rating>
+            <p> {{ recipe.ratings.length }} {{ recipe.ratings.length === 1 ? 'Rating' : 'Ratings' }} </p>
+        </div>
+        <h2> {{ recipe.title }}</h2>
+    </a></li>
+</div>
+
+<app-not-found 
+    [visible]="recipes?.length === 0" 
+    title="You haven't created any personal recipes yet. Start sharing your culinary creations!"
+    imageUrl="https://png.pngtree.com/png-vector/20220606/ourmid/pngtree-cooking-pan-with-vegetables-png-image_4867565.png">
+</app-not-found>
+
+
+

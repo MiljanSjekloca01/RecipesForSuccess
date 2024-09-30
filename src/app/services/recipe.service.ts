@@ -135,5 +135,14 @@ export class RecipeService {
         return of(this.recipes.filter(recipe => recipeIds.includes(recipe.id)));
     }
 
+    getPersonalRecipes(userId: string): Observable<Recipe[]>{
+        if(this.recipes.length === 0){
+            return this.getRecipesFromDatabase().pipe(
+                map(recipes => recipes.filter(recipe => recipe.userId === userId))
+            );
+        }
+        return of(this.recipes.filter(recipe => recipe.userId === userId))
+    }
+
 
 }

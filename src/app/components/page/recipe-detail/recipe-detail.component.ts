@@ -37,7 +37,7 @@ export class RecipeDetailComponent implements OnInit{
   ngOnInit(){
     this.userHaveRated = this.findIfUserHaveRatedRecipe();
     this.cacheLikedReviews();
-    this.savedRecipe = this.user.favoriteRecipes?.includes(this.recipe.id);
+    this.savedRecipe = this.user ? this.user.favoriteRecipes?.includes(this.recipe.id) : false;
     console.log(this.savedRecipe);
   }
 
