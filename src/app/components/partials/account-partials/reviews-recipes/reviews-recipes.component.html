@@ -1,0 +1,46 @@
+<div class="header">
+    <div class="header-top">
+        <img src="https://png.pngtree.com/png-vector/20230315/ourmid/pngtree-reviews-line-icon-vector-png-image_6650528.png" alt="review-logo-image">
+        <h1>Your reviews on Recipes</h1>
+    </div>
+    <p>Welcome to your Reviews section! Here, you can find all the feedback you've shared on your favorite recipes. Discover how your culinary insights can inspire others, and revisit your thoughts on the dishes that stood out to you.</p>
+</div>
+
+<div class="container">
+    <div *ngFor="let recipe of recipes;let i = index" class="main">
+        <div class="recipe-info">
+            <img [src]="recipe.imageUrl" [alt]="recipe.title">
+            <p>{{recipe.title}}</p>
+            <div class="toggle-button">
+                <button *ngIf="!this.pressed[i]" (click)="pressed[i] = true" type="button"><mat-icon>keyboard_arrow_down</mat-icon></button>
+                <button *ngIf="this.pressed[i]" (click)="pressed[i] = false" type="button"><mat-icon>keyboard_arrow_up</mat-icon></button>
+            </div>
+        </div>
+        <div class="toggle-review" *ngIf="pressed[i]">
+            <div *ngFor="let review of recipe.reviews">
+                <a *ngIf="review.user_id === user.id" class="review" [routerLink]="'/recipe/' + recipe.id" >
+                    <div class="review-header">
+                        <h3>{{review.by}}</h3>
+                        <p *ngIf="review.rating">
+                            <star-rating 
+                                [starRating]="review.rating"
+                                filledStarColor="rgb(185, 103, 3)"
+                            ></star-rating>
+                        </p>
+                    </div>
+                    <div *ngIf="review.commentText" class="review-comment">
+                        <p>{{review.commentText}}</p>
+                        <div id="like" *ngIf="review.likes">
+                            <mat-icon>thumb_up</mat-icon>
+                            <p>{{review.likes.length}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="this.recipes.length === 0" style="text-align: center;">
+    <h1>No Reviews</h1>
+</div>

@@ -91,6 +91,23 @@ export class RecipeService {
         return this.recipes.find( recipe => recipe.id === id)
     }
 
+    createReview(reviewData: Review,id: string){
+        if(reviewData.rating || reviewData.commentText){
+            return this.http.post<{name: string}>(
+                `${environment.FIREBASE_BASE_RECIPES_URL}${id}/reviews.json`,
+                reviewData) 
+        }
+    }
+
+    addLikeToComment(recipeId: string, reviewId: string, likeData: { userId: string }) {
+        return this.http.post<{ name: string }>(
+            `${environment.FIREBASE_BASE_RECIPES_URL}${recipeId}/reviews/${reviewId}/likes.json`,
+            likeData
+        )
+    }
+
+    /* Helper functions for Account Page */ 
+
     createRecipe(recipe: Recipe) {
         if (this.recipes.length === 0) {
           return this.getRecipesFromDatabase().pipe(
@@ -109,22 +126,6 @@ export class RecipeService {
         }
       }
 
-
-    createReview(reviewData: Review,id: string){
-        if(reviewData.rating || reviewData.commentText){
-            return this.http.post<{name: string}>(
-                `${environment.FIREBASE_BASE_RECIPES_URL}${id}/reviews.json`,
-                reviewData) 
-        }
-    }
-
-    addLikeToComment(recipeId: string, reviewId: string, likeData: { userId: string }) {
-        return this.http.post<{ name: string }>(
-            `${environment.FIREBASE_BASE_RECIPES_URL}${recipeId}/reviews/${reviewId}/likes.json`,
-            likeData
-        )
-    }
-
     getRecipesByIds(recipeIds: string[]): Observable<Recipe[]> {
         if (this.recipes.length === 0) {
             return this.getRecipesFromDatabase().pipe(
@@ -142,6 +143,18 @@ export class RecipeService {
             );
         }
         return of(this.recipes.filter(recipe => recipe.userId === userId))
+    }
+
+    getReviewedRecipes(userId: string): Observable<Recipe[]>{
+        if(this.recipes.length === 0){
+            return this.getRecipesFromDatabase().pipe(
+                map(recipes => recipes.filter(recipe => recipe.reviews.filter(review => review.user_id === userId).length !== 0))
+            )
+        }
+        const reviewedRecipes = this.recipes.filter(recipe => recipe.reviews.filter(review => review.user_id === userId).length !== 0)
+        return of(reviewedRecipes);
+
+        
     }
 
 

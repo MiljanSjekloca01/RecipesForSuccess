@@ -21,6 +21,7 @@ import { CreateRecipeComponent } from "./components/partials/account-partials/cr
 import { PersonalInfoComponent } from "./components/partials/account-partials/personal-info/personal-info.component";
 import { FavoriteRecipesComponent } from './components/partials/account-partials/favorite-recipes/favorite-recipes.component';
 import { PersonalRecipesComponent } from './components/partials/account-partials/personal-recipes/personal-recipes.component';
+import { ReviewsRecipesComponent } from './components/partials/account-partials/reviews-recipes/reviews-recipes.component';
 
 @NgModule({
     declarations:[
@@ -38,7 +39,8 @@ import { PersonalRecipesComponent } from './components/partials/account-partials
         CreateRecipeComponent,
         PersonalInfoComponent,
         FavoriteRecipesComponent,
-        PersonalRecipesComponent
+        PersonalRecipesComponent,
+        ReviewsRecipesComponent
 
     ],
     imports:[

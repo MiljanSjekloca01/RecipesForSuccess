@@ -10,6 +10,7 @@ import { CreateRecipeComponent } from "./components/partials/account-partials/cr
 import { PersonalInfoComponent } from "./components/partials/account-partials/personal-info/personal-info.component";
 import { FavoriteRecipesComponent } from "./components/partials/account-partials/favorite-recipes/favorite-recipes.component";
 import { PersonalRecipesComponent } from "./components/partials/account-partials/personal-recipes/personal-recipes.component";
+import { ReviewsRecipesComponent } from "./components/partials/account-partials/reviews-recipes/reviews-recipes.component";
 
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
         { path: "profile",component: PersonalInfoComponent},
         { path: "create-recipe",component: CreateRecipeComponent},
         { path: "favorite-recipes", component: FavoriteRecipesComponent},
-        { path: "personal-recipes", component: PersonalRecipesComponent}  
+        { path: "personal-recipes", component: PersonalRecipesComponent},
+        { path: "reviews-recipes", component: ReviewsRecipesComponent}  
     ]},
     
     {path: "**",component: RecipesComponent},
