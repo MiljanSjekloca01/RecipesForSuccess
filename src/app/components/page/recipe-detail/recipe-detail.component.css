@@ -59,6 +59,7 @@
     max-height: 400px;
     min-height: 250px;
     box-shadow: 5px 5px 10px rgb(0, 24, 24);
+    object-fit: cover;
 }
 
 .top-content > .image-container > button{

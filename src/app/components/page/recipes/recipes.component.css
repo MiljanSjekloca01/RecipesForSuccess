@@ -51,6 +51,7 @@ img{
     width:100%;
     min-height: 230px;
     max-height: 250px;
+    object-fit: cover;
 }
 
 .button-container{
@@ -89,4 +90,5 @@ app-header{
     top:0;
     left:0;
     background-color: white;
+    z-index: 10;
 }

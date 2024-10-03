@@ -1,0 +1,15 @@
+<swiper-container class="swiper-container"
+    speed="500"
+    pagination = "true"
+    navigation="true"
+    pagination-clickable="true"
+    >
+    <swiper-slide *ngFor="let recipe of swiperRecipes.slice()" class="swiper-slide">
+        <div>
+            <img [src]="recipe.imageUrl" alt="recipe.title">
+            <p class="absolute">{{recipe.title}}</p>
+        </div>
+    </swiper-slide>
+
+</swiper-container>
+  

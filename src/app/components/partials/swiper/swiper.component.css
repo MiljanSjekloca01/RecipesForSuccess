@@ -1,0 +1,64 @@
+*{
+    box-sizing: border-box;
+}
+
+swiper-container {
+    width: 100%;
+    margin:0 auto;
+    margin-bottom: 3rem;
+    padding:1rem 0rem;
+    --swiper-theme-color: black;
+}
+
+swiper-slide {
+    display:flex;
+    font-size: 18px;
+    background: #fff;
+    padding-bottom: 4rem;
+    justify-content: center;
+}
+
+swiper-slide > div {
+    position: relative;
+    width: 100%;
+    max-width: 250px;
+    height: 250px;
+}
+
+
+swiper-slide > div > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    object-fit: cover;
+}
+
+swiper-slide > div > p {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    z-index: 2; /* Iznad gradijenta */
+    color: white;
+    font-size: 1.2rem;
+    font-size: large;
+    font-weight: 600;
+    font-style: italic;
+  }
+
+
+
+swiper-slide > div:hover{
+    cursor: pointer;
+}
+
+swiper-slide div::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(0deg, black, transparent 70%);
+    width: 100%;
+    height: 100%;
+    content: "";
+    z-index: 1;
+    border-radius: 1rem;
+}

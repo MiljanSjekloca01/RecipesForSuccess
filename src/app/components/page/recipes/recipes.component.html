@@ -21,10 +21,10 @@
     </div>
     
     <div class="button-container" *ngIf="this.recipes.length > this.recipesShownNumber"> <button class="button-end" (click)="onShowMoreRecipes()">Show More</button> </div>
-
 </div>
 
- 
+<app-swiper [swiperRecipes]="recipes" *ngIf="showSwiper && recipes.length > 0"></app-swiper>
+
 <app-footer></app-footer>
 
 

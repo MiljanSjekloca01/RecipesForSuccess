@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
@@ -22,6 +22,7 @@ import { PersonalInfoComponent } from "./components/partials/account-partials/pe
 import { FavoriteRecipesComponent } from './components/partials/account-partials/favorite-recipes/favorite-recipes.component';
 import { PersonalRecipesComponent } from './components/partials/account-partials/personal-recipes/personal-recipes.component';
 import { ReviewsRecipesComponent } from './components/partials/account-partials/reviews-recipes/reviews-recipes.component';
+import { SwiperComponent } from './components/partials/swiper/swiper.component';
 
 @NgModule({
     declarations:[
@@ -40,7 +41,8 @@ import { ReviewsRecipesComponent } from './components/partials/account-partials/
         PersonalInfoComponent,
         FavoriteRecipesComponent,
         PersonalRecipesComponent,
-        ReviewsRecipesComponent
+        ReviewsRecipesComponent,
+        SwiperComponent
 
     ],
     imports:[
@@ -48,8 +50,9 @@ import { ReviewsRecipesComponent } from './components/partials/account-partials/
         AppRoutingModule,
         FormsModule,
         AngularMaterialModule,
-        HttpClientModule
+        HttpClientModule,
     ],
+    schemas:[CUSTOM_ELEMENTS_SCHEMA],
     providers:[
     provideAnimationsAsync(),
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},

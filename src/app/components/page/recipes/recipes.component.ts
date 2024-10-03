@@ -17,18 +17,22 @@ export class RecipesComponent implements OnInit,OnDestroy{
   recipesShownNumber: number = 8;
   routeSubscription: Subscription;
   pageTitle = "All";
+  showSwiper: boolean;
 
   ngOnInit(){
     this.routeSubscription = this.activeRoute.params.subscribe( param => {
       this.recipesShownNumber = 8;
       if(param.tag){
+        this.showSwiper = false;
         this.pageTitle = param.tag
         this.recipes = this.recipeService.getRecipesByTag(param.tag)
       }else if(param.search || param.search === ""){
+        this.showSwiper = false;
         this.recipes = this.recipeService.getRecipesBySearch(param.search)
         if(this.recipes.length) this.pageTitle = "Results for " + param.search
       }else{
         this.recipes = this.recipeService.getRecipes();
+        this.showSwiper = true;
       }
 
     })
