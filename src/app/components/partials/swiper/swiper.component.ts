@@ -11,6 +11,11 @@ export class SwiperComponent implements AfterViewInit{
   @Input()
   swiperRecipes: Recipe[];
 
+  filteredRecipes: Recipe[] = [];
+
+  dietaryPreferences: string[] = ['All','Vegetarian', 'Vegan','Gluten Free','Dairy Free'];
+  activePref: string = "All";
+
   swiperParams = {
     slidesPerView: 1,
     breakpoints: {
@@ -39,6 +44,24 @@ export class SwiperComponent implements AfterViewInit{
     const swiperEl = document.querySelector('swiper-container');
     if(swiperEl){
       Object.assign(swiperEl,this.swiperParams);
+    }
+
+    this.updateFilteredRecipes();
+  }
+
+  filterRecipes(pref: string): void{
+    this.activePref = pref;
+    this.updateFilteredRecipes();
+  }
+
+
+  private updateFilteredRecipes(): void {
+    if (this.activePref === 'All') {
+      this.filteredRecipes = this.swiperRecipes; // Prikaži sve recepte
+    } else {
+      this.filteredRecipes = this.swiperRecipes.filter(recipe => 
+        recipe.dietPreference && recipe.dietPreference.includes(this.activePref)
+      ); // Filtriraj na osnovu aktivne preference
     }
   }
   

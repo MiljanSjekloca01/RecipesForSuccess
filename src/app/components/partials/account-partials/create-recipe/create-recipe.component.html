@@ -70,7 +70,7 @@
   </div>
 
   <div class="form-control">
-    <label for="cuisine">Cuisine</label>
+    <label for="cuisine">Cuisine (optional)</label>
     <select id="cuisine" name="cuisine" [(ngModel)]="recipe.cuisine">
       <option value="">Select Cuisine</option>
       <option *ngFor="let cuisine of cuisines" [value]="cuisine">{{ cuisine }}</option>
@@ -87,7 +87,7 @@
   </div>
 
   <div class="form-control">
-    <label for="dishType">Dish Type</label>
+    <label for="dishType">Dish Type (optional)</label>
     <select id="dishType" name="dishType" [(ngModel)]="dishType">
       <option value="">Select Dish Type</option>
       <option *ngFor="let dish of dishTypes" [value]="dish">{{ dish }}</option>
@@ -122,8 +122,16 @@
 <button type="button" (click)="addDirection()" class="add-button">ADD STEP</button>
 </div>
 
+<div class="form-control">
+  <label for="dietPreference">Dietary Preference (optional)</label>
+  <select id="dietPreference" name="dietPreference" [(ngModel)]="recipe.dietPreference">
+    <option value="">Select Dietary Preference</option>
+    <option *ngFor="let diet of dietPreferences" [value]="diet">{{ diet }}</option>
+  </select>
+</div>
+
   <div class="form-control">
-    <label for="servings">Servings</label>
+    <label for="servings">Servings (optional)</label>
     <input id="servings" name="servings" type="number" min="1" max="20" [(ngModel)]="recipe.servings">
   </div>
 

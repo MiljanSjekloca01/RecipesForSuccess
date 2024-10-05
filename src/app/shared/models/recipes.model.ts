@@ -17,6 +17,7 @@ export interface Recipe{
     ratings?: number[];
     userId?: string;
     cookTime?: string;
+    dietPreference?: string;
     //nutrition: Maybe
     //publishedOnDate
 }

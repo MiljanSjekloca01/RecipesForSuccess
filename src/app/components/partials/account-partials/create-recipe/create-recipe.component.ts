@@ -15,6 +15,7 @@ export class CreateRecipeComponent {
   cuisines: string[] = ['Italian', 'Mexican', 'Chinese', 'Indian', 'French', 'Japanese', 'Mediterranean', 'Serbian'];
   meals: string[] = ["Breakfast","Dinner","Lunch","Drink","Dessert","Snack","Appetizer"];
   dishTypes: string[] = [ 'Pizza', 'Salad', 'Pasta', 'Burger', 'Sushi', 'Steak', 'Tacos', 'Soup', 'Curry', 'Sandwich', 'Seafood', 'Vegetarian', 'Grilled Chicken', 'Fried Rice' ];
+  dietPreferences: string[] = ['Vegetarian', 'Vegan', 'Gluten-Free', 'Dairy-Free'];
   prepTimeMax: number;
   prepTimeMin: number;
   cookTimeMin: number;
@@ -35,7 +36,8 @@ export class CreateRecipeComponent {
     steps:[""],
     reviews: [],
     ratings: [],
-    userId: ""
+    userId: "",
+    dietPreference: "",
 
   };
 

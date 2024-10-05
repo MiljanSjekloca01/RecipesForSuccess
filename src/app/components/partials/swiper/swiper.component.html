@@ -1,14 +1,26 @@
+<h2>RECIPES BASED ON DIETARY PREFERENCES</h2>
+<div class="title-divider"></div>
+
+<div class="button-wrapper">
+    <button *ngFor="let pref of dietaryPreferences"
+    (click)="filterRecipes(pref)"
+    [ngClass]="{'active': activePref === pref}"
+    >
+    {{ pref }}
+    </button>
+</div>
+
 <swiper-container class="swiper-container"
     speed="500"
     pagination = "true"
     navigation="true"
     pagination-clickable="true"
     >
-    <swiper-slide *ngFor="let recipe of swiperRecipes.slice()" class="swiper-slide">
-        <div>
+    <swiper-slide *ngFor="let recipe of filteredRecipes" class="swiper-slide">
+        <a [routerLink]="'recipe/'+ recipe.id">
             <img [src]="recipe.imageUrl" alt="recipe.title">
             <p class="absolute">{{recipe.title}}</p>
-        </div>
+        </a>
     </swiper-slide>
 
 </swiper-container>

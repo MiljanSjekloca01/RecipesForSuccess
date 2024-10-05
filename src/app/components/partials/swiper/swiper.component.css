@@ -2,6 +2,8 @@
     box-sizing: border-box;
 }
 
+/* Swiper CSS */
+
 swiper-container {
     width: 100%;
     margin:0 auto;
@@ -18,7 +20,7 @@ swiper-slide {
     justify-content: center;
 }
 
-swiper-slide > div {
+swiper-slide > a {
     position: relative;
     width: 100%;
     max-width: 250px;
@@ -26,14 +28,14 @@ swiper-slide > div {
 }
 
 
-swiper-slide > div > img {
+swiper-slide > a > img {
     width: 100%;
     height: 100%;
     border-radius: 1rem;
     object-fit: cover;
 }
 
-swiper-slide > div > p {
+swiper-slide > a > p {
     position: absolute;
     bottom: 10px;
     left: 20px;
@@ -43,15 +45,15 @@ swiper-slide > div > p {
     font-size: large;
     font-weight: 600;
     font-style: italic;
+    letter-spacing: 0.09rem;
   }
 
-
-
-swiper-slide > div:hover{
+swiper-slide > a:hover{
     cursor: pointer;
+    filter:drop-shadow(0 1rem 0.4rem gray)
 }
 
-swiper-slide div::after {
+swiper-slide a::after {
     position: absolute;
     top: 0;
     left: 0;
@@ -61,4 +63,58 @@ swiper-slide div::after {
     content: "";
     z-index: 1;
     border-radius: 1rem;
+}
+
+/*  Other  */
+
+h2{
+    text-align: center;
+    margin: 1.5rem 0;
+    font-family:Renner, helvetica, sans-serif;
+    letter-spacing: 0.05rem;
+    line-height: 2.5rem;
+}
+
+
+.title-divider{
+    width: 9rem;
+    margin:auto;
+    border-bottom: 0.25rem solid darkred;
+    margin-bottom: 2rem;
+}
+
+.button-wrapper{
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem 1.5rem 16px;
+    width: 100%;
+    gap: 0.75rem;
+    overflow-x: auto;
+    justify-content: center;
+}
+
+.button-wrapper > button{
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    font-size: large;
+    background-color: rgba(192, 57, 57, 0.2);
+    border-radius: 1.5rem;
+    border:1px solid transparent;
+    margin-bottom: 2rem;
+    word-break: keep-all;
+}
+
+.button-wrapper > button.active{
+    background-color: rgb(44, 40, 40);
+    color:white;
+}
+
+.button-wrapper > button:hover{
+    border:1px solid black;
+}   
+
+@media screen and (max-width:650px){
+    .button-wrapper{
+        justify-content: unset;
+    }
 }

@@ -14,7 +14,7 @@ export class PersonalInfoComponent implements OnInit{
   isDataDifferent: boolean = false;
   oldData: User;
   cuisines: string[] = ['Italian', 'Mexican', 'Chinese', 'Indian', 'French', 'Japanese', 'Mediterranean','Serbian'];
-  dietaryPreferences: string[] = ['Vegetarian', 'Vegan', 'None'];
+  dietaryPreferences: string[] = ['Vegetarian', 'Vegan','Gluten Free','Dairy Free','None'];
 
   constructor(private authService: AuthService){}
 
