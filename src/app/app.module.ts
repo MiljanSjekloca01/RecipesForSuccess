@@ -25,6 +25,7 @@ import { ReviewsRecipesComponent } from './components/partials/account-partials/
 import { SwiperComponent } from './components/partials/swiper/swiper.component';
 import { NutritionComponent } from './components/page/nutrition/nutrition.component';
 import { NutritionDetailComponent } from './components/page/nutrition-detail/nutrition-detail.component';
+import { TooltipComponent } from './shared/tooltip/tooltip.component';
 
 @NgModule({
     declarations:[
@@ -46,7 +47,8 @@ import { NutritionDetailComponent } from './components/page/nutrition-detail/nut
         ReviewsRecipesComponent,
         SwiperComponent,
         NutritionComponent,
-        NutritionDetailComponent
+        NutritionDetailComponent,
+        TooltipComponent
 
     ],
     imports:[

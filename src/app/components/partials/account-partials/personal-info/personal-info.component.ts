@@ -15,6 +15,9 @@ export class PersonalInfoComponent implements OnInit{
   oldData: User;
   cuisines: string[] = ['Italian', 'Mexican', 'Chinese', 'Indian', 'French', 'Japanese', 'Mediterranean','Serbian'];
   dietaryPreferences: string[] = ['Vegetarian', 'Vegan','Gluten Free','Dairy Free','None'];
+  alertVisible = false;
+  alertMessage = "";
+  alertType = "";
 
   constructor(private authService: AuthService){}
 
@@ -27,11 +30,22 @@ export class PersonalInfoComponent implements OnInit{
 
   onSubmit(form: NgForm){
     if(form.valid && this.isDataDifferent){
-      alert("Unfortunately, Firebase Auth REST API does not support updating user data.");
+      this.showAlertMessage("Unfortunately, Firebase Auth REST API does not support updating user data !","info");
     }
   }
 
   checkIfDataChanged() {
     this.isDataDifferent = (JSON.stringify(this.oldData) !== JSON.stringify(this.user));
+  }
+
+
+  showAlertMessage(message: string, type: string) {
+    this.alertMessage = message;
+    this.alertType = type;
+    this.alertVisible = true;
+
+    setTimeout(() => {
+        this.alertVisible = false;
+    }, 8000);
   }
 }

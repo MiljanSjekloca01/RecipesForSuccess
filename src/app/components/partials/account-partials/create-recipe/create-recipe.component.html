@@ -140,3 +140,6 @@
     <button type="submit" [disabled]="!f.valid">Submit Recipe</button>
   </div>
 </form>
+
+
+<app-tooltip *ngIf="this.alertVisible" [message]="this.alertMessage" [messageType]="this.alertType"></app-tooltip>

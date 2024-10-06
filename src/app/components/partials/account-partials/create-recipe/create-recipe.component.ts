@@ -38,8 +38,11 @@ export class CreateRecipeComponent {
     ratings: [],
     userId: "",
     dietPreference: "",
-
   };
+  alertVisible = false;
+  alertMessage = "";
+  alertType = "";
+
 
   constructor(private authService: AuthService,private recipeService: RecipeService,private router: Router){
     this.authService.user.subscribe(user => {
@@ -88,10 +91,11 @@ export class CreateRecipeComponent {
           this.recipeService.recipeAdded.next(this.recipe);
         },
         error: (err) => {
-          alert("Error creating reciep: " + err);
+          console.error(err);
+          this.showAlertMessage("Error occured creating recipe! ","error");
         },
         complete: () => {
-          alert("Recipe succesfully created");
+          this.showAlertMessage("Recipe succesfully created !","success");
           this.router.navigate(["/", this.recipe.id]);
         }
       })
@@ -100,6 +104,16 @@ export class CreateRecipeComponent {
 
   trackByFn(index: number, item: any) {
     return index; 
+  }
+
+  showAlertMessage(message: string, type: string) {
+    this.alertMessage = message;
+    this.alertType = type;
+    this.alertVisible = true;
+
+    setTimeout(() => {
+        this.alertVisible = false;
+    }, 5000);
   }
 
 }

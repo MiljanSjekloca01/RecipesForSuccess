@@ -24,6 +24,9 @@ export class RecipeDetailComponent implements OnInit{
   maxCommentsPerUser = 4;
   recipesCommentNumber = 2;
   likedReviews: { [key: string]: boolean } = {};
+  alertVisible = false;
+  alertMessage = "";
+  alertType = "";
 
   constructor(activedRoute: ActivatedRoute,private recipeService: RecipeService,private authService: AuthService,private router: Router){
       activedRoute.params.subscribe( param => {
@@ -61,7 +64,7 @@ export class RecipeDetailComponent implements OnInit{
     if(comment){
       reviewData.commentText = comment;
       if (this.countUserComments() >= this.maxCommentsPerUser) {
-        alert(`You have reached the maximum limit of ${this.maxCommentsPerUser} comments.`);
+        this.showAlertMessage(`You have reached the maximum limit of ${this.maxCommentsPerUser} comments !`,"error")
         return;
       }
     }
@@ -72,7 +75,7 @@ export class RecipeDetailComponent implements OnInit{
       reviewData.id = response.name;
       this.recipe.ratings.push(rating);
       this.recipe.reviews.push(reviewData)
-    },error => {alert("Error occured creating review !")});
+    },error => {this.showAlertMessage("Error occured creating review !","error")});
   
     this.clickedStarIndex = 0;
     this.comment = "";
@@ -137,10 +140,10 @@ export class RecipeDetailComponent implements OnInit{
            review.likes.push(likeData)
            this.likedReviews[review.id] = true; // Ažuriraj status
         }, error => {
-            console.error("Error adding like", error);
+          this.showAlertMessage("Error adding like" + error,"error");
         });
     } else {
-        alert("You have already liked this comment.");
+        this.showAlertMessage("You have already liked this comment.","info");
     }
   }
 
@@ -153,14 +156,24 @@ export class RecipeDetailComponent implements OnInit{
           localStorage.setItem("userData", JSON.stringify(this.user));
 
         },error: err => {
-          alert('Error adding recipe to favorites:' + err)
+          this.showAlertMessage('Error adding recipe to favorites:' + err, "error")
         },complete: () => {
-          alert("Recipe successfully added to favorites");
+          this.showAlertMessage("Recipe successfully added to favorites","success");
         }
       })
     }else{
       this.router.navigate(["/auth/login"])
     }
+  }
+
+  showAlertMessage(message: string, type: string) {
+    this.alertMessage = message;
+    this.alertType = type;
+    this.alertVisible = true;
+
+    setTimeout(() => {
+        this.alertVisible = false;
+    }, 5000);
   }
 
 }

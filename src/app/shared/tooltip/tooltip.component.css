@@ -1,0 +1,29 @@
+.tooltip {
+    position: fixed;
+    left: 50%;
+    top: 5%; 
+    transform: translateX(-50%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    word-wrap: break-word;
+    text-align: center;
+  }
+  
+  .success {
+    background-color: rgb(46, 181, 46);
+  }
+  
+  .error {
+    background-color: darkred;
+  }
+  
+  .warning {
+    background-color: rgb(195, 132, 16);
+  }
+  
+  .info {
+    background-color: rgb(63, 143, 248);
+  }
