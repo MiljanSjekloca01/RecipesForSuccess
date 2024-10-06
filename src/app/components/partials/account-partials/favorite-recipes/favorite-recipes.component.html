@@ -22,7 +22,7 @@
                     <p *ngIf="recipe.cookTime">{{ recipe.cookTime }} minutes to cook</p>
                 </div>
                 <div class="recipe-column"  *ngIf="recipe.ratings.length">
-                    <star-rating [starRating]="calculateAverageRating(recipe.ratings)"></star-rating>
+                    <star-rating [starRatings]="recipe.ratings"></star-rating>
                     <p>Total of {{ recipe.ratings.length }} {{ recipe.ratings.length === 1 ? 'Rating' : 'Ratings' }} </p>
                 </div>
             </a>

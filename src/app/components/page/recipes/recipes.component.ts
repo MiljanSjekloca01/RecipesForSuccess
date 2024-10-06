@@ -55,12 +55,4 @@ export class RecipesComponent implements OnInit,OnDestroy{
     this.recipeService.storeRecipes();
   }
 
-  calculateAverageRating(ratings: number[]){
-    if(ratings.length === 1){
-      return ratings[0];
-    }
-    return Math.round((ratings.reduce( (acc,current) => acc + current,0)) / ratings.length);
-  }
-
-
 }

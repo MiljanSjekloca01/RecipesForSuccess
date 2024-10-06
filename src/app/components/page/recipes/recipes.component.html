@@ -13,7 +13,7 @@
                 <mat-icon class="material-symbols-outlined">label_imporant</mat-icon>{{ tag }}
             </p>
             <div *ngIf="recipe.ratings.length">
-                <star-rating [starRating]="calculateAverageRating(recipe.ratings)"></star-rating>
+                <star-rating [starRatings]="recipe.ratings"></star-rating>
                 <p> {{ recipe.ratings.length }} {{ recipe.ratings.length === 1 ? 'Rating' : 'Ratings' }} </p>
             </div>
             <h2> {{ recipe.title }}</h2>
