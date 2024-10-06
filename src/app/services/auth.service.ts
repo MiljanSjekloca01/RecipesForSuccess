@@ -100,7 +100,6 @@ export class AuthService implements OnInit{
                 
                 if (user.favoriteRecipes) {
                     const favoriteRecipeIds = Object.values(user.favoriteRecipes as any as {recipeId: string}[]).map(obj => obj.recipeId);
-                    console.log(favoriteRecipeIds)
                     user.favoriteRecipes = favoriteRecipeIds;
                 }
 

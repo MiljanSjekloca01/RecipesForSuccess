@@ -24,12 +24,10 @@ export class FavoriteRecipesComponent implements OnInit{
   
   ngOnInit(){
     if(this.user.favoriteRecipes){
-      console.log(this.user.favoriteRecipes);
       this.recipeService.getRecipesByIds(this.user.favoriteRecipes).subscribe(recipes => {
         this.recipes = recipes;
       })
     }
-    console.log(this.recipes);
   }
 
   calculateAverageRating(ratings: number[]){
