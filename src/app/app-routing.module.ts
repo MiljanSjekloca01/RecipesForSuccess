@@ -11,6 +11,8 @@ import { PersonalInfoComponent } from "./components/partials/account-partials/pe
 import { FavoriteRecipesComponent } from "./components/partials/account-partials/favorite-recipes/favorite-recipes.component";
 import { PersonalRecipesComponent } from "./components/partials/account-partials/personal-recipes/personal-recipes.component";
 import { ReviewsRecipesComponent } from "./components/partials/account-partials/reviews-recipes/reviews-recipes.component";
+import { NutritionComponent } from "./components/page/nutrition/nutrition.component";
+import { NutritionDetailComponent } from "./components/page/nutrition-detail/nutrition-detail.component";
 
 
 const routes: Routes = [
@@ -30,6 +32,10 @@ const routes: Routes = [
         { path: "personal-recipes", component: PersonalRecipesComponent},
         { path: "reviews-recipes", component: ReviewsRecipesComponent}  
     ]},
+
+    {path: "nutrition",component: NutritionComponent},
+    {path:"nutrition/:type",component: NutritionComponent},
+    {path:"nutrition/:type/details/:name",component: NutritionDetailComponent},
     
     {path: "**",component: RecipesComponent},
 ]

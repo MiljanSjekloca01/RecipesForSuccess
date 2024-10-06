@@ -23,6 +23,8 @@ import { FavoriteRecipesComponent } from './components/partials/account-partials
 import { PersonalRecipesComponent } from './components/partials/account-partials/personal-recipes/personal-recipes.component';
 import { ReviewsRecipesComponent } from './components/partials/account-partials/reviews-recipes/reviews-recipes.component';
 import { SwiperComponent } from './components/partials/swiper/swiper.component';
+import { NutritionComponent } from './components/page/nutrition/nutrition.component';
+import { NutritionDetailComponent } from './components/page/nutrition-detail/nutrition-detail.component';
 
 @NgModule({
     declarations:[
@@ -42,7 +44,9 @@ import { SwiperComponent } from './components/partials/swiper/swiper.component';
         FavoriteRecipesComponent,
         PersonalRecipesComponent,
         ReviewsRecipesComponent,
-        SwiperComponent
+        SwiperComponent,
+        NutritionComponent,
+        NutritionDetailComponent
 
     ],
     imports:[

@@ -1,0 +1,39 @@
+<app-header></app-header>
+
+<div class="container" *ngIf="data.length !== 0">  
+    <div class="tabs">
+        <a  
+            [class.active]="currentTab === 'vitamins'"
+            routerLink="/nutrition/vitamins">
+            Vitamins
+        </a>
+        <a  
+        [class.active]="currentTab === 'minerals'"
+        routerLink="/nutrition/minerals">
+            Minerals
+        </a>
+        <a 
+         [class.active]="currentTab === 'ingredients'"
+         routerLink="/nutrition/ingredients">
+            Ingredients
+        </a>
+            
+    </div>
+    
+    <h1>{{ currentTab.toUpperCase() }}</h1>
+    <div class="content">
+      
+      <div *ngFor="let item of data" class="card">
+        <img [src]="item.imageUrl" alt="{{ item.title }}">
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.text.substring(0,30) + "..."}}</p>
+        <a [routerLink]="['/nutrition', item.group,'details', item.title]">View Details</a>
+      </div>
+    </div>
+</div>
+
+
+<app-not-found [visible]="this.data.length === 0" title="Nutrition page you are looking for doesnt exsist " ></app-not-found>
+
+
+<app-footer></app-footer>

@@ -1,0 +1,131 @@
+*{
+   box-sizing: border-box;
+}
+
+:host{
+    display:flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container{
+    width: 100%;
+    min-height: 100vh;
+    padding: 3rem 0;
+}
+
+
+.tabs {
+    display: flex;
+    border-radius: 1rem;
+    margin: 2rem auto;
+    width: min-content;
+    margin-top: 0;
+    background-color: whitesmoke;
+}
+
+h1{
+    letter-spacing: 0.2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-family:'Gill Sans MT';
+    color: #333;
+}
+
+
+.tabs > a {
+    padding: 1rem 3.5rem;
+    cursor: pointer;
+    border-bottom: 5px solid transparent;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+    text-align: center;
+}
+
+.tabs > a.active {
+    background-color: #1F2667;
+    border-radius: 1rem;
+    color:white;
+    transition: all 0.5s ease-in;
+}
+
+
+
+.content {
+    display: grid;
+    width:80%;
+    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 350px));
+    gap: 5rem;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0.2rem 0.5rem rgba(3, 3, 3, 0.4);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    border: 3px solid #ddd;
+}
+
+.card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin: 1rem;
+    color: #333;
+}
+
+.card p {
+    font-size: 1rem;
+    margin: 0 1rem 1rem;
+    color: #555;
+}
+
+.card a {
+    display: block;
+    text-align: center;
+    background-color: #1F2667;
+    color: white;
+    padding: 10px 0;
+    text-decoration: none;
+    margin: 0 10px 10px;
+    border-radius: 5px;
+}
+
+.card a:hover{
+    background-color:#333;
+}
+
+app-not-found{
+    flex-grow: 1;
+}
+
+@media (max-width: 650px) {
+    .tabs > a {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      letter-spacing: 0.05rem;
+    }
+  }
+  
+  @media (max-width: 450px) {
+    .tabs > a {
+      padding: 1.2rem 1.1rem;
+      font-size: 1rem;
+      letter-spacing: normal;
+    }
+  }

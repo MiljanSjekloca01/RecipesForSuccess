@@ -1,0 +1,22 @@
+<app-header> </app-header>
+<div class="container" *ngIf="item">
+    <nav class="breadcrumbs">
+        <a routerLink="/nutrition">Nutrition</a>
+        <mat-icon id="flex">arrow_right_alt</mat-icon>
+        <a routerLink="/nutrition/{{ type }}">{{ type | titlecase }}</a>
+        <mat-icon id="flex">arrow_right_alt</mat-icon>
+        <span>{{ item?.title }}</span>
+      </nav>
+    
+      <div class="details-content">
+        <div class="text">
+          <h1>{{ item.title }}</h1>
+          <p>{{ item.text }}</p>
+        </div>
+        <div class="image">
+          <img [src]="item?.imageUrl" alt="{{ item?.title }}">
+        </div>
+      </div>
+</div>
+<app-not-found [visible]="!item"></app-not-found>
+<app-footer>
