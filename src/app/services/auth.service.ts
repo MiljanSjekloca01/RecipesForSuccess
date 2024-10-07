@@ -20,16 +20,16 @@ export class AuthService implements OnInit{
     constructor( private http: HttpClient, private router: Router){}
     ngOnInit(): void { }
 
-    signUp(email: string, password: string, firstName: string, lastName: string,favoriteCuisine = "",dietaryPreference = "",favoriteRecipes = [],firebaseId = "") {
+    signUp(email: string, password: string, firstName: string, lastName: string) {
         const signupData = { email, password, returnSecureToken: true };
-        let user = { id: "", firstName, lastName, email, favoriteCuisine, dietaryPreference, favoriteRecipes, firebaseId}
+        let user = { id: "", firstName, lastName, email, firebaseId: ""}
         return this.http.post<AuthResponseData>(this.SIGNUP_URL, signupData).pipe(
             catchError(this.handleError),
             mergeMap(resData => {
                 user.id = resData.localId
                 return this.createUserInDatabase(user).pipe(
                     map(() => {
-                        return { ...resData, firstName, lastName, favoriteCuisine, dietaryPreference, favoriteRecipes, firebaseId: user.firebaseId};
+                        return { ...resData, firstName, lastName, email, firebaseId: user.firebaseId};
                     })
                 );
             }),
@@ -41,9 +41,7 @@ export class AuthService implements OnInit{
                     result.expiresIn,
                     result.firstName,
                     result.lastName,
-                    result.favoriteCuisine,
-                    result.dietaryPreference,
-                    result.favoriteRecipes,
+                    "", "", [], //favoriteCouisine,dietaryPreferance,favoriteRecipes
                     result.firebaseId
                     
                 );
@@ -51,7 +49,7 @@ export class AuthService implements OnInit{
         );
     }
     
-    private createUserInDatabase(user: {id: string, firstName: string, lastName:string, email: string, favoriteCuisine: string, dietaryPreference: string, firebaseId: string}) {
+    private createUserInDatabase(user: {id: string, firstName: string, lastName:string, email: string, firebaseId: string}) {
         return this.http.post<{name: string}>(environment.FIREBASE_CREATE_USER_URL, user).pipe(
             catchError(this.handleError),
             tap(response => {

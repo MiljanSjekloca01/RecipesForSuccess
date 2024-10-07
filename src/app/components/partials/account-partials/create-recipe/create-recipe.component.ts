@@ -96,7 +96,7 @@ export class CreateRecipeComponent {
         },
         complete: () => {
           this.showAlertMessage("Recipe succesfully created !","success");
-          this.router.navigate(["/", this.recipe.id]);
+          setTimeout(() => { this.router.navigate(["/"]); }, 1500);
         }
       })
     } 
@@ -113,7 +113,7 @@ export class CreateRecipeComponent {
 
     setTimeout(() => {
         this.alertVisible = false;
-    }, 5000);
+    }, 3000);
   }
 
 }

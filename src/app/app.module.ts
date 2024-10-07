@@ -4,7 +4,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { HeaderComponent } from "./components/partials/header/header.component";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { AngularMaterialModule } from "./angular-material.module";
 import { RecipesComponent } from "./components/page/recipes/recipes.component";
 import { FormsModule } from "@angular/forms";
 import { SearchBarComponent } from "./components/partials/searchBar/searchBar.component";
@@ -26,6 +25,7 @@ import { SwiperComponent } from './components/partials/swiper/swiper.component';
 import { NutritionComponent } from './components/page/nutrition/nutrition.component';
 import { NutritionDetailComponent } from './components/page/nutrition-detail/nutrition-detail.component';
 import { TooltipComponent } from './shared/tooltip/tooltip.component';
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
     declarations:[
@@ -55,8 +55,8 @@ import { TooltipComponent } from './shared/tooltip/tooltip.component';
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        AngularMaterialModule,
         HttpClientModule,
+        MatIconModule
     ],
     schemas:[CUSTOM_ELEMENTS_SCHEMA],
     providers:[
