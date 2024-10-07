@@ -77,7 +77,8 @@ span{
 .image img {
     max-width: 100%;
     height: auto;
-    max-height: 700px;
+    max-height: 40rem;
+    min-height: 12rem;
 }
 
 @media (max-width: 768px) {
@@ -98,7 +99,6 @@ span{
 @media (max-width: 450px) {
     .breadcrumbs {
         gap:1rem;
-        font-size: smaller;
         justify-content: center;
     }
 

@@ -22,7 +22,7 @@ export class RecipeDetailComponent implements OnInit{
   user: User;
   savedRecipe: boolean;
   maxCommentsPerUser = 4;
-  recipesCommentNumber = 2;
+  recipesCommentNumber = 4;
   likedReviews: { [key: string]: boolean } = {};
   alertVisible = false;
   alertMessage = "";

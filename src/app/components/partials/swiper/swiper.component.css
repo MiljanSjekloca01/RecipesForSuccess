@@ -14,17 +14,16 @@ swiper-container {
 
 swiper-slide {
     display:flex;
-    font-size: 18px;
     background: #fff;
-    padding-bottom: 4rem;
+    margin: 3rem 0rem;
     justify-content: center;
 }
 
 swiper-slide > a {
     position: relative;
     width: 100%;
-    max-width: 250px;
-    height: 250px;
+    max-width: 18.5rem;
+    height: 19rem;
 }
 
 
@@ -41,8 +40,7 @@ swiper-slide > a > p {
     left: 20px;
     z-index: 2; /* Iznad gradijenta */
     color: white;
-    font-size: 1.2rem;
-    font-size: large;
+    font-size: 1.15rem;
     font-weight: 600;
     font-style: italic;
     letter-spacing: 0.09rem;
@@ -96,7 +94,6 @@ h2{
 .button-wrapper > button{
     padding: 0.75rem 1.5rem;
     cursor: pointer;
-    font-size: large;
     background-color: rgba(192, 57, 57, 0.2);
     border-radius: 1.5rem;
     border:1px solid transparent;

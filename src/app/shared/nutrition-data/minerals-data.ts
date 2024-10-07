@@ -33,7 +33,7 @@ export const mineralsData: NutritionModel[] = [
     },
     { 
         title: "Sodium", 
-        imageUrl: "https://www.netmeds.com/images/cms/wysiwyg/blog/2020/07/1594804013_Sodium_big_600.jpg",
+        imageUrl: "https://www.healthifyme.com/blog/wp-content/uploads/2022/01/shutterstock_308169692-1.jpg",
         text: "Sodium is a mineral that plays a crucial role in fluid balance, nerve transmission, and muscle contraction. While sodium is essential for health, excessive intake can lead to high blood pressure and other cardiovascular problems. Sodium is commonly found in table salt and processed foods. The recommended daily intake is about 2,300 mg, but many people consume much more. Maintaining a balanced intake is vital for overall health.",
         group: "minerals"
     }

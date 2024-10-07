@@ -57,11 +57,11 @@ export class SwiperComponent implements AfterViewInit{
 
   private updateFilteredRecipes(): void {
     if (this.activePref === 'All') {
-      this.filteredRecipes = this.swiperRecipes; // Prikaži sve recepte
+      this.filteredRecipes = this.swiperRecipes; 
     } else {
       this.filteredRecipes = this.swiperRecipes.filter(recipe => 
         recipe.dietPreference && recipe.dietPreference.includes(this.activePref)
-      ); // Filtriraj na osnovu aktivne preference
+      );
     }
   }
   

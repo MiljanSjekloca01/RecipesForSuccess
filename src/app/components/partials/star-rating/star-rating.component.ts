@@ -10,7 +10,7 @@ import { Component, Input, OnInit } from "@angular/core";
           </mat-icon>
       </div>
   `,
-  styles: [` .star-container { display: flex; align-items: center; }`]
+  styles: [` .star-container { display: flex; align-items: center; } mat-icon{ font-size: 1.6rem }`]
 })
 
 export class StarRatingComponent implements OnInit{

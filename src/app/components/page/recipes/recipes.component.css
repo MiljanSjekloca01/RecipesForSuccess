@@ -11,15 +11,16 @@
 .container{
     padding:1rem 0rem;
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 450px));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
     justify-content: center;
     gap:2rem;
     margin-bottom: 1rem;
 }
 
 .container > li {
-  width:300px;
-  margin:auto
+  width:280px;
+  height:100%;
+  margin:1rem auto
 }
 
 .container > li > a > div {
@@ -30,8 +31,8 @@
 
 .container > li > a > div > p{
     color:rgb(91, 0, 0);
-    font-size:large;
     font-weight: bold;
+    font-size: 1.1rem;
 }
 
 .container > li:hover > a > img {
@@ -50,7 +51,7 @@ img{
     border-radius:10%;
     width:100%;
     min-height: 230px;
-    max-height: 250px;
+    max-height: 230px;
     object-fit: cover;
 }
 

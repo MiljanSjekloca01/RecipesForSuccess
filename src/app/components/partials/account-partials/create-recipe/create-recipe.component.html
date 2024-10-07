@@ -37,7 +37,7 @@
     <label for="imageUrl">Image URL*</label>
     <div class="input-with-icon">
       <input id="imageUrl" name="imageUrl" type="text" [(ngModel)]="recipe.imageUrl" #imageUrl="ngModel" placeholder="Image URL" required>
-      <mat-icon>image</mat-icon>
+      <mat-icon (click)="recipe.imageUrl = ''">image</mat-icon>
     </div>
     <div *ngIf="imageUrl.invalid && imageUrl.touched || (imageUrl.touched && !recipe.imageUrl?.match('\\.(jpg|jpeg|png)(\\?.*)?$'))" class="error">
       <p>* Invalid Image URL - ( Image URL must be .jpg, .jpeg, or .png )</p>

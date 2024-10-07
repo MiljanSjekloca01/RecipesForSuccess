@@ -33,7 +33,7 @@ p {
 .header > p {
     color:black;
     line-height: 1.5rem;
-    font-size: larger;
+    font-size: 1.2rem;
 }
 
 h1{
@@ -61,7 +61,6 @@ h1{
     cursor: pointer;
     padding:1rem 0rem;
     gap:2rem;
-    background-color: rgb(159 59 19 / 8%);
     cursor: pointer;
 }
 
@@ -77,6 +76,7 @@ h1{
     width: 9rem;
     height: 7rem;
     border-radius: 10%;
+    object-fit: cover;
 }
 
 .index > h2 {

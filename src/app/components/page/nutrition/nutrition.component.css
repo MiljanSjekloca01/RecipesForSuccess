@@ -56,15 +56,15 @@ h1{
     display: grid;
     width:80%;
     margin: 0 auto;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 350px));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 300px));
     gap: 5rem;
     justify-content: center;
-    padding: 0 20px;
+    padding: 0 1.5rem;
 }
 
 .card {
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     overflow: hidden;
     box-shadow: 0 0.2rem 0.5rem rgba(3, 3, 3, 0.4);
     transition: transform 0.2s;
@@ -78,9 +78,8 @@ h1{
 
 .card img {
     width: 100%;
-    height: 300px;
+    height: 20rem;
     object-fit: cover;
-    object-position: center;
 }
 
 .card h2 {

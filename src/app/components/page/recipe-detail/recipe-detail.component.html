@@ -101,8 +101,8 @@
                     </div>
                 </div>
             </div>
-            <button type="button" (click)="recipesCommentNumber = recipesCommentNumber + 2" *ngIf="recipe.reviews.length > recipesCommentNumber">Load more comments</button>
-            <button type="button" (click)="recipesCommentNumber = 2" *ngIf="recipe.reviews.length <= recipesCommentNumber && recipesCommentNumber > 2">Show less</button>
+            <button type="button" (click)="recipesCommentNumber = recipesCommentNumber + 4" *ngIf="recipe.reviews.length > recipesCommentNumber">Load more comments</button>
+            <button type="button" (click)="recipesCommentNumber = 4" *ngIf="recipe.reviews.length <= recipesCommentNumber && recipesCommentNumber > 2">Show less</button>
         </div>
     </div>
 

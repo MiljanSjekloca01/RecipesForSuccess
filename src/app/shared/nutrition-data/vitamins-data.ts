@@ -21,7 +21,7 @@ export const vitaminsData: NutritionModel[] = [
     },
     { 
         title: "Vitamin B2", 
-        imageUrl: "https://www.logicno.com/wp-content/uploads/2020/04/Vitamin-B2.jpg",
+        imageUrl: "https://www.healthaid.co.uk/cdn/shop/articles/Vitamin_B2_Riboflavin.jpg?v=1673615279",
         text: "Vitamin B2 (Riboflavin) is vital for energy production, red blood cell formation, and maintaining healthy skin and mucous membranes. It helps the body absorb vitamin B6 and produce niacin (B3). Sources of B2 include milk, eggs, yogurt, cheese, leafy greens, avocados, whole grains, nuts, legumes, liver, and fish. Since it’s water-soluble, excess amounts are expelled through urine. Deficiency in riboflavin can cause skin irritation, mouth sores, throat pain, and anemia.",
         group: "vitamins" 
         

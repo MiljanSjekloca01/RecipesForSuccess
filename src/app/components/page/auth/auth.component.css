@@ -74,6 +74,7 @@ form > .input-container{
 
 input{
     padding:0.3rem 0;
+    padding-left:0.5rem;
     border:none;
     outline:none;
     font-weight: 500;
@@ -105,17 +106,18 @@ input{
 
 button{
     padding:0.8rem 1.6rem;
-    font-weight: 500;
     border:none;
-    border:1px solid transparent;
+    font-family: 'Roboto';
+    border:none;
+    color:rgb(60, 60, 60);
     background: linear-gradient(to right,rgb(151, 186, 255),rgb(201, 219, 255),rgb(226, 212, 252));
     margin:1rem;
     border-radius:0.5rem;
 }
 
 button:hover{
-    opacity:0.8;
-    box-shadow: 0 0 3px black;
+    filter:grayscale(0.85);
+    box-shadow: 0 0 0.3rem black;
     cursor: pointer;
 }
 
@@ -156,5 +158,9 @@ input:-webkit-autofill {
     .inner-container{
         margin: 2rem 0.5rem;
         flex-direction: column;
+    }
+
+    .inner-container > .form-container{
+        padding:2rem 0.5rem;
     }
 }

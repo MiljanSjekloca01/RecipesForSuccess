@@ -21,19 +21,19 @@
 }
 
 .header-top > img {
-    width: 200px;
-    max-height: 160px;
+    width: 160px;
+    max-height: 140px;
 }
 
 .header > p {
-    margin-top: 10px;
+    margin-top: 0.8rem;
     color: #666;
 }
 
 .header > p {
     color:black;
     line-height: 1.5rem;
-    font-size: larger;
+    font-size: 1.2rem;
 }
 
 .header-top > h1{
@@ -47,7 +47,7 @@
 .container{
     padding:2rem 0rem;
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 0.5fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 0.5fr));
     align-items: start;
     justify-content: center;
     gap:2rem;
@@ -79,7 +79,7 @@
 }
 
 .recipe-info > p{
-    font-size: larger;
+    font-size: 1.2rem;
     font-weight: bold;
     word-wrap: break-word;
 }
@@ -98,9 +98,9 @@
 }
 
 .toggle-button > button > mat-icon{
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: black;
-    width: 1.8rem;
+    width: 2rem;
     font-weight: 600;
 }
 
@@ -129,13 +129,13 @@
 .review-comment{
     display:flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: center;
     margin-top:0.5rem;
 }
 
 .review-comment > p{
     word-wrap: break-word;
-    font-size: large;
+    font-size: 1rem;
 }
 
 .review-comment > div#like{
@@ -164,9 +164,12 @@
     display:flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
-
+h3{
+    font-size: 1.15rem;
+}
 
 
 @media screen and (max-width:555px){

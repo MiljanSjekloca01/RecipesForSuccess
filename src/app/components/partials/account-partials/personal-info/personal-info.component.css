@@ -23,7 +23,7 @@
     padding: 1.5rem 3rem;
     cursor: pointer;
     border-radius: 0.5rem;
-    font-size: large;
+    font-size: 1.1rem;
 }
 
 .header-top button:hover{
@@ -47,7 +47,7 @@ p {
 .header > p {
     color:black;
     line-height: 1.5rem;
-    font-size: larger;
+    font-size:1.2rem;
 }
 
 /* Toggle Info  */
@@ -76,9 +76,9 @@ p {
 }
 
 button mat-icon {
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: rgb(98, 47, 3);
-    width: 1.8rem;
+    width: 2rem;
 }
 
 /*  Form  */
@@ -90,7 +90,7 @@ button mat-icon {
 .form-control label {
     display: block;
     font-weight: bold;
-    font-size: large;
+    font-size: 1.1rem;
     margin-bottom: 1rem;
 }
 
@@ -98,10 +98,9 @@ button mat-icon {
 .form-control select {
     padding: 1.2rem;
     border: 0.15rem solid gray;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 0.3rem;
+    font-size: 1rem;
     width: calc(100% - 2.6rem);
-    font-size: large;
 }
 
 .form-control input:focus,
