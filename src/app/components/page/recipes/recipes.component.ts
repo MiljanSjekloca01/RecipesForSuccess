@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { RecipeService } from '../../../services/recipe.service';
 import { Recipe } from '../../../shared/models/recipes.model';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'app-recipes',
@@ -29,7 +29,7 @@ export class RecipesComponent implements OnInit,OnDestroy{
       }else if(param.search || param.search === ""){
         this.showSwiper = false;
         this.recipes = this.recipeService.getRecipesBySearch(param.search)
-        if(this.recipes.length) this.pageTitle = "Results for " + param.search
+        this.pageTitle = "Results for " + param.search
       }else{
         this.recipes = this.recipeService.getRecipes();
         this.showSwiper = true;
@@ -49,10 +49,6 @@ export class RecipesComponent implements OnInit,OnDestroy{
 
   ngOnDestroy(): void {
     this.routeSubscription.unsubscribe();
-  }
-
-  storeRecipes(){
-    this.recipeService.storeRecipes();
   }
 
 }

@@ -79,7 +79,7 @@
   justify-content: center;
   margin:auto;
   filter: grayscale(20%);
-  transition: filter 0.3s ease;
+  transition: filter 0.6s ease;
 }
 
 .container > li > a {
@@ -102,7 +102,7 @@
 }
 
 .container > li:hover{
-    filter: grayscale(100%);
+    filter: grayscale(70%);
 }
 
 .tags{

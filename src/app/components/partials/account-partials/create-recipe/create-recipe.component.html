@@ -21,7 +21,7 @@
     </div>
     </div>
     <div *ngIf="title.invalid && title.touched" class="error">
-      <p>* Title is required and must be between 2-40 characters long.</p>
+      <p>*Title is required (2-40 chars).</p>
     </div>
   </div>
 
@@ -29,7 +29,7 @@
     <label for="description">Description*</label>
     <textarea id="description" name="description" rows="4" required minlength="30" maxlength="500" [(ngModel)]="recipe.description" #description="ngModel" placeholder="Describe your recipe"></textarea>
     <div *ngIf="description.invalid && description.touched" class="error">
-      <p>* Description cannot exceed 500 characters or have less then 30.</p>
+      <p>* Description is required (30-500 chars)</p>
     </div>
   </div>
 
@@ -44,7 +44,7 @@
     </div>
 
     <div class="image-preview" *ngIf="recipe.imageUrl">
-      <img [src]="recipe.imageUrl" alt="Image preview">
+      <img [src]="recipe.imageUrl" alt="Invalid or unsupported type of image">
     </div>
   </div>
 

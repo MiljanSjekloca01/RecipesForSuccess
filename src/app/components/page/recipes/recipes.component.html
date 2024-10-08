@@ -2,15 +2,13 @@
 <app-header></app-header>
 <div class="main">
     <page-title [title]="pageTitle" *ngIf="recipes.length !== 0"></page-title>
-    <app-not-found
-    [visible]="recipes.length === 0">
-    </app-not-found>
+    <app-not-found [visible]="recipes.length === 0"> </app-not-found>
     <div class="container">
         <li *ngFor="let recipe of recipes.slice().reverse().slice(0,recipesShownNumber)">
         <a routerLink="/recipe/{{recipe.id}}">
             <img [src]="recipe.imageUrl" [alt]="recipe.title">
             <p class="tags" *ngFor="let tag of recipe.tags">
-                <mat-icon class="material-symbols-outlined">label_imporant</mat-icon>{{ tag }}
+                <mat-icon class="material-symbols-outlined">label</mat-icon>{{ tag }}
             </p>
             <div *ngIf="recipe.ratings.length">
                 <star-rating [starRatings]="recipe.ratings"></star-rating>
@@ -20,7 +18,7 @@
         </a></li>
     </div>
     
-    <div class="button-container" *ngIf="this.recipes.length > this.recipesShownNumber"> <button class="button-end" (click)="onShowMoreRecipes()">Show More</button> </div>
+    <div class="button-container" *ngIf="recipes.length > recipesShownNumber"> <button class="button-end" (click)="onShowMoreRecipes()">Show More</button> </div>
 </div>
 
 <app-swiper [swiperRecipes]="recipes" *ngIf="showSwiper && recipes.length > 0"></app-swiper>

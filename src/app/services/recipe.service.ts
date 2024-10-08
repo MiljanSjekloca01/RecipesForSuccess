@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject, catchError, map, of, switchMap, throwError } from "rxjs";
 import { Recipe } from "../shared/models/recipes.model";
-import { sample_recipes } from "../data";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Review } from "../shared/models/review.model";
@@ -12,20 +11,10 @@ export class RecipeService {
     private recipes: Recipe[] = [];
 
     constructor(private http: HttpClient){
-        this.recipeAdded.subscribe(recipe => {
-            this.recipes.push(recipe);
-        })
+        this.recipeAdded.subscribe(recipe => { this.recipes.push(recipe); })
     }
 
-    getRecipes(){
-        return this.recipes.slice();
-    }
-
-    //For testing data
-    storeRecipes(){
-        sample_recipes.forEach(recipe => 
-            this.http.post<{name : string}>("https://recipesforsucces-cdfa9-default-rtdb.europe-west1.firebasedatabase.app/recipes.json",recipe).subscribe())
-    }
+    getRecipes(){ return this.recipes.slice(); }
 
     // Resolver
     getRecipesFromDatabase(): Observable<Recipe[]> {
@@ -67,13 +56,11 @@ export class RecipeService {
     // Recipes component part
     getRecipesByTag(tagLink: string){
         this.getRecipesFromDatabase().subscribe(
-            data => {
-                this.recipes = data
-            }
+            data => { this.recipes = data }
         )
         return this.recipes.filter( recipe => {
             return recipe.tags.some( tag => tag.toLowerCase().includes(tagLink.toLowerCase()))
-    })}
+        })}
 
     getRecipesBySearch(search: string){
         this.getRecipesFromDatabase().subscribe( data => this.recipes = data )
@@ -112,25 +99,17 @@ export class RecipeService {
         if (this.recipes.length === 0) {
           return this.getRecipesFromDatabase().pipe(
             switchMap(() => {
-              return this.http.post<{ name: string }>(
-                environment.FIREBASE_RECIPES_URL,
-                recipe
-              );
+              return this.http.post<{ name: string }>( environment.FIREBASE_RECIPES_URL, recipe );
             })
           );
         } else {
-          return this.http.post<{ name: string }>(
-            environment.FIREBASE_RECIPES_URL,
-            recipe
-          );
+          return this.http.post<{ name: string }>( environment.FIREBASE_RECIPES_URL, recipe );
         }
       }
 
     getRecipesByIds(recipeIds: string[]): Observable<Recipe[]> {
         if (this.recipes.length === 0) {
-            return this.getRecipesFromDatabase().pipe(
-                map(recipes => recipes.filter(recipe => recipeIds.includes(recipe.id)))
-            );
+            return this.getRecipesFromDatabase().pipe( map(recipes => recipes.filter(recipe => recipeIds.includes(recipe.id))) );
         }
 
         return of(this.recipes.filter(recipe => recipeIds.includes(recipe.id)));
@@ -138,9 +117,7 @@ export class RecipeService {
 
     getPersonalRecipes(userId: string): Observable<Recipe[]>{
         if(this.recipes.length === 0){
-            return this.getRecipesFromDatabase().pipe(
-                map(recipes => recipes.filter(recipe => recipe.userId === userId))
-            );
+            return this.getRecipesFromDatabase().pipe( map(recipes => recipes.filter(recipe => recipe.userId === userId)) );
         }
         return of(this.recipes.filter(recipe => recipe.userId === userId))
     }

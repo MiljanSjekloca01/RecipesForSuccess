@@ -11,8 +11,11 @@ export class AccountComponent implements OnInit{
 
   constructor(private authService: AuthService){}
   user: User;
-
+  displayName: string;
   ngOnInit(): void {
-    this.authService.user.subscribe(user => this.user = user)
+    this.authService.user.subscribe(user => {
+      this.user = user
+      if(user) this.displayName = user.firstName + " " + user.lastName
+    })
   }
 }

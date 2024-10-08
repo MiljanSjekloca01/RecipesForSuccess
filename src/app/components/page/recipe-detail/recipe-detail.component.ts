@@ -30,10 +30,9 @@ export class RecipeDetailComponent implements OnInit{
 
   constructor(activedRoute: ActivatedRoute,private recipeService: RecipeService,private authService: AuthService,private router: Router){
       activedRoute.params.subscribe( param => {
-      if(param.id){
-        this.recipe = this.recipeService.getRecipeById(param.id);
-      }
+      if(param.id) this.recipe = this.recipeService.getRecipeById(param.id);
     })
+    
     this.authService.user.subscribe(user => this.user = user);
   }
 
@@ -124,7 +123,9 @@ export class RecipeDetailComponent implements OnInit{
   }
 
   handleLikeClick(review: Review) {
-    if (!this.user) return;
+    if (!this.user){
+      this.showAlertMessage("Please log in to like a comment !","info"); return;
+    };
     
     let alreadyLiked: boolean = false;
 
@@ -138,7 +139,7 @@ export class RecipeDetailComponent implements OnInit{
           if(!review.likes){ review.likes = []; }
 
            review.likes.push(likeData)
-           this.likedReviews[review.id] = true; // Ažuriraj status
+           this.likedReviews[review.id] = true;
         }, error => {
           this.showAlertMessage("Error adding like" + error,"error");
         });
@@ -162,7 +163,7 @@ export class RecipeDetailComponent implements OnInit{
         }
       })
     }else{
-      this.router.navigate(["/auth/login"])
+      this.showAlertMessage("Please log in to save this recipe.","info")
     }
   }
 
@@ -171,9 +172,12 @@ export class RecipeDetailComponent implements OnInit{
     this.alertType = type;
     this.alertVisible = true;
 
-    setTimeout(() => {
-        this.alertVisible = false;
-    }, 5000);
+    setTimeout(() => { this.alertVisible = false; }, 5000);
+  }
+
+  resetMyReview(){
+    this.comment = '';
+    this.clickedStarIndex = 0;
   }
 
 }

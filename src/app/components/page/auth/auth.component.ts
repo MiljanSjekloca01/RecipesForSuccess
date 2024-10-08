@@ -16,9 +16,7 @@ export class AuthComponent {
   error: string = null;
 
   constructor(private router:Router,activeRoute: ActivatedRoute,private authService: AuthService){
-    if(activeRoute.snapshot.url[1].path === "login"){
-      this.authMode = "login";
-    }else this.authMode = "register";
+    this.authMode = activeRoute.snapshot.url[1]?.path === 'login' ? 'login' : 'register';
   }
 
 
@@ -26,8 +24,10 @@ export class AuthComponent {
     if(form.valid){
       const email = form.value.email;
       const password = form.value.password;
+
       this.error = null;
       let authObservable: Observable<AuthResponseData>;
+      
       if(this.authMode === "login"){
         authObservable = this.authService.login(email,password)
       }else if(this.authMode ==="register"){

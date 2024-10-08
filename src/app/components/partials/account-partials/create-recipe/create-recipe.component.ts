@@ -22,23 +22,7 @@ export class CreateRecipeComponent {
   cookTimeMax: number;
   meal: string = "";
   dishType: string = "";
-  recipe: Recipe = {
-    id: '',
-    title: "",
-    description: '',
-    imageUrl: '',
-    prepTime: '',
-    cuisine: '',
-    owner: '',
-    tags: [],
-    servings: "",
-    ingredients: [""],
-    steps:[""],
-    reviews: [],
-    ratings: [],
-    userId: "",
-    dietPreference: "",
-  };
+  recipe: Recipe = { id: '', title: "", description: '', imageUrl: '', prepTime: '', cuisine: '', owner: '', tags: [], servings: "", ingredients: [""], steps:[""], reviews: [], ratings: [], userId: "", dietPreference: "", };
   alertVisible = false;
   alertMessage = "";
   alertType = "";
@@ -85,6 +69,7 @@ export class CreateRecipeComponent {
       this.recipe.tags.push(this.meal);
       if(this.dishType) this.recipe.tags.push(this.dishType);
       if(this.cookTimeMin && this.cookTimeMax) this.recipe.cookTime = `${this.cookTimeMin}-${this.cookTimeMax}`
+
       this.recipeService.createRecipe(this.recipe).subscribe({
         next: (resData) => {
           this.recipe.id = resData.name;
@@ -96,7 +81,7 @@ export class CreateRecipeComponent {
         },
         complete: () => {
           this.showAlertMessage("Recipe succesfully created !","success");
-          setTimeout(() => { this.router.navigate(["/"]); }, 1500);
+          setTimeout(() => { this.router.navigate(["/"]); }, 1000);
         }
       })
     } 

@@ -28,4 +28,8 @@ export class ReviewsRecipesComponent implements OnInit{
     })
     
   }
+
+  trackByRecipeId(index: number, recipe: Recipe): string {
+    return recipe.id;
+  }
 }

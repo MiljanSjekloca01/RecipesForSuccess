@@ -13,7 +13,6 @@ export class AuthService implements OnInit{
     user = new BehaviorSubject<User>(null)
 
     private tokenExpirationTimer: any;
-    //token: string = null;
     private SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.FIREBASE_WEB_API}`
     private SIGNIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.FIREBASE_WEB_API}`
     

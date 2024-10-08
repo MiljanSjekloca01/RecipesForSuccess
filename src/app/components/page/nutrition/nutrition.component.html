@@ -2,22 +2,9 @@
 
 <div class="container" *ngIf="data.length !== 0">  
     <div class="tabs">
-        <a  
-            [class.active]="currentTab === 'vitamins'"
-            routerLink="/nutrition/vitamins">
-            Vitamins
-        </a>
-        <a  
-        [class.active]="currentTab === 'minerals'"
-        routerLink="/nutrition/minerals">
-            Minerals
-        </a>
-        <a 
-         [class.active]="currentTab === 'ingredients'"
-         routerLink="/nutrition/ingredients">
-            Ingredients
-        </a>
-            
+        <a [class.active]="currentTab === 'vitamins'" routerLink="/nutrition/vitamins"> Vitamins </a>
+        <a [class.active]="currentTab === 'minerals'" routerLink="/nutrition/minerals"> Minerals </a>
+        <a [class.active]="currentTab === 'ingredients'" routerLink="/nutrition/ingredients"> Ingredients </a>
     </div>
     
     <h1>{{ currentTab.toUpperCase() }}</h1>
