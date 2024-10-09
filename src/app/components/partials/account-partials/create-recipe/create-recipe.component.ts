@@ -38,27 +38,24 @@ export class CreateRecipeComponent {
   }
 
   addIngredient() {
-    if (this.recipe.ingredients) {
-      this.recipe.ingredients.push('');
-    }
+    if (this.recipe.ingredients && this.recipe.ingredients.length <= 12) this.recipe.ingredients.push('');
+    else  this.showAlertMessage("You cannot add more than 12 ingredients.", "info")
   }
 
   removeIngredient(index: number) {
-    if (this.recipe.ingredients) {
-      this.recipe.ingredients.splice(index, 1);
-    }
+    if (this.recipe.ingredients && this.recipe.ingredients.length !== 1) this.recipe.ingredients.splice(index, 1);
+    else this.showAlertMessage("At least one ingredient is required ! ","info");
   }
 
   addDirection() {
-    if (this.recipe.steps) {
-      this.recipe.steps.push(''); 
-    }
+    if (this.recipe.steps && this.recipe.ingredients.length <= 12) this.recipe.steps.push(''); 
+    else  this.showAlertMessage("You cannot add more than 12 directions.", "info")
+    
   }
 
   removeDirection(index: number) {
-    if (this.recipe.steps) {
-      this.recipe.steps.splice(index, 1);
-    }
+    if (this.recipe.steps && this.recipe.steps.length !== 1)  this.recipe.steps.splice(index, 1);
+    else this.showAlertMessage("At least one direction is required ! ","info");
   }
 
   cancel(form: NgForm) { form.reset(); }
