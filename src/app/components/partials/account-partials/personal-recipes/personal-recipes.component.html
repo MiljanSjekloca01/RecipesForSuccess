@@ -10,9 +10,11 @@
     <li *ngFor="let recipe of recipes">
     <a routerLink="/recipe/{{recipe.id}}">
         <img [src]="recipe.imageUrl" [alt]="recipe.title">
-        <p class="tags" *ngFor="let tag of recipe.tags">
-            <mat-icon class="material-symbols-outlined">label_imporant</mat-icon>{{ tag }}
-        </p>
+        <div class="tags">
+            <p *ngFor="let tag of recipe.tags">
+                <mat-icon class="material-symbols-outlined">label</mat-icon>{{ tag }}
+            </p>
+        </div>
         <div *ngIf="recipe.ratings.length" class="rating">
             <star-rating [starRatings]="recipe.ratings"></star-rating>
             <p> {{ recipe.ratings.length }} {{ recipe.ratings.length === 1 ? 'Rating' : 'Ratings' }} </p>

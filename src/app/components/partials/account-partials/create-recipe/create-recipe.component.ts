@@ -38,7 +38,7 @@ export class CreateRecipeComponent {
   }
 
   addIngredient() {
-    if (this.recipe.ingredients && this.recipe.ingredients.length <= 12) this.recipe.ingredients.push('');
+    if (this.recipe.ingredients && this.recipe.ingredients.length <= 14) this.recipe.ingredients.push('');
     else  this.showAlertMessage("You cannot add more than 12 ingredients.", "info")
   }
 
@@ -48,7 +48,7 @@ export class CreateRecipeComponent {
   }
 
   addDirection() {
-    if (this.recipe.steps && this.recipe.ingredients.length <= 12) this.recipe.steps.push(''); 
+    if (this.recipe.steps && this.recipe.ingredients.length <= 14) this.recipe.steps.push(''); 
     else  this.showAlertMessage("You cannot add more than 12 directions.", "info")
     
   }
