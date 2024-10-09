@@ -19,14 +19,11 @@
     padding:0.5rem;
 }
 
-.auth-header-list > li > a#logout{
-    cursor: pointer;
-}
 
 .auth-header-list > li > a:hover{
     border-radius: 10%;
     border-bottom: 0.1px solid slategray;
-    border-top: 0.1px solid slategray;
+    cursor: pointer;
     color:red;
 }
 
@@ -62,6 +59,7 @@ h1{
 }
 
 .nav-list > ul > li:hover > a{
+    cursor: pointer;
     color:red;
 }
 
@@ -73,7 +71,8 @@ h1{
    padding:2rem;
    background-color: rgba(17, 17, 17, 0.7); 
    border-radius: 0.2rem;
-   font-size: 1.2rem;  
+   font-size: 1.2rem;
+   cursor: pointer;  
 }
 
 .nav-list > ul > li > div > a {
