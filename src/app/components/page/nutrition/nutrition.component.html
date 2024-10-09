@@ -11,7 +11,7 @@
     <div class="content">
       
       <div *ngFor="let item of data" class="card">
-        <img [src]="item.imageUrl" alt="{{ item.title }}">
+        <img [src]="item.imageUrl" alt="{{ item.title }}" loading="lazy">
         <h2>{{ item.title }}</h2>
         <p>{{ item.text.substring(0,30) + "..."}}</p>
         <a [routerLink]="['/nutrition', item.group,'details', item.title]">View Details</a>
