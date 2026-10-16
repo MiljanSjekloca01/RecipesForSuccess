@@ -10,7 +10,7 @@
 <div class="container" *ngIf="recipes?.length">
     <div *ngFor="let recipe of recipes;let i = index;  trackBy: trackByRecipeId" class="main">
         <div class="recipe-info">
-            <img [src]="recipe.imageUrl" [alt]="recipe.title">
+            <img [srcWithFallback]="recipe.imageUrl" [alt]="recipe.title">
             <p>{{recipe.title}}</p>
             <div class="toggle-button">
                 <button *ngIf="!this.pressed[i]" (click)="pressed[i] = true" type="button"><mat-icon>keyboard_arrow_down</mat-icon></button>

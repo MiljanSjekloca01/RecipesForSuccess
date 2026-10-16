@@ -18,7 +18,7 @@
     >
     <swiper-slide *ngFor="let recipe of filteredRecipes" class="swiper-slide">
         <a [routerLink]="'recipe/'+ recipe.id">
-            <img [src]="recipe.imageUrl" alt="recipe.title">
+            <img [srcWithFallback]="recipe.imageUrl" [alt]="recipe.title">
             <p class="absolute">{{recipe.title}}</p>
         </a>
     </swiper-slide>

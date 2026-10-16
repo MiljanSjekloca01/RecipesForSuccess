@@ -12,7 +12,7 @@
             <a class="recipe" routerLink="/recipe/{{recipe.id}}">
                 <div class="index">
                     <h2>{{ i + 1 }}</h2>
-                    <img [src]="recipe.imageUrl" [alt]="recipe.title">
+                    <img [srcWithFallback]="recipe.imageUrl" [alt]="recipe.title">
                 </div>
                 <div class="recipe-column">
                     <h3>{{ recipe.title }}</h3>

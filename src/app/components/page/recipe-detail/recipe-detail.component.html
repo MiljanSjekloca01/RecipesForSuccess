@@ -14,7 +14,7 @@
 
     <div class="top-content">
         <div class="image-container">
-            <img [src]="recipe.imageUrl" [alt]="recipe.title">
+            <img [srcWithFallback]="recipe.imageUrl" [alt]="recipe.title">
             <button  *ngIf="(this.user?.id !== this.recipe.userId) && !savedRecipe" (click)="addToFavorite(this.recipe.id)">
                 <mat-icon class="center-icon">favorite</mat-icon>
                 <p>S A V E </p>

@@ -6,7 +6,7 @@
     <div class="container" *ngIf="recipes.length">
         <li *ngFor="let recipe of recipes.slice().reverse().slice(0,recipesShownNumber)">
         <a routerLink="/recipe/{{recipe.id}}">
-            <img [src]="recipe.imageUrl" [alt]="recipe.title">
+            <img [srcWithFallback]="recipe.imageUrl" [alt]="recipe.title">
             <p class="tags" *ngFor="let tag of recipe.tags">
                 <mat-icon class="material-symbols-outlined">label</mat-icon>{{ tag }}
             </p>

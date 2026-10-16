@@ -9,7 +9,8 @@ import { StarRatingComponent } from "../components/partials/star-rating/star-rat
 import { TooltipComponent } from "./tooltip/tooltip.component";
 import { CommonModule } from "@angular/common";
 import {MatIconModule} from '@angular/material/icon';
-import { Router, RouterModule } from "@angular/router";
+import { RouterModule } from "@angular/router";
+import { SrcWithFallbackDirective } from "./src-with-fallback.directive";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { Router, RouterModule } from "@angular/router";
     StarRatingComponent,
     TooltipComponent,
     SearchBarComponent,
+    SrcWithFallbackDirective,
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { Router, RouterModule } from "@angular/router";
     SearchBarComponent,
     CommonModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    SrcWithFallbackDirective,
   ],
 })
 export class SharedModule {}

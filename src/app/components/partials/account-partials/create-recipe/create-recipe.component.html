@@ -44,7 +44,7 @@
     </div>
 
     <div class="image-preview" *ngIf="recipe.imageUrl">
-      <img [src]="recipe.imageUrl" alt="Invalid or unsupported type of image">
+      <img [srcWithFallback]="recipe.imageUrl" alt="Recipe image">
     </div>
   </div>
 
