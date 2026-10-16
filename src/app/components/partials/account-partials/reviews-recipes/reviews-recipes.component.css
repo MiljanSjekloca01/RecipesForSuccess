@@ -2,6 +2,12 @@
     box-sizing: border-box;
 }
 
+:host{
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+}
+
 .header {
     display:flex;
     flex-direction: column;
@@ -13,32 +19,50 @@
 
 .header-top {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
     margin-bottom: 1rem;
-    gap:1rem; 
+    width:100%;
+    gap:1rem;
+    background-repeat:no-repeat;
+    min-height: 9.5rem;
+    background-size:cover;
+    background-position: center;
 }
 
-.header-top > img {
-    width: 160px;
-    max-height: 140px;
+.header-top > div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    min-height: 9.5rem;
+    min-width:40%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
-.header > p {
-    margin-top: 0.8rem;
-    color: #666;
+.header-top > div > h1 > mat-icon{
+    font-size: 2.4rem;
+    min-height: 2.4rem;
+    min-width: 2.4rem;
+    margin: 0 0.5rem;
+}
+
+.header-top > div > h1 {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.1rem;
+    flex-wrap: wrap;
+    padding:0 0.5rem;
 }
 
 .header > p {
     color:black;
     line-height: 1.5rem;
     font-size: 1.2rem;
-}
-
-.header-top > h1{
-    border-bottom: 0.3rem solid;
-    border-image: linear-gradient(to left, rgb(136, 69, 1), rgb(33, 19, 0)) 1;
+    text-align: left;
+    width: 100%;
 }
 
 /*   Main Part */
@@ -178,11 +202,6 @@ h3{
         grid-template-columns: minmax(min-content,300px);
     }
 
-    .header-top > h1 {
-        text-align: center;
-        padding-bottom: 1rem;
-    }
-
    .recipe-info > .toggle-button{
      margin-left:unset;
    }
@@ -199,11 +218,4 @@ h3{
         align-items: center;
    }
 
-   .header-top > img {
-     margin:auto;
-   }
-
-   .header > p {
-     text-align: center;
-   }
 }

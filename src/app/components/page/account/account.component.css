@@ -1,8 +1,15 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .account{
     display:flex;
+    flex: 1 0 auto;
     flex-wrap: wrap;
+    align-items: stretch;
     width: 100%;
-    min-height: 100vh;
     background-color: whitesmoke;
     margin-top:0.2rem;
     justify-content: space-around;
@@ -81,6 +88,8 @@
 
 
 .content{
+    display: flex;
+    flex-direction: column;
     width: calc(100vw - 600px);
     background-color: white;
     margin: 2rem auto;

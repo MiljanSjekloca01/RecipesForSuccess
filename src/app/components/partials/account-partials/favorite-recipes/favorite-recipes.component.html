@@ -1,11 +1,12 @@
-<div *ngIf="user.favoriteRecipes.length > 0 ;">
-    <div class="header">
-        <div class="header-top">
-            <img src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-recipe-book-illustration-in-minimal-style-png-image_10274588.png" alt="book-of-recipes">
-            <h1>Collection of your favorite recipes</h1>
+<div class="header">
+    <div class="header-top" style="background-image: url('assets/header-banner/favorite_banner.webp')">
+        <div>
+            <h1><mat-icon>favorite</mat-icon>Favorite Recipes</h1>
         </div>
-        <p>Welcome to your Favorite Recipes collection! Here, you can explore all the delicious recipes you've saved. Whether you're planning a special meal or just looking for some inspiration, this is your go-to place for all your culinary favorites.</p>
     </div>
+    <p>Welcome to your Favorite Recipes collection! Here, you can explore all the delicious recipes you've saved. Whether you're planning a special meal or just looking for some inspiration, this is your go-to place for all your culinary favorites.</p>
+</div>
+<div *ngIf="user.favoriteRecipes.length > 0 ;">
     <div class="recipes">
         <div *ngFor="let recipe of recipes;let i = index" class="container">
             <a class="recipe" routerLink="/recipe/{{recipe.id}}">
@@ -32,7 +33,9 @@
 
 <app-not-found
  [visible]="user.favoriteRecipes.length <= 0"
- title="Looks like your saved recipes list is empty. Find something delicious to save!"
- imageUrl="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-recipe-book-illustration-in-minimal-style-png-image_10274588.png"
+ title="Save the recipes you want to cook again!"
+ imageUrl="assets/nothing-found/no_favorite_recipes.webp"
+ buttonLabel="Go to recipes"
+ [showArrow]="false"
  >
 </app-not-found>

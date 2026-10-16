@@ -1,32 +1,87 @@
+:host:not(.is-visible) {
+    display: none;
+}
+
+:host.is-visible {
+    display: flex;
+    flex: 1 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
 div{
     display:flex;
     flex-direction: column;
-    align-items: center; 
-    margin:1rem 0;
-    gap:1rem;
+    align-items: center;
+    justify-content: center;
+    width: min(100%, 36rem);
+    margin: 1rem 0;
+    gap: 1rem;
+    text-align: center;
 }
 
 div > img {
+    width: 100%;
     max-width: 320px;
-    min-height: 300px;
+    height: auto;
+    max-height: 280px;
+    object-fit: contain;
 }
 
 
 button{
-    padding:1em 6rem;
-    background-color: black;
-    color:white;
-    border-radius: 10rem;
-    opacity: 1;
-    min-width: 300px;
-    font-size:1rem;
-    font-family:"Quicksand",sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.85rem 1.5rem;
+    background-color: #111;
+    color: white;
+    border: 1px solid #111;
+    border-radius: 999px;
+    width: min(260px, 100%);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    font-family: "Quicksand", sans-serif;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+button svg{
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+    transition: transform 0.2s ease;
+}
+
+button span{
+    display: block;
+    line-height: 1;
 }
 
 button:hover{
-    box-shadow: none;
-    cursor: pointer;
-    opacity: 0.7;
+    background-color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+}
+
+button:hover svg{
+    transform: translateX(-3px);
+}
+
+button:active{
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
+}
+
+button:focus-visible{
+    outline: 2px solid rgb(185, 103, 3);
+    outline-offset: 3px;
 }
 
 p{

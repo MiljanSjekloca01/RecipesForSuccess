@@ -1,12 +1,13 @@
 <div class="header">
-    <div class="header-top">
-        <img src="https://png.pngtree.com/png-vector/20230315/ourmid/pngtree-reviews-line-icon-vector-png-image_6650528.png" alt="review-logo-image">
-        <h1>Your reviews on Recipes</h1>
+    <div class="header-top" style="background-image: url('assets/header-banner/reviews_banner.webp')">
+        <div>
+            <h1><mat-icon>reviews</mat-icon>Your Reviews</h1>
+        </div>
     </div>
-    <p>Welcome to your Reviews section! Here, you can find all the feedback you've shared on your favorite recipes. Discover how your culinary insights can inspire others, and revisit your thoughts on the dishes that stood out to you.</p>
+    <p>Welcome to your Reviews section! Here, you can find all the feedback you've shared on recipes. Discover how your culinary insights can inspire others, and revisit your thoughts on the dishes that stood out to you.</p>
 </div>
 
-<div class="container">
+<div class="container" *ngIf="recipes?.length">
     <div *ngFor="let recipe of recipes;let i = index;  trackBy: trackByRecipeId" class="main">
         <div class="recipe-info">
             <img [src]="recipe.imageUrl" [alt]="recipe.title">
@@ -41,6 +42,10 @@
     </div>
 </div>
 
-<div *ngIf="this.recipes?.length === 0" style="text-align: center;">
-    <h1>No Reviews</h1>
-</div>
+<app-not-found
+    [visible]="recipes?.length === 0"
+    title="You haven't made any reviews yet."
+    imageUrl="assets/nothing-found/no_reviews_yet.webp"
+    buttonLabel="Go to recipes"
+    [showArrow]="false">
+</app-not-found>

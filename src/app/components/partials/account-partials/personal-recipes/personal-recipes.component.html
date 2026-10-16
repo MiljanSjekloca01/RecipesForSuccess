@@ -1,12 +1,12 @@
 <div class="header">
-    <div class="header-top">
+    <div class="header-top" style="background-image: url('assets/header-banner/personal_banner.webp')">
         <div>
-            <h1><mat-icon>segment</mat-icon>Personal Receipts</h1>
+            <h1><mat-icon>receipt_long</mat-icon>Personal Recipes</h1>
         </div>
     </div>
     <p>These are the recipes you've shared with our community. Take a moment to revisit your favorite culinary creations.</p>
 </div>
-<div class="container" *ngIf="recipes">
+<div class="container" *ngIf="recipes?.length">
     <li *ngFor="let recipe of recipes">
     <a routerLink="/recipe/{{recipe.id}}">
         <img [src]="recipe.imageUrl" [alt]="recipe.title">
@@ -25,8 +25,10 @@
 
 <app-not-found 
     [visible]="recipes?.length === 0" 
-    title="You haven't created any personal recipes yet. Start sharing your culinary creations!"
-    imageUrl="https://png.pngtree.com/png-vector/20220606/ourmid/pngtree-cooking-pan-with-vegetables-png-image_4867565.png">
+    title="Start sharing your culinary creations!"
+    imageUrl="assets/nothing-found/no_personal_recipes.webp"
+    buttonLabel="Go to recipes"
+    [showArrow]="false">
 </app-not-found>
 
 

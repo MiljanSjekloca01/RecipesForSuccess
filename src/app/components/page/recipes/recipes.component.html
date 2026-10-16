@@ -3,7 +3,7 @@
 <div class="main">
     <page-title [title]="pageTitle" *ngIf="recipes.length !== 0"></page-title>
     <app-not-found [visible]="recipes.length === 0"> </app-not-found>
-    <div class="container">
+    <div class="container" *ngIf="recipes.length">
         <li *ngFor="let recipe of recipes.slice().reverse().slice(0,recipesShownNumber)">
         <a routerLink="/recipe/{{recipe.id}}">
             <img [src]="recipe.imageUrl" [alt]="recipe.title">

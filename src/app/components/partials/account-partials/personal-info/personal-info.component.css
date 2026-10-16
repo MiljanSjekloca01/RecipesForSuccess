@@ -48,6 +48,8 @@ p {
     color:black;
     line-height: 1.5rem;
     font-size:1.2rem;
+    text-align: left;
+    width: 100%;
 }
 
 /* Toggle Info  */
@@ -114,17 +116,9 @@ button mat-icon {
     box-sizing: border-box;
 }
 
-@media screen and (max-width: 1050px){
-    .header-top{
-        justify-content: center;
+@media screen and (max-width: 600px){
+    .header-top button {
+        padding: 1rem 1.2rem;
+        font-size: 0.95rem;
     }
-
-    .header > p{
-        text-align: center;
-    }
-
-    .form-control label{
-        text-align: center;
-    }
-
 }

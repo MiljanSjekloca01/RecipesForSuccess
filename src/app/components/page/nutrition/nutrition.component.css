@@ -109,10 +109,6 @@ h1{
     background-color:#333;
 }
 
-app-not-found{
-    flex-grow: 1;
-}
-
 @media (max-width: 650px) {
     .tabs > a {
       padding: 1rem 2rem;

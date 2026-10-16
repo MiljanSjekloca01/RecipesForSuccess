@@ -1,5 +1,10 @@
 <div *ngIf="visible">
     <img [src]="imageUrl" [alt]="title">
-    <button type="button" (click)="navigateBack()">BACK TO RECIPES</button>
+    <button type="button" (click)="navigateBack()">
+        <svg *ngIf="showArrow" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M12.5 4.5 7 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>{{ buttonLabel }}</span>
+    </button>
     <p>{{title}}</p>
 </div>
