@@ -21,6 +21,7 @@ export class RecipeDetailComponent implements OnInit{
   userHaveRated: boolean;
   user: User;
   savedRecipe: boolean;
+  favoriteUpdateInProgress = false;
   maxCommentsPerUser = 4;
   recipesCommentNumber = 4;
   likedReviews: { [key: string]: boolean } = {};
@@ -148,22 +149,42 @@ export class RecipeDetailComponent implements OnInit{
     }
   }
 
-  addToFavorite(recipeId: string){
-    if(this.user){
-      this.savedRecipe = true;
-      this.authService.addRecipeToFavorites(recipeId).subscribe({
-        next: res => {
-          this.user.favoriteRecipes.push(recipeId);
-          localStorage.setItem("userData", JSON.stringify(this.user));
+  toggleFavorite(recipeId: string){
+    if(!this.user){
+      this.showAlertMessage("Please log in to save this recipe.","info");
+      return;
+    }
 
-        },error: err => {
-          this.showAlertMessage('Error adding recipe to favorites:' + err, "error")
-        },complete: () => {
-          this.showAlertMessage("Recipe successfully added to favorites","success");
-        }
-      })
-    }else{
-      this.showAlertMessage("Please log in to save this recipe.","info")
+    if(this.favoriteUpdateInProgress) return;
+
+    const wasSaved = this.savedRecipe;
+    const onSuccess = () => {
+      const current = this.user.favoriteRecipes || [];
+      const updated = wasSaved
+        ? current.filter(id => id !== recipeId)
+        : [...current, recipeId];
+
+      this.authService.updateFavoriteRecipes(updated);
+      this.savedRecipe = updated.includes(recipeId);
+      this.favoriteUpdateInProgress = false;
+      this.showAlertMessage(
+        this.savedRecipe ? "Recipe successfully added to favorites" : "Recipe removed from favorites",
+        "success"
+      );
+    };
+    const onError = (err: unknown) => {
+      this.favoriteUpdateInProgress = false;
+      this.showAlertMessage(
+        wasSaved ? "Error removing recipe from favorites: " + err : "Error adding recipe to favorites: " + err,
+        "error"
+      );
+    };
+
+    this.favoriteUpdateInProgress = true;
+    if (wasSaved) {
+      this.authService.removeRecipeFromFavorites(recipeId).subscribe({ next: onSuccess, error: onError });
+    } else {
+      this.authService.addRecipeToFavorites(recipeId).subscribe({ next: onSuccess, error: onError });
     }
   }
 

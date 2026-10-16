@@ -89,10 +89,21 @@
     height:3rem;
 }
 
+.top-content > .image-container > button > p {
+    margin: 0;
+}
+
 .top-content > .image-container > button:hover{
     background-color: darkred;
     color:white;
     border-radius: 8%;
+}
+
+.top-content > .image-container > button.saved,
+.top-content > .image-container > button.saved:hover{
+    background-color: darkred;
+    color: white;
+    border-color: transparent;
 }
 
 .top-content > .description {

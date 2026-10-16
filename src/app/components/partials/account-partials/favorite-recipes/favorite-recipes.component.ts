@@ -12,7 +12,11 @@ import { Recipe } from '../../../../shared/models/recipes.model';
 export class FavoriteRecipesComponent implements OnInit{
 
   user: User;
-  recipes: Recipe[];
+  recipes: Recipe[] = [];
+  removingId: string = "";
+  alertVisible = false;
+  alertMessage = "";
+  alertType = "";
     
   constructor(private authService: AuthService,private recipeService:RecipeService){
 
@@ -28,6 +32,32 @@ export class FavoriteRecipesComponent implements OnInit{
         this.recipes = recipes;
       })
     }
+  }
+
+  removeFavorite(recipeId: string){
+    if(this.removingId) return;
+
+    this.removingId = recipeId;
+    this.authService.removeRecipeFromFavorites(recipeId).subscribe({
+      next: () => {
+        this.recipes = this.recipes.filter(recipe => recipe.id !== recipeId);
+        const updated = (this.authService.user.value?.favoriteRecipes || []).filter(id => id !== recipeId);
+        this.authService.updateFavoriteRecipes(updated);
+        this.removingId = "";
+        this.showAlertMessage("Recipe removed from favorites", "success");
+      },
+      error: () => {
+        this.removingId = "";
+        this.showAlertMessage("Could not remove this recipe.", "error");
+      }
+    });
+  }
+
+  showAlertMessage(message: string, type: string) {
+    this.alertMessage = message;
+    this.alertType = type;
+    this.alertVisible = true;
+    setTimeout(() => { this.alertVisible = false; }, 5000);
   }
 
 }

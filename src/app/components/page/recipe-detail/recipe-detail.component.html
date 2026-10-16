@@ -15,9 +15,9 @@
     <div class="top-content">
         <div class="image-container">
             <img [srcWithFallback]="recipe.imageUrl" [alt]="recipe.title">
-            <button  *ngIf="(this.user?.id !== this.recipe.userId) && !savedRecipe" (click)="addToFavorite(this.recipe.id)">
+            <button *ngIf="this.user?.id !== this.recipe.userId" [class.saved]="savedRecipe" [disabled]="favoriteUpdateInProgress" (click)="toggleFavorite(this.recipe.id)">
                 <mat-icon class="center-icon">favorite</mat-icon>
-                <p>S A V E </p>
+                <p>{{ savedRecipe ? 'Saved' : 'Save' }}</p>
             </button>
         </div>
         <div class="description">

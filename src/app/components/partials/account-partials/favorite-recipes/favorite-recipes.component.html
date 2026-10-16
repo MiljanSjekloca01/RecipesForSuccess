@@ -8,28 +8,32 @@
 </div>
 <div *ngIf="user.favoriteRecipes.length > 0 ;">
     <div class="recipes">
-        <div *ngFor="let recipe of recipes;let i = index" class="container">
-            <a class="recipe" routerLink="/recipe/{{recipe.id}}">
-                <div class="index">
-                    <h2>{{ i + 1 }}</h2>
-                    <img [srcWithFallback]="recipe.imageUrl" [alt]="recipe.title">
+        <div *ngFor="let recipe of recipes" class="container">
+            <div class="recipe">
+                <a class="recipe-link" routerLink="/recipe/{{recipe.id}}">
+                    <div class="recipe-part">
+                        <img [srcWithFallback]="recipe.imageUrl" [alt]="recipe.title">
+                    </div>
+                    <div class="recipe-part">
+                        <h3>{{ recipe.title }}</h3>
+                        <p *ngIf="recipe.servings">Servings for {{ recipe.servings }}</p>
+                    </div>
+                    <div class="recipe-part">
+                        <p>{{ recipe.prepTime }} minutes to prepare</p>
+                        <p *ngIf="recipe.cookTime">{{ recipe.cookTime }} minutes to cook</p>
+                    </div>
+                </a>
+                <div class="recipe-part">
+                    <button type="button" class="remove-favorite" (click)="removeFavorite(recipe.id)" [disabled]="removingId === recipe.id" aria-label="Remove from favorites">
+                        <mat-icon>delete</mat-icon>
+                    </button>
                 </div>
-                <div class="recipe-column">
-                    <h3>{{ recipe.title }}</h3>
-                    <p *ngIf="recipe.servings">Servings for {{ recipe.servings }}</p>
-                </div>
-                <div class="recipe-column">
-                    <p> {{ recipe.prepTime }} minutes to prepare</p>
-                    <p *ngIf="recipe.cookTime">{{ recipe.cookTime }} minutes to cook</p>
-                </div>
-                <div class="recipe-column"  *ngIf="recipe.ratings.length">
-                    <star-rating [starRatings]="recipe.ratings"></star-rating>
-                    <p>Total of {{ recipe.ratings.length }} {{ recipe.ratings.length === 1 ? 'Rating' : 'Ratings' }} </p>
-                </div>
-            </a>
+            </div>
         </div>
     </div>
 </div>
+
+<app-tooltip *ngIf="alertVisible" [message]="alertMessage" [messageType]="alertType"></app-tooltip>
 
 <app-not-found
  [visible]="user.favoriteRecipes.length <= 0"

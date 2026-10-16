@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from "@angular/core";
-import { BehaviorSubject, catchError,map,mergeMap,switchMap,take,tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError,forkJoin,map,mergeMap,Observable,switchMap,take,tap, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { User } from "../shared/models/user.model";
 import { environment } from "../../environments/environment";
@@ -119,7 +119,6 @@ export class AuthService implements OnInit{
                 }
             });
         } else {
-
             localStorage.removeItem("userData");
             this.user.next(null);
             if (this.tokenExpirationTimer) {
@@ -209,6 +208,41 @@ export class AuthService implements OnInit{
                 return this.http.post<{ name: string }>( `${environment.FIREBASE_BASE_USERS_URL}/${user.firebaseId}/favoriteRecipes.json`, favoriteRecipe )
             })
         );
+    }
+
+    removeRecipeFromFavorites(recipeId: string) {
+        return this.user.pipe(
+            take(1),
+            switchMap(user => {
+                if (!user) { return throwError('User not found'); }
+
+                return this.http.get<{ [key: string]: { recipeId: string } }>(
+                    `${environment.FIREBASE_BASE_USERS_URL}/${user.firebaseId}/favoriteRecipes.json`
+                ).pipe(
+                    switchMap(favorites => {
+                        const keys = Object.entries(favorites || {})
+                            .filter(([, value]) => value?.recipeId === recipeId)
+                            .map(([key]) => key);
+
+                        if (!keys.length) { return throwError('Favorite not found'); }
+
+                        const deletes: Observable<unknown>[] = keys.map(key =>
+                            this.http.delete(`${environment.FIREBASE_BASE_USERS_URL}/${user.firebaseId}/favoriteRecipes/${key}.json`)
+                        );
+                        return forkJoin(deletes);
+                    })
+                );
+            })
+        );
+    }
+
+    updateFavoriteRecipes(recipeIds: string[]) {
+        const currentUser = this.user.value;
+        if (!currentUser) { return; }
+
+        currentUser.favoriteRecipes = [...recipeIds];
+        this.user.next(currentUser);
+        localStorage.setItem("userData", JSON.stringify(currentUser));
     }
 }
 
