@@ -1,6 +1,4 @@
-import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
 import { Routes, RouterModule } from "@angular/router";
 import { CreateRecipeComponent } from "../../partials/account-partials/create-recipe/create-recipe.component";
 import { FavoriteRecipesComponent } from "../../partials/account-partials/favorite-recipes/favorite-recipes.component";

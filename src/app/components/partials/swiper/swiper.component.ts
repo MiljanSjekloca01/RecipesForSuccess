@@ -9,7 +9,7 @@ import { Recipe } from '../../../shared/models/recipes.model';
 export class SwiperComponent implements AfterViewInit{
 
   @Input()
-  swiperRecipes: Recipe[];
+  swiperRecipes: Recipe[] = [];
 
   filteredRecipes: Recipe[] = [];
 

@@ -10,8 +10,8 @@ import { User } from '../../../shared/models/user.model';
 export class AccountComponent implements OnInit{
 
   constructor(private authService: AuthService){}
-  user: User;
-  displayName: string;
+  user: User | null = null;
+  displayName = "";
   ngOnInit(): void {
     this.authService.user.subscribe(user => {
       this.user = user

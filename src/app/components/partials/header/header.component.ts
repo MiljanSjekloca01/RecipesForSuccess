@@ -13,7 +13,7 @@ import { Subscription } from "rxjs";
 export class HeaderComponent implements OnInit{
     tags: string[] = ["Breakfast","Dinner","Lunch","Drink","Dessert","Snack","Appetizer"];
     isAuthenticated = false;
-    userSub: Subscription;
+    userSub?: Subscription;
 
     constructor(private authService: AuthService){}
 
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit{
     }
 
     ngOnDestroy(){
-        this.userSub.unsubscribe();
+        this.userSub?.unsubscribe();
     }
 
     onLogout(){

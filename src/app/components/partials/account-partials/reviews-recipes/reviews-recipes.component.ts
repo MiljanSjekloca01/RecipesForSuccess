@@ -11,9 +11,9 @@ import { RecipeService } from '../../../../services/recipe.service';
 })
 export class ReviewsRecipesComponent implements OnInit{
 
-  user: User;
-  recipes: Recipe[];
-  pressed = []
+  user!: User;
+  recipes: Recipe[] = [];
+  pressed: boolean[] = []
   
   constructor(private authService: AuthService,private recipeService: RecipeService){
 

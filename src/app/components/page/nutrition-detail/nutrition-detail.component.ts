@@ -12,16 +12,16 @@ import { ingredientsData } from '../../../shared/nutrition-data/ingredients-data
 })
 export class NutritionDetailComponent implements OnInit{
 
-  type: string;
-  name: string;
+  type = "";
+  name = "";
   item: NutritionModel | undefined;
 
   constructor(private route: ActivatedRoute){}
 
   ngOnInit(): void {
-    this.type = this.route.snapshot.paramMap.get("type");
+    this.type = this.route.snapshot.paramMap.get("type") ?? "";
     console.log(this.type);
-    this.name = this.route.snapshot.paramMap.get("name");
+    this.name = this.route.snapshot.paramMap.get("name") ?? "";
 
     if(this.type === "vitamins"){
       this.item = vitaminsData.find(vitamin => vitamin.title === this.name);

@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 @Injectable({providedIn:"root"})
 export class AuthService implements OnInit{
 
-    user = new BehaviorSubject<User>(null)
+    user = new BehaviorSubject<User | null>(null)
 
     private tokenExpirationTimer: any;
     private SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.FIREBASE_WEB_API}`
@@ -80,7 +80,7 @@ export class AuthService implements OnInit{
                     result.favoriteCuisine,
                     result.dietaryPreference,
                     result.favoriteRecipes,
-                    result.firebaseId
+                    result.firebaseId ?? ""
                 );
             })
         );
@@ -92,7 +92,10 @@ export class AuthService implements OnInit{
                 
                 const usersEntries = Object.entries(usersData);
                 
-                const userEntry = usersEntries.find(([firebaseId, user]) => user.id === userId);
+                const userEntry = usersEntries.find(([, user]) => user.id === userId);
+                if (!userEntry) {
+                    throw new Error("User not found");
+                }
                 const [firebaseId, user] = userEntry;  
                 
                 if (user.favoriteRecipes) {
@@ -173,6 +176,11 @@ export class AuthService implements OnInit{
 
 
     autoLogin(){
+        const storedUser = localStorage.getItem("userData");
+        if(!storedUser){
+            return;
+        }
+
         const userData: {
             email: string;
             id: string;
@@ -184,10 +192,7 @@ export class AuthService implements OnInit{
             dietaryPreference: string,
             favoriteRecipes: string[],
             firebaseId: string;
-        } = JSON.parse(localStorage.getItem("userData"));
-        if(!userData){
-            return;
-        }
+        } = JSON.parse(storedUser);
         
         const loadedUser = new User(userData.email,userData.id,userData._token, new Date(userData._tokenExpirationDate),userData.firstName,userData.lastName,userData.favoriteCuisine,userData.dietaryPreference,userData.favoriteRecipes,userData.firebaseId)
         const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime()

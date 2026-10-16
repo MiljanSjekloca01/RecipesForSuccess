@@ -25,10 +25,11 @@ export class RecipeService {
             for (const id in responseData) {
                 if (responseData.hasOwnProperty(id)) {
                 const recipe: Recipe = { ...responseData[id], id: id };
-                recipe.ratings = [];
+                const ratings: number[] = [];
+                recipe.ratings = ratings;
                 if (recipe.reviews) {
                     recipe.reviews = Object.entries(recipe.reviews).map(([reviewsId,review]) => {
-                        if(review.rating) recipe.ratings.push(review.rating);
+                        if(review.rating) ratings.push(review.rating);
 
                         if(review.likes){
                             review.likes = Object.entries(review.likes).map( ([likeId,like]) => {
@@ -125,10 +126,10 @@ export class RecipeService {
     getReviewedRecipes(userId: string): Observable<Recipe[]>{
         if(this.recipes.length === 0){
             return this.getRecipesFromDatabase().pipe(
-                map(recipes => recipes.filter(recipe => recipe.reviews.filter(review => review.user_id === userId).length !== 0))
+                map(recipes => recipes.filter(recipe => (recipe.reviews ?? []).filter(review => review.user_id === userId).length !== 0))
             )
         }
-        const reviewedRecipes = this.recipes.filter(recipe => recipe.reviews.filter(review => review.user_id === userId).length !== 0)
+        const reviewedRecipes = this.recipes.filter(recipe => (recipe.reviews ?? []).filter(review => review.user_id === userId).length !== 0)
         return of(reviewedRecipes);
 
         

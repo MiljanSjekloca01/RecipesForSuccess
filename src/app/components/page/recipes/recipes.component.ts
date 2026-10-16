@@ -15,9 +15,9 @@ export class RecipesComponent implements OnInit,OnDestroy{
 
   recipes: Recipe[] = [];
   recipesShownNumber: number = 8;
-  routeSubscription: Subscription;
+  routeSubscription?: Subscription;
   pageTitle = "All";
-  showSwiper: boolean;
+  showSwiper = false;
 
   ngOnInit(){
     this.routeSubscription = this.activeRoute.params.subscribe( param => {
@@ -48,7 +48,7 @@ export class RecipesComponent implements OnInit,OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.routeSubscription.unsubscribe();
+    this.routeSubscription?.unsubscribe();
   }
 
 }

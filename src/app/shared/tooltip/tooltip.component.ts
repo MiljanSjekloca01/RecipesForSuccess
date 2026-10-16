@@ -7,6 +7,6 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TooltipComponent{
   @Input({required: true}) message: string = '';  
-  @Input({required: true}) messageType:  "warning" | "errror" | "info" | "success"
+  @Input({required: true}) messageType!: "warning" | "errror" | "info" | "success";
 
 }

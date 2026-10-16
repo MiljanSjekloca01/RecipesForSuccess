@@ -8,10 +8,10 @@ import { Component, Input, OnChanges } from '@angular/core';
 export class PageTitleComponent implements OnChanges{
 
   @Input()
-  title: string;
+  title = "";
 
   @Input()
-  aboutPage: string;
+  aboutPage = "";
 
   private readonly descriptions: Record<string, string> = {
     lunch: "Don’t forget about lunch! We know you need tasty, easy lunches to get you through your day—whether you’re at work, school, or home. Browse pasta salads, quick soups, and sandwiches galore!",

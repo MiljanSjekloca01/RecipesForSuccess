@@ -11,8 +11,8 @@ import { AuthService } from '../../../../services/auth.service';
 })
 export class PersonalRecipesComponent implements OnInit{
 
-  user: User;
-  recipes: Recipe[];
+  user!: User;
+  recipes: Recipe[] = [];
 
   constructor(private recipeService: RecipeService,private authService: AuthService){
     this.authService.user.subscribe(user => {

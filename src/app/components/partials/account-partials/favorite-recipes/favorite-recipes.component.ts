@@ -11,7 +11,7 @@ import { Recipe } from '../../../../shared/models/recipes.model';
 })
 export class FavoriteRecipesComponent implements OnInit{
 
-  user: User;
+  user!: User;
   recipes: Recipe[] = [];
   removingId: string = "";
   alertVisible = false;

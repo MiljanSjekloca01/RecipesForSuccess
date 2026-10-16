@@ -16,10 +16,10 @@ export class CreateRecipeComponent {
   meals: string[] = ["Breakfast","Dinner","Lunch","Drink","Dessert","Snack","Appetizer"];
   dishTypes: string[] = [ 'Pizza', 'Pasta', 'Rice', 'Noodles', 'Soup', 'Salad', 'Sandwich', 'Burger', 'Tacos', 'Curry', 'Stew', 'Seafood', 'Chicken', 'Beef', 'Sushi', 'Other' ];
   dietPreferences: string[] = ['Vegetarian', 'Vegan', 'Gluten-Free', 'Dairy-Free'];
-  prepTimeMax: number;
-  prepTimeMin: number;
-  cookTimeMin: number;
-  cookTimeMax: number;
+  prepTimeMax?: number;
+  prepTimeMin?: number;
+  cookTimeMin?: number;
+  cookTimeMax?: number;
   meal: string = "";
   dishType: string = "";
   recipe: Recipe = { id: '', title: "", description: '', imageUrl: '', prepTime: '', cuisine: '', owner: '', tags: [], servings: "", ingredients: [""], steps:[""], reviews: [], ratings: [], userId: "", dietPreference: "", };
@@ -48,7 +48,7 @@ export class CreateRecipeComponent {
   }
 
   addDirection() {
-    if (this.recipe.steps && this.recipe.ingredients.length <= 14) this.recipe.steps.push(''); 
+    if (this.recipe.steps && this.recipe.ingredients && this.recipe.ingredients.length <= 14) this.recipe.steps.push(''); 
     else  this.showAlertMessage("You cannot add more than 12 directions.", "info");
   }
 
@@ -61,7 +61,9 @@ export class CreateRecipeComponent {
 
   onSubmit(form: NgForm) {
     if(form.valid){
-      this.recipe.prepTime = this.prepTimeMin.toString() + "-" + this.prepTimeMax.toString();
+      if (this.prepTimeMin != null && this.prepTimeMax != null) {
+        this.recipe.prepTime = this.prepTimeMin.toString() + "-" + this.prepTimeMax.toString();
+      }
       this.recipe.tags.push(this.meal);
       if(this.dishType) this.recipe.tags.push(this.dishType);
       if(this.cookTimeMin && this.cookTimeMax) this.recipe.cookTime = `${this.cookTimeMin}-${this.cookTimeMax}`

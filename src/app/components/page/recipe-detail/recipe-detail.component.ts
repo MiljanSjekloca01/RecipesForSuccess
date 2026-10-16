@@ -14,13 +14,13 @@ import { Review } from '../../../shared/models/review.model';
 })
 export class RecipeDetailComponent implements OnInit{
 
-  recipe: Recipe;
-  clickedStarIndex: number;
-  ratingText: string;
+  recipe?: Recipe;
+  clickedStarIndex = 0;
+  ratingText = "";
   comment: string = "";
-  userHaveRated: boolean;
-  user: User;
-  savedRecipe: boolean;
+  userHaveRated = false;
+  user: User | null = null;
+  savedRecipe = false;
   favoriteUpdateInProgress = false;
   maxCommentsPerUser = 4;
   recipesCommentNumber = 4;
@@ -40,13 +40,16 @@ export class RecipeDetailComponent implements OnInit{
   ngOnInit(){
     this.userHaveRated = this.findIfUserHaveRatedRecipe();
     this.cacheLikedReviews();
-    this.savedRecipe = this.user ? this.user.favoriteRecipes?.includes(this.recipe.id) : false;
+    this.savedRecipe = !!this.user?.favoriteRecipes?.includes(this.recipe?.id ?? "");
   }
 
   cacheLikedReviews() {
-    if (!this.user || !this.recipe.reviews) return;
+    const reviews = this.recipe?.reviews;
+    if (!this.user || !reviews) return;
   
-    this.recipe.reviews.forEach(review => {
+    reviews.forEach(review => {
+      if (!review.id) return;
+
       if (review.likes) {
         this.likedReviews[review.id] = review.likes.some(like => like.userId === this.user?.id);
       } else {
@@ -71,8 +74,17 @@ export class RecipeDetailComponent implements OnInit{
 
     if(rating) {this.userHaveRated = true; reviewData.rating = rating};
 
-    this.recipeService.createReview(reviewData,this.recipe.id).subscribe( response => {
+    if(!this.recipe) return;
+
+    const createdReview = this.recipeService.createReview(reviewData,this.recipe.id);
+    if(!createdReview) return;
+
+    createdReview.subscribe( response => {
+      if(!response || !this.recipe) return;
+
       reviewData.id = response.name;
+      if(!this.recipe.ratings) this.recipe.ratings = [];
+      if(!this.recipe.reviews) this.recipe.reviews = [];
       this.recipe.ratings.push(rating);
       this.recipe.reviews.push(reviewData)
     },error => {this.showAlertMessage("Error occured creating review !","error")});
@@ -83,29 +95,30 @@ export class RecipeDetailComponent implements OnInit{
   
   onStarClicked(star:number){
    this.clickedStarIndex = star;
-   const ratingTexts = {
+   const ratingTexts: Record<number, string> = {
     1: "Bad recipe !",
     2: "Didn't like it",
     3: "It was good",
     4: "Great recipe",
     5: "Loved it !"
   };
-  this.ratingText = ratingTexts[star];
+  this.ratingText = ratingTexts[star] ?? "";
   }
 
 
   findIfUserHaveRatedRecipe(){
-    if(!this.user) return false;
+    if(!this.user || !this.recipe?.reviews) return false;
+    const userId = this.user.id;
     if(this.recipe.reviews){
       return this.recipe.reviews.some(review => {
-       return review.rating && review.user_id === this.user.id
+       return review.rating && review.user_id === userId
       })
     }
     return false;
   }
 
   findIfRecipeHasCommentReview(){
-    if(this.recipe.reviews){
+    if(this.recipe?.reviews){
       this.recipe.reviews.forEach(review => {
         if(review.commentText){
           return true;
@@ -117,8 +130,9 @@ export class RecipeDetailComponent implements OnInit{
   }
 
   countUserComments(): number {
-    if (this.user.id && this.recipe.reviews) {
-      return this.recipe.reviews.filter(review => review.user_id === this.user.id && review.commentText).length;
+    if (this.user?.id && this.recipe?.reviews) {
+      const userId = this.user.id;
+      return this.recipe.reviews.filter(review => review.user_id === userId && review.commentText).length;
     }
     return 0;
   }
@@ -135,12 +149,14 @@ export class RecipeDetailComponent implements OnInit{
     }
 
     if (!alreadyLiked) {
+        if(!review.id || !this.recipe) return;
+
         const likeData = { userId: this.user.id };
-        this.recipeService.addLikeToComment(this.recipe.id, review.id, likeData).subscribe(response => {
+        this.recipeService.addLikeToComment(this.recipe.id, review.id, likeData).subscribe(() => {
           if(!review.likes){ review.likes = []; }
 
            review.likes.push(likeData)
-           this.likedReviews[review.id] = true;
+           this.likedReviews[review.id!] = true;
         }, error => {
           this.showAlertMessage("Error adding like" + error,"error");
         });
@@ -157,9 +173,10 @@ export class RecipeDetailComponent implements OnInit{
 
     if(this.favoriteUpdateInProgress) return;
 
+    const currentUser = this.user;
     const wasSaved = this.savedRecipe;
     const onSuccess = () => {
-      const current = this.user.favoriteRecipes || [];
+      const current = currentUser.favoriteRecipes || [];
       const updated = wasSaved
         ? current.filter(id => id !== recipeId)
         : [...current, recipeId];

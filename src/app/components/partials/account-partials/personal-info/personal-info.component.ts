@@ -10,9 +10,9 @@ import { NgForm } from '@angular/forms';
 })
 export class PersonalInfoComponent implements OnInit{
   pressed = false;
-  user: User;
+  user!: User;
   isDataDifferent: boolean = false;
-  oldData: User;
+  oldData!: User;
   cuisines: string[] = ['Italian', 'Mexican', 'Chinese', 'Indian', 'French', 'Japanese', 'Mediterranean','Serbian'];
   dietaryPreferences: string[] = ['Vegetarian', 'Vegan','Gluten Free','Dairy Free','None'];
   alertVisible = false;

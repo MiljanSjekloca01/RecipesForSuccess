@@ -12,8 +12,8 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class AuthComponent {
 
-  authMode: string = "login" || "register";
-  error: string = null;
+  authMode: string = "login";
+  error: string | null = null;
 
   constructor(private router:Router,activeRoute: ActivatedRoute,private authService: AuthService){
     this.authMode = activeRoute.snapshot.url[1]?.path === 'login' ? 'login' : 'register';
@@ -32,6 +32,8 @@ export class AuthComponent {
         authObservable = this.authService.login(email,password)
       }else if(this.authMode ==="register"){
         authObservable = this.authService.signUp(email,password,form.value.firstName,form.value.lastName)
+      }else{
+        return;
       }
       
       authObservable.subscribe( resData => {
