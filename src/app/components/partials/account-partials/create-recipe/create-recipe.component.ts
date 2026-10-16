@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class CreateRecipeComponent {
   cuisines: string[] = ['Italian', 'Mexican', 'Chinese', 'Indian', 'French', 'Japanese', 'Mediterranean', 'Serbian'];
   meals: string[] = ["Breakfast","Dinner","Lunch","Drink","Dessert","Snack","Appetizer"];
-  dishTypes: string[] = [ 'Pizza', 'Salad', 'Pasta', 'Burger', 'Sushi', 'Steak', 'Tacos', 'Soup', 'Curry', 'Sandwich', 'Seafood', 'Vegetarian', 'Grilled Chicken', 'Fried Rice' ];
+  dishTypes: string[] = [ 'Pizza', 'Pasta', 'Rice', 'Noodles', 'Soup', 'Salad', 'Sandwich', 'Burger', 'Tacos', 'Curry', 'Stew', 'Seafood', 'Chicken', 'Beef', 'Sushi', 'Other' ];
   dietPreferences: string[] = ['Vegetarian', 'Vegan', 'Gluten-Free', 'Dairy-Free'];
   prepTimeMax: number;
   prepTimeMin: number;
@@ -49,8 +49,7 @@ export class CreateRecipeComponent {
 
   addDirection() {
     if (this.recipe.steps && this.recipe.ingredients.length <= 14) this.recipe.steps.push(''); 
-    else  this.showAlertMessage("You cannot add more than 12 directions.", "info")
-    
+    else  this.showAlertMessage("You cannot add more than 12 directions.", "info");
   }
 
   removeDirection(index: number) {
