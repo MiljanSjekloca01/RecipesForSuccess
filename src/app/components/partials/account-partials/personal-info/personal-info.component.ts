@@ -38,6 +38,10 @@ export class PersonalInfoComponent implements OnInit{
     this.isDataDifferent = (JSON.stringify(this.oldData) !== JSON.stringify(this.user));
   }
 
+  lengthOf(value: unknown): number {
+    return typeof value === "string" ? value.length : 0;
+  }
+
 
   showAlertMessage(message: string, type: string) {
     this.alertMessage = message;

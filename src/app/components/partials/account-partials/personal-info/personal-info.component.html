@@ -27,13 +27,19 @@
                 name="firstName" 
                 type="text" 
                 required 
-                minlength="2" 
+                minlength="2"
+                [appMaxLength]="25"
                 [(ngModel)]="user.firstName"
                 (input)="checkIfDataChanged()"
                 #firstName="ngModel" 
                 placeholder="First Name">
-            <div *ngIf="firstName.invalid && firstName.touched" class="error">
-                <p>* First name is required and must be at least 2 characters long.</p>
+            <div class="field-meta">
+                <div class="messages">
+                    <p class="error" *ngIf="firstName.touched && firstName.errors?.['required']">* First name is required.</p>
+                    <p class="error" *ngIf="firstName.touched && firstName.errors?.['minlength']">* First name must be at least 2 characters.</p>
+                    <p class="error" *ngIf="firstName.errors?.['appMaxLength']">* First name can be at most 25 characters.</p>
+                </div>
+                <span class="count" [class.over]="lengthOf(firstName.value) > 25">{{ lengthOf(firstName.value) }}/25</span>
             </div>
         </div>
 
@@ -44,13 +50,19 @@
                 name="lastName" 
                 type="text" 
                 required 
-                minlength="2" 
+                minlength="2"
+                [appMaxLength]="25"
                 [(ngModel)]="user.lastName" 
                 (input)="checkIfDataChanged()"
                 #lastName="ngModel" 
                 placeholder="Last Name">
-            <div *ngIf="lastName.invalid && lastName.touched" class="error">
-                <p>* Last name is required and must be at least 2 characters long.</p>
+            <div class="field-meta">
+                <div class="messages">
+                    <p class="error" *ngIf="lastName.touched && lastName.errors?.['required']">* Last name is required.</p>
+                    <p class="error" *ngIf="lastName.touched && lastName.errors?.['minlength']">* Last name must be at least 2 characters.</p>
+                    <p class="error" *ngIf="lastName.errors?.['appMaxLength']">* Last name can be at most 25 characters.</p>
+                </div>
+                <span class="count" [class.over]="lengthOf(lastName.value) > 25">{{ lengthOf(lastName.value) }}/25</span>
             </div>
         </div>
         <div class="form-control">

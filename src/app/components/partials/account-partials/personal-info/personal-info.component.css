@@ -116,6 +116,37 @@ button mat-icon {
     box-sizing: border-box;
 }
 
+.field-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 0.45rem;
+}
+
+.field-meta .messages {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.field-meta .error {
+    margin: 0;
+    color: darkred;
+    font-size: 0.9rem;
+}
+
+.field-meta .count {
+    margin-left: auto;
+    color: #666;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.field-meta .count.over {
+    color: darkred;
+}
+
 @media screen and (max-width: 600px){
     .header-top button {
         padding: 1rem 1.2rem;

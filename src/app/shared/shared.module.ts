@@ -11,6 +11,7 @@ import { CommonModule } from "@angular/common";
 import {MatIconModule} from '@angular/material/icon';
 import { RouterModule } from "@angular/router";
 import { SrcWithFallbackDirective } from "./src-with-fallback.directive";
+import { MaxLengthDirective } from "./max-length.directive";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SrcWithFallbackDirective } from "./src-with-fallback.directive";
     CommonModule,
     FormsModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    MaxLengthDirective,
   ],
   exports: [
     HeaderComponent,
@@ -39,6 +41,7 @@ import { SrcWithFallbackDirective } from "./src-with-fallback.directive";
     FormsModule,
     MatIconModule,
     SrcWithFallbackDirective,
+    MaxLengthDirective,
   ],
 })
 export class SharedModule {}
