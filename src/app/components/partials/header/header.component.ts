@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "../../../services/auth.service";
+import { AlertService } from "../../../services/alert.service";
 import { Subscription } from "rxjs";
 
 @Component({
@@ -13,28 +14,16 @@ import { Subscription } from "rxjs";
 
 export class HeaderComponent implements OnInit{
     isAuthenticated = false;
-    alertVisible = false;
-    alertMessage = "";
-    alertType: "warning" | "errror" | "info" | "success" = "info";
     userSub?: Subscription;
-    private alertTimer?: ReturnType<typeof setTimeout>;
 
-    constructor(private authService: AuthService, private router: Router){}
+    constructor(private authService: AuthService, private alertService: AlertService, private router: Router){}
 
     onFavorites(){
         if (!this.isAuthenticated) {
-            this.showAlert("Please log in to view your favorites.", "info");
+            this.alertService.show("Please log in to view your favorites.", "info");
             return;
         }
         this.router.navigate(["/account/favorite-recipes"]);
-    }
-
-    private showAlert(message: string, type: "warning" | "errror" | "info" | "success"){
-        this.alertMessage = message;
-        this.alertType = type;
-        this.alertVisible = true;
-        clearTimeout(this.alertTimer);
-        this.alertTimer = setTimeout(() => this.alertVisible = false, 5000);
     }
 
     isRecipesActive(): boolean {
@@ -60,7 +49,6 @@ export class HeaderComponent implements OnInit{
 
     ngOnDestroy(){
         this.userSub?.unsubscribe();
-        clearTimeout(this.alertTimer);
     }
 
     onLogout(){

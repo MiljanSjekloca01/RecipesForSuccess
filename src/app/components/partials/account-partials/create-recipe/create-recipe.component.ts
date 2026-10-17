@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Recipe } from '../../../../shared/models/recipes.model';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../../../services/auth.service';
+import { AlertService } from '../../../../services/alert.service';
 import { RecipeService } from '../../../../services/recipe.service';
 import { Router } from '@angular/router';
 
@@ -23,12 +24,8 @@ export class CreateRecipeComponent {
   meal: string = "";
   dishType: string = "";
   recipe: Recipe = { id: '', title: "", description: '', imageUrl: '', prepTime: '', cuisine: '', owner: '', tags: [], servings: "", ingredients: [""], steps:[""], reviews: [], ratings: [], userId: "", dietPreference: "", };
-  alertVisible = false;
-  alertMessage = "";
-  alertType = "";
 
-
-  constructor(private authService: AuthService,private recipeService: RecipeService,private router: Router){
+  constructor(private authService: AuthService,private recipeService: RecipeService,private alertService: AlertService,private router: Router){
     this.authService.user.subscribe(user => {
       if(user){
         this.recipe.userId = user.id
@@ -39,22 +36,22 @@ export class CreateRecipeComponent {
 
   addIngredient() {
     if (this.recipe.ingredients && this.recipe.ingredients.length <= 14) this.recipe.ingredients.push('');
-    else  this.showAlertMessage("You cannot add more than 12 ingredients.", "info")
+    else  this.alertService.show("You cannot add more than 12 ingredients.", "info")
   }
 
   removeIngredient(index: number) {
     if (this.recipe.ingredients && this.recipe.ingredients.length !== 1) this.recipe.ingredients.splice(index, 1);
-    else this.showAlertMessage("At least one ingredient is required ! ","info");
+    else this.alertService.show("At least one ingredient is required ! ","info");
   }
 
   addDirection() {
     if (this.recipe.steps && this.recipe.ingredients && this.recipe.ingredients.length <= 14) this.recipe.steps.push(''); 
-    else  this.showAlertMessage("You cannot add more than 12 directions.", "info");
+    else  this.alertService.show("You cannot add more than 12 directions.", "info");
   }
 
   removeDirection(index: number) {
     if (this.recipe.steps && this.recipe.steps.length !== 1)  this.recipe.steps.splice(index, 1);
-    else this.showAlertMessage("At least one direction is required ! ","info");
+    else this.alertService.show("At least one direction is required ! ","info");
   }
 
   cancel(form: NgForm) { form.reset(); }
@@ -75,10 +72,10 @@ export class CreateRecipeComponent {
         },
         error: (err) => {
           console.error(err);
-          this.showAlertMessage("Error occured creating recipe! ","error");
+          this.alertService.show("Error occured creating recipe! ","error");
         },
         complete: () => {
-          this.showAlertMessage("Recipe succesfully created !","success");
+          this.alertService.show("Recipe succesfully created !","success");
           setTimeout(() => { this.router.navigate(["/"]); }, 1000);
         }
       })
@@ -87,16 +84,6 @@ export class CreateRecipeComponent {
 
   trackByFn(index: number, item: any) {
     return index; 
-  }
-
-  showAlertMessage(message: string, type: string) {
-    this.alertMessage = message;
-    this.alertType = type;
-    this.alertVisible = true;
-
-    setTimeout(() => {
-        this.alertVisible = false;
-    }, 3000);
   }
 
 }

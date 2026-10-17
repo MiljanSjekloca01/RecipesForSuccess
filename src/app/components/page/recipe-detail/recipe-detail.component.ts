@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from '../../../services/recipe.service';
 import { Recipe } from '../../../shared/models/recipes.model';
 import { AuthService } from '../../../services/auth.service';
+import { AlertService } from '../../../services/alert.service';
 import { User } from '../../../shared/models/user.model';
 import { Review } from '../../../shared/models/review.model';
 
@@ -25,11 +26,8 @@ export class RecipeDetailComponent implements OnInit{
   maxCommentsPerUser = 4;
   recipesCommentNumber = 4;
   likedReviews: { [key: string]: boolean } = {};
-  alertVisible = false;
-  alertMessage = "";
-  alertType = "";
 
-  constructor(activedRoute: ActivatedRoute,private recipeService: RecipeService,private authService: AuthService,private router: Router){
+  constructor(activedRoute: ActivatedRoute,private recipeService: RecipeService,private authService: AuthService,private alertService: AlertService,private router: Router){
       activedRoute.params.subscribe( param => {
       if(param.id) this.recipe = this.recipeService.getRecipeById(param.id);
     })
@@ -67,7 +65,7 @@ export class RecipeDetailComponent implements OnInit{
     if(comment){
       reviewData.commentText = comment;
       if (this.countUserComments() >= this.maxCommentsPerUser) {
-        this.showAlertMessage(`You have reached the maximum limit of ${this.maxCommentsPerUser} comments !`,"error")
+        this.alertService.show(`You have reached the maximum limit of ${this.maxCommentsPerUser} comments !`,"error")
         return;
       }
     }
@@ -87,7 +85,7 @@ export class RecipeDetailComponent implements OnInit{
       if(!this.recipe.reviews) this.recipe.reviews = [];
       this.recipe.ratings.push(rating);
       this.recipe.reviews.push(reviewData)
-    },error => {this.showAlertMessage("Error occured creating review !","error")});
+    },error => {this.alertService.show("Error occured creating review !","error")});
   
     this.clickedStarIndex = 0;
     this.comment = "";
@@ -139,7 +137,7 @@ export class RecipeDetailComponent implements OnInit{
 
   handleLikeClick(review: Review) {
     if (!this.user){
-      this.showAlertMessage("Please log in to like a comment !","info"); return;
+      this.alertService.show("Please log in to like a comment !","info"); return;
     };
     
     let alreadyLiked: boolean = false;
@@ -158,16 +156,16 @@ export class RecipeDetailComponent implements OnInit{
            review.likes.push(likeData)
            this.likedReviews[review.id!] = true;
         }, error => {
-          this.showAlertMessage("Error adding like" + error,"error");
+          this.alertService.show("Error adding like" + error,"error");
         });
     } else {
-        this.showAlertMessage("You have already liked this comment.","info");
+        this.alertService.show("You have already liked this comment.","info");
     }
   }
 
   toggleFavorite(recipeId: string){
     if(!this.user){
-      this.showAlertMessage("Please log in to save this recipe.","info");
+      this.alertService.show("Please log in to save this recipe.","info");
       return;
     }
 
@@ -184,14 +182,14 @@ export class RecipeDetailComponent implements OnInit{
       this.authService.updateFavoriteRecipes(updated);
       this.savedRecipe = updated.includes(recipeId);
       this.favoriteUpdateInProgress = false;
-      this.showAlertMessage(
+      this.alertService.show(
         this.savedRecipe ? "Recipe successfully added to favorites" : "Recipe removed from favorites",
         "success"
       );
     };
     const onError = (err: unknown) => {
       this.favoriteUpdateInProgress = false;
-      this.showAlertMessage(
+      this.alertService.show(
         wasSaved ? "Error removing recipe from favorites: " + err : "Error adding recipe to favorites: " + err,
         "error"
       );
@@ -203,14 +201,6 @@ export class RecipeDetailComponent implements OnInit{
     } else {
       this.authService.addRecipeToFavorites(recipeId).subscribe({ next: onSuccess, error: onError });
     }
-  }
-
-  showAlertMessage(message: string, type: string) {
-    this.alertMessage = message;
-    this.alertType = type;
-    this.alertVisible = true;
-
-    setTimeout(() => { this.alertVisible = false; }, 5000);
   }
 
   resetMyReview(){

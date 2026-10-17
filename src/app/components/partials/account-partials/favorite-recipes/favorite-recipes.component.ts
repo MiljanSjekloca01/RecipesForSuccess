@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../../services/auth.service';
+import { AlertService } from '../../../../services/alert.service';
 import { User } from '../../../../shared/models/user.model';
 import { RecipeService } from '../../../../services/recipe.service';
 import { Recipe } from '../../../../shared/models/recipes.model';
@@ -14,11 +15,8 @@ export class FavoriteRecipesComponent implements OnInit{
   user!: User;
   recipes: Recipe[] = [];
   removingId: string = "";
-  alertVisible = false;
-  alertMessage = "";
-  alertType = "";
     
-  constructor(private authService: AuthService,private recipeService:RecipeService){
+  constructor(private authService: AuthService,private recipeService:RecipeService,private alertService: AlertService){
 
     this.authService.user.subscribe(user => {
       this.user = JSON.parse(JSON.stringify(user));
@@ -44,20 +42,13 @@ export class FavoriteRecipesComponent implements OnInit{
         const updated = (this.authService.user.value?.favoriteRecipes || []).filter(id => id !== recipeId);
         this.authService.updateFavoriteRecipes(updated);
         this.removingId = "";
-        this.showAlertMessage("Recipe removed from favorites", "success");
+        this.alertService.show("Recipe removed from favorites", "success");
       },
       error: () => {
         this.removingId = "";
-        this.showAlertMessage("Could not remove this recipe.", "error");
+        this.alertService.show("Could not remove this recipe.", "error");
       }
     });
-  }
-
-  showAlertMessage(message: string, type: string) {
-    this.alertMessage = message;
-    this.alertType = type;
-    this.alertVisible = true;
-    setTimeout(() => { this.alertVisible = false; }, 5000);
   }
 
 }

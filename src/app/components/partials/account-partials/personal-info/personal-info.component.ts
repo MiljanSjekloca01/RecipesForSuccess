@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../../services/auth.service';
+import { AlertService } from '../../../../services/alert.service';
 import { User } from '../../../../shared/models/user.model';
 import { NgForm } from '@angular/forms';
 
@@ -15,11 +16,8 @@ export class PersonalInfoComponent implements OnInit{
   oldData!: User;
   cuisines: string[] = ['Italian', 'Mexican', 'Chinese', 'Indian', 'French', 'Japanese', 'Mediterranean','Serbian'];
   dietaryPreferences: string[] = ['Vegetarian', 'Vegan','Gluten Free','Dairy Free','None'];
-  alertVisible = false;
-  alertMessage = "";
-  alertType = "";
 
-  constructor(private authService: AuthService){}
+  constructor(private authService: AuthService, private alertService: AlertService){}
 
   ngOnInit(): void {
     this.authService.user.subscribe(user => {
@@ -30,7 +28,7 @@ export class PersonalInfoComponent implements OnInit{
 
   onSubmit(form: NgForm){
     if(form.valid && this.isDataDifferent){
-      this.showAlertMessage("Unfortunately, Firebase Auth REST API does not support updating user data !","info");
+      this.alertService.show("Unfortunately, Firebase Auth REST API does not support updating user data !","info");
     }
   }
 
@@ -43,13 +41,4 @@ export class PersonalInfoComponent implements OnInit{
   }
 
 
-  showAlertMessage(message: string, type: string) {
-    this.alertMessage = message;
-    this.alertType = type;
-    this.alertVisible = true;
-
-    setTimeout(() => {
-        this.alertVisible = false;
-    }, 8000);
-  }
 }

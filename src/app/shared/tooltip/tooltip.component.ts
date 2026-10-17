@@ -1,12 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from "@angular/core";
+import { AlertService } from "../../services/alert.service";
 
 @Component({
-  selector: 'app-tooltip',
-  templateUrl: './tooltip.component.html',
-  styleUrl: './tooltip.component.css'
+  selector: "app-tooltip",
+  templateUrl: "./tooltip.component.html",
+  styleUrl: "./tooltip.component.css"
 })
-export class TooltipComponent{
-  @Input({required: true}) message: string = '';  
-  @Input({required: true}) messageType!: "warning" | "errror" | "info" | "success";
-
+export class TooltipComponent {
+  constructor(public alert: AlertService) {}
 }
