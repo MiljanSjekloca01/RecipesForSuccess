@@ -13,7 +13,7 @@ export class SwiperComponent implements OnChanges, AfterViewInit{
 
   filteredRecipes: Recipe[] = [];
 
-  dietaryPreferences: string[] = ['All','Vegetarian', 'Vegan','Gluten Free','Dairy Free'];
+  dietaryPreferences: string[] = ['All','Vegetarian', 'Vegan','Gluten-Free','Dairy-Free'];
   activePref: string = "All";
 
   swiperParams = {
