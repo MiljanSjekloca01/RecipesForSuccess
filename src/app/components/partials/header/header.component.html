@@ -1,26 +1,68 @@
 <div class="header-container">
     <ul class="auth-header-list">
-        <li><a routerLink="/account">My Account</a></li>
-        <li *ngIf="!isAuthenticated"><a routerLink="/auth/login">Login</a></li>
-        <li *ngIf="!isAuthenticated"><a routerLink="/auth/register">Register</a></li>
-        <li *ngIf="isAuthenticated"><a (click)="onLogout()" id="logout">Logout</a></li>
+        <li>
+            <a routerLink="/account" [class.active]="isAccountActive()">
+                <svg lucideUser [size]="16" aria-hidden="true"></svg>
+                Account
+            </a>
+        </li>
+        <li *ngIf="!isAuthenticated">
+            <a routerLink="/auth/login">
+                <svg lucideLogIn [size]="16" aria-hidden="true"></svg>
+                Login
+            </a>
+        </li>
+        <li *ngIf="isAuthenticated">
+            <a (click)="onLogout()" id="logout">
+                <svg lucideLogOut [size]="16" aria-hidden="true"></svg>
+                Logout
+            </a>
+        </li>
     </ul>
     <div class="nav-header">
        <h1>Recipes For Success</h1>
         <div class="nav-list">
             <ul>
                 <li>
-                    <a routerLink="/" class="dropdown">Recipes <mat-icon>expand_circle_down</mat-icon></a>
+                    <a routerLink="/" class="dropdown" [class.active]="isRecipesActive()">
+                        <svg lucideChefHat [size]="18" aria-hidden="true"></svg>
+                        Recipes
+                        <span class="chevron" aria-hidden="true"></span>
+                    </a>
                     <div class="recipes-dropdown-content">
-                        <a *ngFor="let tag of tags" [routerLink]="['/tag/', tag | lowercase]">{{ tag }}</a>
+                        <a routerLink="/tag/breakfast" routerLinkActive="selected"><svg lucideSunrise [size]="16" aria-hidden="true"></svg><span>Breakfast</span></a>
+                        <a routerLink="/tag/dinner" routerLinkActive="selected"><svg lucideCookingPot [size]="16" aria-hidden="true"></svg><span>Dinner</span></a>
+                        <a routerLink="/tag/lunch" routerLinkActive="selected"><svg lucideUtensils [size]="16" aria-hidden="true"></svg><span>Lunch</span></a>
+                        <a routerLink="/tag/drink" routerLinkActive="selected"><svg lucideCupSoda [size]="16" aria-hidden="true"></svg><span>Drink</span></a>
+                        <a routerLink="/tag/dessert" routerLinkActive="selected"><svg lucideCakeSlice [size]="16" aria-hidden="true"></svg><span>Dessert</span></a>
+                        <a routerLink="/tag/snack" routerLinkActive="selected"><svg lucideCookie [size]="16" aria-hidden="true"></svg><span>Snack</span></a>
+                        <a routerLink="/tag/appetizer" routerLinkActive="selected"><svg lucideSalad [size]="16" aria-hidden="true"></svg><span>Appetizer</span></a>
+                        <button type="button" class="favorites" (click)="onFavorites()">
+                            <svg lucideHeart [size]="16" aria-hidden="true"></svg>
+                            <span>My Favorites</span>
+                        </button>
                     </div>
                 </li>
 
-                <li><a routerLink="/nutrition" class="dropdown">Nutrition <mat-icon>expand_circle_down</mat-icon></a>
+                <li>
+                    <a routerLink="/nutrition" class="dropdown" [class.active]="isNutritionActive()">
+                        <svg lucideLeaf [size]="18" aria-hidden="true"></svg>
+                        Nutrition
+                        <span class="chevron" aria-hidden="true"></span>
+                    </a>
                     <div class="nutrition-dropdown-content">
-                        <a routerLink="/nutrition/vitamins">Vitamins</a>
-                        <a routerLink="/nutrition/minerals">Minerals</a>
-                        <a routerLink="/nutrition/ingredients">Ingredients</a>
+                        <a routerLink="/nutrition/vitamins" routerLinkActive="selected">
+                            <svg lucidePill [size]="16" aria-hidden="true"></svg>
+                            <span>Vitamins</span>
+                        </a>
+                        <a routerLink="/nutrition/minerals" routerLinkActive="selected">
+                            <svg lucideAtom [size]="16" aria-hidden="true"></svg>
+                            <span>Minerals</span>
+                        </a>
+                        <a routerLink="/nutrition/ingredients" routerLinkActive="selected">
+                            <svg lucideSprout [size]="16" aria-hidden="true"></svg>
+                            <span>Ingredients</span>
+                        </a>
                     </div>
                 </li>
 
@@ -28,4 +70,5 @@
             </ul>
         </div>
     </div>
+    <app-tooltip *ngIf="alertVisible" [message]="alertMessage" [messageType]="alertType"></app-tooltip>
 </div>

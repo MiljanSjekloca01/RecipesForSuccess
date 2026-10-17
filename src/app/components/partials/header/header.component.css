@@ -8,23 +8,40 @@
 .auth-header-list{
     flex-wrap: wrap;
     display:flex;
-    justify-content: center;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.15rem 1.5rem 0 0;
 }
 
 .auth-header-list > li {
-    margin:0.2rem 1rem;
+    display: flex;
+    align-items: center;
+    margin: 0.2rem 0 0.2rem 1.1rem;
 }
 
 .auth-header-list > li > a{
-    padding:0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.1rem;
+    font-size: 1.15rem;
+    font-weight: 500;
+    cursor: pointer;
 }
 
+.auth-header-list > li > a > svg{
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
 
-.auth-header-list > li > a:hover{
-    border-radius: 10%;
-    border-bottom: 0.1px solid slategray;
-    cursor: pointer;
-    color:red;
+.auth-header-list > li > a:hover,
+.auth-header-list > li > a.active{
+    color: darkred;
 }
 
 .nav-header{
@@ -44,14 +61,44 @@ h1{
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    column-gap: 4rem;
+    row-gap: 1rem;
 }
 
 
+.nav-list > ul > li{
+    position: relative;
+}
+
 .nav-list > ul > li > a{
     display:flex;
-    margin:0.5rem 1rem;
+    margin:0;
     font-size:1.6rem;
     align-items: center;
+}
+
+.nav-list > ul > li > a.dropdown > svg{
+    margin-right: 0.45rem;
+    flex: none;
+}
+
+.chevron{
+    width: 0.42rem;
+    height: 0.42rem;
+    margin-left: 0.55rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-0.1rem) rotate(45deg);
+    transition: transform 0.2s ease;
+}
+
+.nav-list > ul > li:hover > a .chevron{
+    transform: translateY(0.05rem) rotate(225deg);
+}
+
+.nav-list > ul > li > a.active{
+    color: darkred;
 }
 
 .nutrition-dropdown-content,.recipes-dropdown-content{
@@ -60,40 +107,70 @@ h1{
 
 .nav-list > ul > li:hover > a{
     cursor: pointer;
-    color:red;
+    color: darkred;
 }
 
 .nav-list > ul > li:hover > .nutrition-dropdown-content,
 .nav-list > ul > li:hover > .recipes-dropdown-content {
-   position:absolute;
+   position: absolute;
+   top: 100%;
+   left: 0;
    display: flex;
    flex-direction: column;
-   padding:2rem;
-   background-color: rgba(17, 17, 17, 0.7); 
-   border-radius: 0.2rem;
-   font-size: 1.2rem;
-   cursor: pointer;  
+   min-width: 12.5rem;
+   padding: 0.4rem;
+   background-color: white;
+   border-radius: 0.7rem;
+   box-shadow: 0 0.45rem 1.4rem rgba(17, 17, 17, 0.16);
+   font-size: 1.05rem;
+   z-index: 5;
+   overflow: hidden;
 }
 
-.nav-list > ul > li > div > a {
-    padding:5px 0px;
-    color:white;
+.nav-list > ul > li > div > a,
+.nav-list > ul > li > div > button {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+    color: #333;
     font-weight: 500;
-    text-shadow: 2px 2px 2px black;
+    font-size: 1.05rem;
+    font-family: inherit;
+    text-align: left;
+    background: none;
+    border: none;
+    border-radius: 0.45rem;
+    cursor: pointer;
 }
 
-.nav-list > ul > li > div > a:hover {
-   text-shadow:none;
+.nav-list > ul > li > div > a > svg,
+.nav-list > ul > li > div > button > svg {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
-
-@media screen and (max-width: 576px) {
-    .nav-list > ul > li:hover > .nutrition-dropdown-content,
-    .nav-list > ul > li:hover > .recipes-dropdown-content {
-        padding-top: 2.8rem;
-    }
-
-    .nav-list > ul > li > a{
-       margin-bottom: 1rem;
-    }
+.nav-list > ul > li > div > a:hover,
+.nav-list > ul > li > div > a.selected,
+.nav-list > ul > li > div > button:hover {
+    background-color: rgb(252, 232, 232);
+    color: darkred;
 }
+
+.nav-list > ul > li > div > button.favorites {
+    margin-top: 0.35rem;
+    border-top: 1px solid #eee;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    border-radius: 0 0 0.45rem 0.45rem;
+}
+

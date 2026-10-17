@@ -92,6 +92,11 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "prebundle": {
+              "exclude": ["@lucide/angular"]
+            }
+          },
           "configurations": {
             "production": {
               "buildTarget": "AngularRecipesProject:build:production"

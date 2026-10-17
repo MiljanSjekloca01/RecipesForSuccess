@@ -8,10 +8,11 @@ import { SearchBarComponent } from "../components/partials/searchBar/searchBar.c
 import { StarRatingComponent } from "../components/partials/star-rating/star-rating.component";
 import { TooltipComponent } from "./tooltip/tooltip.component";
 import { CommonModule } from "@angular/common";
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from "@angular/router";
 import { SrcWithFallbackDirective } from "./src-with-fallback.directive";
 import { MaxLengthDirective } from "./max-length.directive";
+import { LucideAtom, LucideCakeSlice, LucideChefHat, LucideCookie, LucideCookingPot, LucideCupSoda, LucideHeart, LucideLeaf, LucideLogIn, LucideLogOut, LucidePill, LucideSalad, LucideSprout, LucideSunrise, LucideUser, LucideUtensils } from "@lucide/angular";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,22 @@ import { MaxLengthDirective } from "./max-length.directive";
     MatIconModule,
     RouterModule,
     MaxLengthDirective,
+    LucideAtom,
+    LucideCakeSlice,
+    LucideChefHat,
+    LucideCookie,
+    LucideCookingPot,
+    LucideCupSoda,
+    LucideHeart,
+    LucideLeaf,
+    LucideLogIn,
+    LucideLogOut,
+    LucidePill,
+    LucideSalad,
+    LucideSprout,
+    LucideSunrise,
+    LucideUser,
+    LucideUtensils,
   ],
   exports: [
     HeaderComponent,
