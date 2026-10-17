@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, } from '@angular/core';
 import { Recipe } from '../../../shared/models/recipes.model';
 
 @Component({
@@ -6,7 +6,7 @@ import { Recipe } from '../../../shared/models/recipes.model';
   templateUrl: './swiper.component.html',
   styleUrl: './swiper.component.css'
 })
-export class SwiperComponent implements AfterViewInit{
+export class SwiperComponent implements OnChanges, AfterViewInit{
 
   @Input()
   swiperRecipes: Recipe[] = [];
@@ -40,13 +40,15 @@ export class SwiperComponent implements AfterViewInit{
     }
   }
 
+  ngOnChanges(): void {
+    this.updateFilteredRecipes();
+  }
+
   ngAfterViewInit(): void {
     const swiperEl = document.querySelector('swiper-container');
     if(swiperEl){
       Object.assign(swiperEl,this.swiperParams);
     }
-
-    this.updateFilteredRecipes();
   }
 
   filterRecipes(pref: string): void{
