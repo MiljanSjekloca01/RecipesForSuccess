@@ -6,21 +6,31 @@
     </div>
     <p>These are the recipes you've shared with our community. Take a moment to revisit your favorite culinary creations.</p>
 </div>
-<div class="container" *ngIf="recipes?.length">
-    <li *ngFor="let recipe of recipes">
-    <a routerLink="/recipe/{{recipe.id}}">
-        <img [srcWithFallback]="recipe.imageUrl" [alt]="recipe.title">
-        <div class="tags">
-            <p *ngFor="let tag of recipe.tags">
-                <mat-icon class="material-symbols-outlined">label</mat-icon>{{ tag }}
-            </p>
+<div class="recipes" *ngIf="recipes?.length">
+    <div *ngFor="let recipe of recipes" class="container">
+        <div class="recipe">
+            <a class="recipe-link" routerLink="/recipe/{{recipe.id}}">
+                <div class="recipe-part">
+                    <img [srcWithFallback]="recipe.imageUrl" [alt]="recipe.title">
+                </div>
+                <div class="recipe-part">
+                    <h3>{{ recipe.title }}</h3>
+                </div>
+            </a>
+            <div class="recipe-part">
+                <button type="button" class="edit-recipe" aria-label="Edit recipe">
+                    <mat-icon>edit</mat-icon>
+                    <span>Edit</span>
+                </button>
+            </div>
+            <div class="recipe-part">
+                <button type="button" class="delete-recipe" aria-label="Delete recipe">
+                    <mat-icon>delete</mat-icon>
+                    <span>Delete</span>
+                </button>
+            </div>
         </div>
-        <div *ngIf="recipe.ratings.length" class="rating">
-            <star-rating [starRatings]="recipe.ratings"></star-rating>
-            <p> {{ recipe.ratings.length }} {{ recipe.ratings.length === 1 ? 'Rating' : 'Ratings' }} </p>
-        </div>
-        <h2> {{ recipe.title }}</h2>
-    </a></li>
+    </div>
 </div>
 
 <app-not-found 
@@ -30,6 +40,3 @@
     buttonLabel="Go to recipes"
     [showArrow]="false">
 </app-not-found>
-
-
-
