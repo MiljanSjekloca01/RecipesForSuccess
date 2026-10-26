@@ -105,6 +105,34 @@ export class RecipeService {
         );
     }
 
+    updateRecipe(recipe: Recipe) {
+        const changes: Omit<Recipe, "id" | "owner" | "reviews" | "ratings" | "userId" | "type" | "cookTime"> & { cookTime: string | null } = {
+            title: recipe.title,
+            description: recipe.description,
+            imageUrl: recipe.imageUrl,
+            prepTime: recipe.prepTime,
+            cuisine: recipe.cuisine ?? "",
+            tags: recipe.tags,
+            servings: recipe.servings ?? "",
+            ingredients: recipe.ingredients ?? [],
+            steps: recipe.steps ?? [],
+            dietPreference: recipe.dietPreference ?? "",
+            cookTime: recipe.cookTime ? recipe.cookTime : null,
+        };
+
+        return this.http.patch(`${environment.FIREBASE_BASE_RECIPES_URL}${recipe.id}.json`, changes).pipe(
+            map(() => {
+                this.recipes = this.recipes.map(item => {
+                    if (item.id !== recipe.id) return item;
+                    const next: Recipe = { ...item, ...changes, id: item.id, reviews: item.reviews, ratings: item.ratings };
+                    if (!changes.cookTime) delete next.cookTime;
+                    return next;
+                });
+                return this.recipes.find(item => item.id === recipe.id) as Recipe;
+            })
+        );
+    }
+
     createRecipe(recipe: Recipe) {
         if (this.recipes.length === 0) {
           return this.getRecipesFromDatabase().pipe(

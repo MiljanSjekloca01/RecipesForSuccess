@@ -16,6 +16,7 @@ export class PersonalRecipesComponent implements OnInit{
   recipes: Recipe[] = [];
   deletingId = "";
   pendingRecipe: Recipe | null = null;
+  editingRecipe: Recipe | null = null;
 
   constructor(private recipeService: RecipeService,private authService: AuthService,private alertService: AlertService){
     this.authService.user.subscribe(user => {
@@ -32,8 +33,22 @@ export class PersonalRecipesComponent implements OnInit{
   }
 
   askToDelete(recipe: Recipe){
-    if(this.deletingId || recipe.userId !== this.user?.id) return;
+    if(this.deletingId || this.editingRecipe || recipe.userId !== this.user?.id) return;
     this.pendingRecipe = recipe;
+  }
+
+  askToEdit(recipe: Recipe){
+    if(this.deletingId || this.pendingRecipe || recipe.userId !== this.user?.id) return;
+    this.editingRecipe = recipe;
+  }
+
+  onRecipeSaved(recipe: Recipe){
+    this.recipes = this.recipes.map(item => item.id === recipe.id ? recipe : item);
+    this.editingRecipe = null;
+  }
+
+  cancelEdit(){
+    this.editingRecipe = null;
   }
 
   confirmDelete(){

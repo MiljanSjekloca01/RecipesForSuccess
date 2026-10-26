@@ -106,6 +106,7 @@ button mat-icon {
 }
 
 .form-control input:focus,
+.form-control select:hover,
 .form-control select:focus {
     outline: none; 
     border: 0.15rem solid rgb(185, 103, 3);
@@ -114,6 +115,14 @@ button mat-icon {
 .form-control select {
     width:100%;
     box-sizing: border-box;
+    appearance: none;
+    cursor: pointer;
+    padding-right: 2.8rem;
+    background-color: white;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 L6 6.5 L11 1.5' fill='none' stroke='%23884501' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1.1rem center;
+    background-size: 0.75rem;
 }
 
 .field-meta {

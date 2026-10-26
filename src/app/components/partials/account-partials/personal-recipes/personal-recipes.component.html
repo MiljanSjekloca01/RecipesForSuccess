@@ -18,7 +18,7 @@
                 </div>
             </a>
             <div class="recipe-part">
-                <button type="button" class="edit-recipe" aria-label="Edit recipe">
+                <button type="button" class="edit-recipe" (click)="askToEdit(recipe)" aria-label="Edit recipe">
                     <mat-icon>edit</mat-icon>
                     <span>Edit</span>
                 </button>
@@ -32,6 +32,12 @@
         </div>
     </div>
 </div>
+
+<app-edit-recipe-modal
+    [recipe]="editingRecipe"
+    (saved)="onRecipeSaved($event)"
+    (cancel)="cancelEdit()">
+</app-edit-recipe-modal>
 
 <app-confirmation-modal
     [visible]="!!pendingRecipe"

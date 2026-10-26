@@ -1,0 +1,135 @@
+<div class="backdrop" *ngIf="recipe">
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="edit-recipe-title">
+    <div class="dialog-header">
+      <h2 id="edit-recipe-title">Edit recipe</h2>
+      <button type="button" class="close" (click)="onCancel()" [disabled]="saving" aria-label="Close">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <form #editForm="ngForm" (ngSubmit)="onSubmit(editForm)">
+      <div class="form-control">
+        <label for="edit-title">Title*</label>
+        <input id="edit-title" name="title" type="text" required minlength="2" maxlength="40" placeholder="Recipe Title" [(ngModel)]="draft.title" #title="ngModel"/>
+        <div *ngIf="title.invalid && title.touched" class="error">
+          <p>*Title is required (2-40 chars).</p>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label for="edit-description">Description*</label>
+        <textarea id="edit-description" name="description" rows="4" required minlength="30" maxlength="500" [(ngModel)]="draft.description" #description="ngModel" placeholder="Describe your recipe"></textarea>
+        <div *ngIf="description.invalid && description.touched" class="error">
+          <p>* Description is required (30-500 chars)</p>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label for="edit-imageUrl">Image URL*</label>
+        <div class="input-with-icon">
+          <input id="edit-imageUrl" name="imageUrl" type="text" [(ngModel)]="draft.imageUrl" #imageUrl="ngModel" placeholder="Image URL" required>
+          <mat-icon (click)="draft.imageUrl = ''">image</mat-icon>
+        </div>
+        <div *ngIf="imageUrl.invalid && imageUrl.touched || (imageUrl.touched && !draft.imageUrl?.match('\\.(jpg|jpeg|png)(\\?.*)?$'))" class="error">
+          <p>* Invalid Image URL - ( Image URL must be .jpg, .jpeg, or .png )</p>
+        </div>
+        <div class="image-preview" *ngIf="draft.imageUrl">
+          <img [srcWithFallback]="draft.imageUrl" alt="Recipe image">
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label>Preparation Time (minutes)*</label>
+        <div class="preparation-time">
+          <input type="number" name="prepTimeMin" [(ngModel)]="prepTimeMin" min="1" max="600" placeholder="Min time" required #prepMin="ngModel">
+          <span> - </span>
+          <input type="number" name="prepTimeMax" [(ngModel)]="prepTimeMax" min="2" max="600" placeholder="Max time" required #prepMax="ngModel">
+        </div>
+        <div *ngIf="(prepMin.invalid || prepMax.invalid) && (prepMin.touched || prepMax.touched)" class="error">
+          <p>* Preparation time is required and maximum is 600min/10h.</p>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label>Cook time (optional)</label>
+        <div class="preparation-time">
+          <input type="number" name="cookTimeMin" [(ngModel)]="cookTimeMin" min="1" max="600" placeholder="Min time">
+          <span> - </span>
+          <input type="number" name="cookTimeMax" [(ngModel)]="cookTimeMax" min="2" max="600" placeholder="Max time">
+        </div>
+        <div *ngIf="cookTimeIncomplete" class="error">
+          <p>* Enter both cook times, or leave both empty.</p>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label for="edit-cuisine">Cuisine (optional)</label>
+        <select id="edit-cuisine" name="cuisine" [(ngModel)]="draft.cuisine">
+          <option value="">Select Cuisine</option>
+          <option *ngFor="let cuisine of cuisines" [value]="cuisine">{{ cuisine }}</option>
+        </select>
+      </div>
+
+      <div class="form-control">
+        <label for="edit-meal">Meal*</label>
+        <select id="edit-meal" name="meal" [(ngModel)]="meal" required #mealRef="ngModel">
+          <option value="">Select Meal</option>
+          <option *ngFor="let mealOption of meals" [value]="mealOption">{{ mealOption }}</option>
+        </select>
+        <div *ngIf="meal === '' && mealRef.touched" class="error"><p>* Meal is required.</p></div>
+      </div>
+
+      <div class="form-control">
+        <label for="edit-dishType">Dish Type (optional)</label>
+        <select id="edit-dishType" name="dishType" [(ngModel)]="dishType">
+          <option value="">Select Dish Type</option>
+          <option *ngFor="let dish of dishTypes" [value]="dish">{{ dish }}</option>
+        </select>
+      </div>
+
+      <div class="form-control ingredients-section">
+        <label>Ingredients*</label>
+        <div *ngFor="let ingredient of draft.ingredients; let i = index; trackBy: trackByFn">
+          <div class="ingredient">
+            <input type="text" name="editIngredient{{i}}" [(ngModel)]="draft.ingredients![i]" maxlength="80" required placeholder="Add ingredient" />
+            <button type="button" (click)="removeIngredient(i)" class="delete-button">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </div>
+        </div>
+        <button type="button" (click)="addIngredient()" class="add-button">ADD INGREDIENT</button>
+      </div>
+
+      <div class="form-control directions-section">
+        <label>Directions*</label>
+        <div *ngFor="let step of draft.steps; let i = index; trackBy: trackByFn">
+          <label>Step {{ i + 1 }}</label>
+          <div class="direction">
+            <textarea rows="3" name="editStep{{i}}" [(ngModel)]="draft.steps![i]" placeholder="Add description step" required></textarea>
+            <button type="button" (click)="removeDirection(i)" class="delete-button">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </div>
+        </div>
+        <button type="button" (click)="addDirection()" class="add-button">ADD STEP</button>
+      </div>
+
+      <div class="form-control">
+        <label for="edit-dietPreference">Dietary Preference (optional)</label>
+        <select id="edit-dietPreference" name="dietPreference" [(ngModel)]="draft.dietPreference">
+          <option value="">Select Dietary Preference</option>
+          <option *ngFor="let diet of dietPreferences" [value]="diet">{{ diet }}</option>
+        </select>
+      </div>
+
+      <div class="form-control">
+        <label for="edit-servings">Servings (optional)</label>
+        <input id="edit-servings" name="servings" type="number" min="1" max="20" [(ngModel)]="draft.servings">
+      </div>
+
+      <div class="form-control buttons">
+        <button type="button" (click)="onCancel()" [disabled]="saving">Cancel</button>
+        <button type="submit" [disabled]="!editForm.valid || cookTimeIncomplete || saving">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

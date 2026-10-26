@@ -1,0 +1,269 @@
+* {
+  box-sizing: border-box;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+.dialog {
+  width: min(58rem, 100%);
+  max-height: calc(100vh - 3rem);
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 1.5rem 1.4rem;
+  background-color: white;
+  border: 1px solid rgba(136, 69, 1, 0.18);
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 1.2rem rgba(30, 17, 0, 0.28);
+}
+
+.dialog-header {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.dialog h2 {
+  margin: 0;
+  padding: 0 2.6rem;
+  color: rgb(91, 0, 0);
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: rgb(91, 0, 0);
+  cursor: pointer;
+}
+
+.close mat-icon {
+  font-size: 1.8rem;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.close:hover {
+  color: darkred;
+}
+
+.close:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+form {
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.form-control {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.input-with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.input-with-icon input {
+  width: 100%;
+  padding-right: 3rem;
+}
+
+input,
+select,
+textarea {
+  padding: 1.2rem;
+  border: 0.15rem solid gray;
+  border-radius: 5px;
+  color: gray;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+select {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 2.8rem;
+  background-color: white;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 L6 6.5 L11 1.5' fill='none' stroke='%23884501' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.1rem center;
+  background-size: 0.75rem;
+}
+
+select:hover,
+select:focus {
+  outline: none;
+  border-color: rgb(185, 103, 3);
+}
+
+.input-with-icon mat-icon {
+  margin-left: -2.5rem;
+  color: gray;
+  cursor: pointer;
+}
+
+.form-control textarea {
+  padding: 1rem;
+  max-width: 100%;
+  max-height: 150px;
+  min-height: 100px;
+  min-width: 0;
+}
+
+.image-preview {
+  display: flex;
+}
+
+.image-preview img {
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 300px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.preparation-time {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.form-control > .preparation-time input {
+  width: calc(50% - 0.8rem);
+}
+
+.error {
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  color: gray;
+}
+
+.directions-section,
+.ingredients-section {
+  gap: 1rem;
+}
+
+.delete-button {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.directions-section button mat-icon,
+.ingredients-section button mat-icon {
+  font-size: 2.2rem;
+  min-width: 2.2rem;
+  min-height: 2.2rem;
+  color: rgb(75, 75, 75);
+  margin-left: 1rem;
+}
+
+.direction,
+.ingredient {
+  display: flex;
+  align-items: center;
+}
+
+.direction > textarea,
+.ingredient > input {
+  width: calc(100% - 3.2rem);
+}
+
+.add-button {
+  width: 20%;
+  min-width: calc(300px - 2rem);
+  padding: 1.2rem 0;
+  border: 3px solid rgb(182, 36, 0);
+  background-color: transparent;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: rgb(182, 36, 0);
+  color: white;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.buttons > button {
+  min-width: 7.5rem;
+  padding: 1.2rem 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: white;
+  font-weight: bold;
+  background-color: rgb(182, 100, 0);
+}
+
+.buttons > button[type="button"] {
+  border: 1px solid rgba(136, 69, 1, 0.45);
+  background-color: white;
+  color: rgb(33, 19, 0);
+}
+
+.buttons > button:hover {
+  opacity: 0.85;
+}
+
+.buttons button:disabled {
+  background-color: #cccccc;
+  color: white;
+  border: none;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+@media screen and (max-width: 700px) {
+  .buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .add-button {
+    width: 100%;
+  }
+}
