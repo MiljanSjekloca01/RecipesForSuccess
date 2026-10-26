@@ -1,0 +1,72 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+.dialog {
+  width: min(36rem, 100%);
+  padding: 1.6rem 1.5rem 1.4rem;
+  background-color: white;
+  border: 1px solid rgba(136, 69, 1, 0.18);
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 1.2rem rgba(30, 17, 0, 0.28);
+  text-align: center;
+}
+
+.dialog h2 {
+  margin: 0 0 0.7rem;
+  color: rgb(91, 0, 0);
+  font-size: 1.6rem;
+}
+
+.dialog p {
+  margin: 0;
+  color: rgb(40, 40, 40);
+  font-size: 1.15rem;
+  line-height: 1.45;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1.4rem;
+}
+
+.actions button {
+  min-width: 7.5rem;
+  height: 3.2rem;
+  margin: 0;
+  padding: 0 1rem;
+  border-radius: 0.8rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.cancel {
+  border: 1px solid rgba(136, 69, 1, 0.45);
+  background-color: white;
+  color: rgb(33, 19, 0);
+}
+
+.cancel:hover {
+  background-color: rgb(252, 232, 232);
+}
+
+.confirm {
+  border: none;
+  background-color: darkred;
+  color: white;
+  box-shadow: 2px 2px 8px rgba(0, 24, 24, 0.35);
+}
+
+.confirm:hover {
+  background-color: rgb(94, 1, 1);
+}

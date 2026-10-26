@@ -96,6 +96,15 @@ export class RecipeService {
 
     /* Helper functions for Account Page */ 
 
+    deleteRecipe(recipeId: string) {
+        return this.http.delete(`${environment.FIREBASE_BASE_RECIPES_URL}${recipeId}.json`).pipe(
+            map(() => {
+                this.recipes = this.recipes.filter(recipe => recipe.id !== recipeId);
+                return recipeId;
+            })
+        );
+    }
+
     createRecipe(recipe: Recipe) {
         if (this.recipes.length === 0) {
           return this.getRecipesFromDatabase().pipe(

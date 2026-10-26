@@ -113,7 +113,7 @@
 <div *ngFor="let step of recipe.steps; let i = index; trackBy: trackByFn">
   <label>Step {{ i + 1 }}</label>
   <div class="direction">
-    <textarea rows="3" maxlength="400" minlength="10" name="stepasfasf{{i}}" [(ngModel)]="recipe.steps[i]" placeholder="Add description step" required></textarea>
+    <textarea rows="3" maxlength="400" name="stepasfasf{{i}}" [(ngModel)]="recipe.steps[i]" placeholder="Add description step" required></textarea>
     <button type="button" (click)="removeDirection(i)" class="delete-button">
       <mat-icon>cancel</mat-icon>
     </button>

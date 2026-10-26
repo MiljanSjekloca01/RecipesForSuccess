@@ -7,7 +7,7 @@
     <p>These are the recipes you've shared with our community. Take a moment to revisit your favorite culinary creations.</p>
 </div>
 <div class="recipes" *ngIf="recipes?.length">
-    <div *ngFor="let recipe of recipes" class="container">
+    <div *ngFor="let recipe of recipes.slice().reverse()" class="container">
         <div class="recipe">
             <a class="recipe-link" routerLink="/recipe/{{recipe.id}}">
                 <div class="recipe-part">
@@ -24,7 +24,7 @@
                 </button>
             </div>
             <div class="recipe-part">
-                <button type="button" class="delete-recipe" aria-label="Delete recipe">
+                <button type="button" class="delete-recipe" (click)="askToDelete(recipe)" [disabled]="deletingId === recipe.id" aria-label="Delete recipe">
                     <mat-icon>delete</mat-icon>
                     <span>Delete</span>
                 </button>
@@ -32,6 +32,16 @@
         </div>
     </div>
 </div>
+
+<app-confirmation-modal
+    [visible]="!!pendingRecipe"
+    title="Delete recipe"
+    [message]="deleteMessage"
+    confirmLabel="Delete"
+    cancelLabel="Cancel"
+    (confirm)="confirmDelete()"
+    (cancel)="cancelDelete()">
+</app-confirmation-modal>
 
 <app-not-found 
     [visible]="recipes?.length === 0" 

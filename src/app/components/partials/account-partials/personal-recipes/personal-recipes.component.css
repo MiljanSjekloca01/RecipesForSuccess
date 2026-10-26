@@ -176,6 +176,11 @@
     background-color: rgb(94, 1, 1);
 }
 
+.delete-recipe:disabled{
+    cursor: default;
+    opacity: 0.6;
+}
+
 @media screen and (max-width:700px){
     .recipe{
         grid-template-columns: 1fr;
