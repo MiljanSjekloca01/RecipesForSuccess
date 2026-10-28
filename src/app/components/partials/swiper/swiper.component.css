@@ -7,16 +7,14 @@
 swiper-container {
     width: 100%;
     margin:0 auto;
-    padding:1rem 0 4rem;
+    margin-bottom: 3rem;
+    padding:1rem 0rem;
     --swiper-theme-color: black;
-    background-image: url("/assets/background/paint-splatters.svg");
-    background-repeat: repeat;
-    background-size: 90rem 64rem;
 }
 
 swiper-slide {
     display:flex;
-    background: transparent;
+    background: #fff;
     margin: 3rem 0rem;
     justify-content: center;
 }

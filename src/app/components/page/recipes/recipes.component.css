@@ -2,7 +2,6 @@
     display:flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: white;
 }
 
 .main{
@@ -18,28 +17,6 @@
     justify-content: center;
     gap:2rem;
     margin-bottom: 1rem;
-}
-
-.container.painted{
-    background-image: url("/assets/background/paint-splatters.svg");
-    background-repeat: repeat;
-    background-size: 90rem 64rem;
-}
-
-.container > li > a{
-    position: relative;
-    z-index: 0;
-}
-
-.container > li > a::before{
-    content: "";
-    position: absolute;
-    z-index: -1;
-    left: 0;
-    right: 0;
-    top: 230px;
-    bottom: 0;
-    background: white;
 }
 
 .container > li {
