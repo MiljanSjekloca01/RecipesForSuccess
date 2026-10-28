@@ -75,6 +75,34 @@
 form {
   overflow-y: auto;
   min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 0, 0, 0.45) transparent;
+}
+
+form::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+form::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+form::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 0.4rem 0;
+}
+
+form::-webkit-scrollbar-thumb {
+  background-color: rgba(139, 0, 0, 0.35);
+  border: 0.18rem solid white;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+form::-webkit-scrollbar-thumb:hover {
+  background-color: darkred;
 }
 
 .form-control {
@@ -100,7 +128,6 @@ form {
 }
 
 input,
-select,
 textarea {
   padding: 1.2rem;
   border: 0.15rem solid gray;
@@ -108,23 +135,6 @@ textarea {
   color: gray;
   font-size: 1rem;
   font-family: inherit;
-}
-
-select {
-  appearance: none;
-  cursor: pointer;
-  padding-right: 2.8rem;
-  background-color: white;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 L6 6.5 L11 1.5' fill='none' stroke='%23884501' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1.1rem center;
-  background-size: 0.75rem;
-}
-
-select:hover,
-select:focus {
-  outline: none;
-  border-color: rgb(185, 103, 3);
 }
 
 .input-with-icon mat-icon {

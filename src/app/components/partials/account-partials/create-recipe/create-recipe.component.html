@@ -71,27 +71,18 @@
 
   <div class="form-control">
     <label for="cuisine">Cuisine (optional)</label>
-    <select id="cuisine" name="cuisine" [(ngModel)]="recipe.cuisine">
-      <option value="">Select Cuisine</option>
-      <option *ngFor="let cuisine of cuisines" [value]="cuisine">{{ cuisine }}</option>
-    </select>
+    <app-select-field inputId="cuisine" name="cuisine" [(ngModel)]="recipe.cuisine" [options]="cuisines" placeholder="Select Cuisine"></app-select-field>
   </div>
 
   <div class="form-control">
     <label for="meal">Meal*</label>
-    <select id="meal" name="meal" [(ngModel)]="meal" required #mealRef="ngModel">
-      <option value="">Select Meal</option>
-      <option *ngFor="let meal of meals" [value]="meal">{{ meal }}</option>
-    </select>
+    <app-select-field inputId="meal" name="meal" [(ngModel)]="meal" [options]="meals" placeholder="Select Meal" required #mealRef="ngModel"></app-select-field>
     <div *ngIf="meal === '' && mealRef.touched" class="error"> <p>* Meal is required.</p> </div>
   </div>
 
   <div class="form-control">
     <label for="dishType">Dish Type (optional)</label>
-    <select id="dishType" name="dishType" [(ngModel)]="dishType">
-      <option value="">Select Dish Type</option>
-      <option *ngFor="let dish of dishTypes" [value]="dish">{{ dish }}</option>
-    </select>
+    <app-select-field inputId="dishType" name="dishType" [(ngModel)]="dishType" [options]="dishTypes" placeholder="Select Dish Type"></app-select-field>
   </div>
   <!-- Ingredients Section -->
 <div class="form-control ingredients-section">
@@ -124,10 +115,7 @@
 
 <div class="form-control">
   <label for="dietPreference">Dietary Preference (optional)</label>
-  <select id="dietPreference" name="dietPreference" [(ngModel)]="recipe.dietPreference">
-    <option value="">Select Dietary Preference</option>
-    <option *ngFor="let diet of dietPreferences" [value]="diet">{{ diet }}</option>
-  </select>
+  <app-select-field inputId="dietPreference" name="dietPreference" [(ngModel)]="recipe.dietPreference" [options]="dietPreferences" placeholder="Select Dietary Preference"></app-select-field>
 </div>
 
   <div class="form-control">

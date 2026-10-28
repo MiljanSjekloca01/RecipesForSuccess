@@ -1,0 +1,37 @@
+<button
+  #trigger
+  type="button"
+  class="trigger"
+  [id]="inputId"
+  [class.open]="open"
+  [disabled]="disabled"
+  [attr.aria-expanded]="open"
+  aria-haspopup="listbox"
+  [attr.aria-controls]="listId"
+  (click)="toggle()"
+  (keydown)="onKey($event)">
+  <span [class.placeholder]="!value">{{ value || placeholder }}</span>
+  <span class="chevron" aria-hidden="true"></span>
+</button>
+
+<ul #panel class="panel" *ngIf="open" [id]="listId" role="listbox">
+  <li
+    role="option"
+    class="placeholder-option"
+    [class.active]="activeIndex === -1"
+    [attr.aria-selected]="value === ''"
+    (mouseenter)="activeIndex = -1"
+    (click)="choose('')">
+    {{ placeholder }}
+  </li>
+  <li
+    *ngFor="let option of options; let i = index"
+    role="option"
+    [class.active]="activeIndex === i"
+    [class.selected]="option === value"
+    [attr.aria-selected]="option === value"
+    (mouseenter)="activeIndex = i"
+    (click)="choose(option)">
+    {{ option }}
+  </li>
+</ul>

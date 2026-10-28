@@ -63,27 +63,18 @@
 
       <div class="form-control">
         <label for="edit-cuisine">Cuisine (optional)</label>
-        <select id="edit-cuisine" name="cuisine" [(ngModel)]="draft.cuisine">
-          <option value="">Select Cuisine</option>
-          <option *ngFor="let cuisine of cuisines" [value]="cuisine">{{ cuisine }}</option>
-        </select>
+        <app-select-field inputId="edit-cuisine" name="cuisine" [(ngModel)]="draft.cuisine" [options]="cuisines" placeholder="Select Cuisine"></app-select-field>
       </div>
 
       <div class="form-control">
         <label for="edit-meal">Meal*</label>
-        <select id="edit-meal" name="meal" [(ngModel)]="meal" required #mealRef="ngModel">
-          <option value="">Select Meal</option>
-          <option *ngFor="let mealOption of meals" [value]="mealOption">{{ mealOption }}</option>
-        </select>
+        <app-select-field inputId="edit-meal" name="meal" [(ngModel)]="meal" [options]="meals" placeholder="Select Meal" required #mealRef="ngModel"></app-select-field>
         <div *ngIf="meal === '' && mealRef.touched" class="error"><p>* Meal is required.</p></div>
       </div>
 
       <div class="form-control">
         <label for="edit-dishType">Dish Type (optional)</label>
-        <select id="edit-dishType" name="dishType" [(ngModel)]="dishType">
-          <option value="">Select Dish Type</option>
-          <option *ngFor="let dish of dishTypes" [value]="dish">{{ dish }}</option>
-        </select>
+        <app-select-field inputId="edit-dishType" name="dishType" [(ngModel)]="dishType" [options]="dishTypes" placeholder="Select Dish Type"></app-select-field>
       </div>
 
       <div class="form-control ingredients-section">
@@ -115,10 +106,7 @@
 
       <div class="form-control">
         <label for="edit-dietPreference">Dietary Preference (optional)</label>
-        <select id="edit-dietPreference" name="dietPreference" [(ngModel)]="draft.dietPreference">
-          <option value="">Select Dietary Preference</option>
-          <option *ngFor="let diet of dietPreferences" [value]="diet">{{ diet }}</option>
-        </select>
+        <app-select-field inputId="edit-dietPreference" name="dietPreference" [(ngModel)]="draft.dietPreference" [options]="dietPreferences" placeholder="Select Dietary Preference"></app-select-field>
       </div>
 
       <div class="form-control">

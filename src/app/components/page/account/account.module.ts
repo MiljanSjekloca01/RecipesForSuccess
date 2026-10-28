@@ -5,6 +5,7 @@ import { FavoriteRecipesComponent } from "../../partials/account-partials/favori
 import { PersonalInfoComponent } from "../../partials/account-partials/personal-info/personal-info.component";
 import { PersonalRecipesComponent } from "../../partials/account-partials/personal-recipes/personal-recipes.component";
 import { EditRecipeModalComponent } from "../../partials/account-partials/edit-recipe-modal/edit-recipe-modal.component";
+import { SelectFieldComponent } from "../../partials/account-partials/select-field/select-field.component";
 import { ReviewsRecipesComponent } from "../../partials/account-partials/reviews-recipes/reviews-recipes.component";
 import { AccountComponent } from "./account.component";
 import { SharedModule } from "../../../shared/shared.module";
@@ -32,6 +33,7 @@ const accountRoutes: Routes = [
     FavoriteRecipesComponent,
     PersonalRecipesComponent,
     EditRecipeModalComponent,
+    SelectFieldComponent,
     ReviewsRecipesComponent,
   ],
   imports: [ SharedModule,RouterModule.forChild(accountRoutes)],
