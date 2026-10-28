@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1000" viewBox="0 0 1400 1000">
+  <defs>
+    <filter id="soft" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+  <g fill="#b96703" filter="url(#soft)">
+    <circle cx="160" cy="140" r="62" opacity="0.26"/>
+    <circle cx="620" cy="80" r="24" opacity="0.3"/>
+    <circle cx="1120" cy="180" r="46" opacity="0.2"/>
+    <circle cx="380" cy="420" r="16" opacity="0.34"/>
+    <circle cx="900" cy="360" r="58" opacity="0.16"/>
+    <circle cx="180" cy="720" r="36" opacity="0.22"/>
+    <circle cx="700" cy="780" r="20" opacity="0.28"/>
+    <circle cx="1180" cy="680" r="42" opacity="0.18"/>
+    <circle cx="480" cy="920" r="14" opacity="0.32"/>
+    <circle cx="980" cy="900" r="28" opacity="0.2"/>
+  </g>
+</svg>
