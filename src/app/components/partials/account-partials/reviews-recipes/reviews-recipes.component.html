@@ -7,7 +7,8 @@
     <p>Welcome to your Reviews section! Here, you can find all the feedback you've shared on recipes. Discover how your culinary insights can inspire others, and revisit your thoughts on the dishes that stood out to you.</p>
 </div>
 
-<div class="container" *ngIf="recipes?.length">
+<app-loading-spinner [visible]="loading"></app-loading-spinner>
+<div class="container" *ngIf="!loading && recipes?.length">
     <div *ngFor="let recipe of recipes;let i = index;  trackBy: trackByRecipeId" class="main">
         <div class="recipe-info">
             <img [srcWithFallback]="recipe.imageUrl" [alt]="recipe.title">
@@ -43,7 +44,7 @@
 </div>
 
 <app-not-found
-    [visible]="recipes?.length === 0"
+    [visible]="!loading && recipes?.length === 0"
     title="You haven't made any reviews yet."
     imageUrl="assets/nothing-found/no_reviews_yet.webp"
     buttonLabel="Go to recipes"

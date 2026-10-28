@@ -6,7 +6,8 @@
     </div>
     <p>These are the recipes you've shared with our community. Take a moment to revisit your favorite culinary creations.</p>
 </div>
-<div class="recipes" *ngIf="recipes?.length">
+<app-loading-spinner [visible]="loading"></app-loading-spinner>
+<div class="recipes" *ngIf="!loading && recipes?.length">
     <div *ngFor="let recipe of recipes.slice().reverse()" class="container">
         <div class="recipe">
             <a class="recipe-link" routerLink="/recipe/{{recipe.id}}">
@@ -50,7 +51,7 @@
 </app-confirmation-modal>
 
 <app-not-found 
-    [visible]="recipes?.length === 0" 
+    [visible]="!loading && recipes?.length === 0" 
     title="Start sharing your culinary creations!"
     imageUrl="assets/nothing-found/no_personal_recipes.webp"
     buttonLabel="Go to recipes"

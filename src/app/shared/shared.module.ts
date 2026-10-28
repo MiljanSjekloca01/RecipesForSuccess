@@ -8,6 +8,7 @@ import { SearchBarComponent } from "../components/partials/searchBar/searchBar.c
 import { StarRatingComponent } from "../components/partials/star-rating/star-rating.component";
 import { TooltipComponent } from "./tooltip/tooltip.component";
 import { ConfirmationModalComponent } from "./confirmation-modal/confirmation-modal.component";
+import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
 import { CommonModule } from "@angular/common";
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from "@angular/router";
@@ -23,6 +24,7 @@ import { LucideAtom, LucideCakeSlice, LucideChefHat, LucideCookie, LucideCooking
     StarRatingComponent,
     TooltipComponent,
     ConfirmationModalComponent,
+    LoadingSpinnerComponent,
     SearchBarComponent,
     SrcWithFallbackDirective,
   ],
@@ -56,6 +58,7 @@ import { LucideAtom, LucideCakeSlice, LucideChefHat, LucideCookie, LucideCooking
     StarRatingComponent,
     TooltipComponent,
     ConfirmationModalComponent,
+    LoadingSpinnerComponent,
     SearchBarComponent,
     CommonModule,
     FormsModule,

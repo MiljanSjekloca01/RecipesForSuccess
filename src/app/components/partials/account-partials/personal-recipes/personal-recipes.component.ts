@@ -17,6 +17,7 @@ export class PersonalRecipesComponent implements OnInit{
   deletingId = "";
   pendingRecipe: Recipe | null = null;
   editingRecipe: Recipe | null = null;
+  loading = true;
 
   constructor(private recipeService: RecipeService,private authService: AuthService,private alertService: AlertService){
     this.authService.user.subscribe(user => {
@@ -25,11 +26,18 @@ export class PersonalRecipesComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    if(this.user){
-      this.recipeService.getPersonalRecipes(this.user.id).subscribe(personalRecipes => {
-        this.recipes = personalRecipes;
-      })
+    if(!this.user){
+      this.loading = false;
+      return;
     }
+
+    this.recipeService.getPersonalRecipes(this.user.id).subscribe({
+      next: personalRecipes => {
+        this.recipes = personalRecipes;
+        this.loading = false;
+      },
+      error: () => this.loading = false
+    });
   }
 
   askToDelete(recipe: Recipe){

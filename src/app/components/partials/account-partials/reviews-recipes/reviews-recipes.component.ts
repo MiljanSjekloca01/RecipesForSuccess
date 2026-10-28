@@ -13,7 +13,8 @@ export class ReviewsRecipesComponent implements OnInit{
 
   user!: User;
   recipes: Recipe[] = [];
-  pressed: boolean[] = []
+  pressed: boolean[] = [];
+  loading = true;
   
   constructor(private authService: AuthService,private recipeService: RecipeService){
 
@@ -22,11 +23,14 @@ export class ReviewsRecipesComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.recipeService.getReviewedRecipes(this.user?.id).subscribe(recipes => {
-      this.recipes = recipes
-      this.pressed = new Array(this.recipes.length).fill(false);
-    })
-    
+    this.recipeService.getReviewedRecipes(this.user?.id).subscribe({
+      next: recipes => {
+        this.recipes = recipes;
+        this.pressed = new Array(this.recipes.length).fill(false);
+        this.loading = false;
+      },
+      error: () => this.loading = false
+    });
   }
 
   trackByRecipeId(index: number, recipe: Recipe): string {

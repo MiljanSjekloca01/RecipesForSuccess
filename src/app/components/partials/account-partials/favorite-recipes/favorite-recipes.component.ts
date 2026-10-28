@@ -15,6 +15,7 @@ export class FavoriteRecipesComponent implements OnInit{
   user!: User;
   recipes: Recipe[] = [];
   removingId: string = "";
+  loading = true;
     
   constructor(private authService: AuthService,private recipeService:RecipeService,private alertService: AlertService){
 
@@ -25,11 +26,19 @@ export class FavoriteRecipesComponent implements OnInit{
 
   
   ngOnInit(){
-    if(this.user.favoriteRecipes){
-      this.recipeService.getRecipesByIds(this.user.favoriteRecipes).subscribe(recipes => {
-        this.recipes = recipes;
-      })
+    const ids = this.user?.favoriteRecipes || [];
+    if(!ids.length){
+      this.loading = false;
+      return;
     }
+
+    this.recipeService.getRecipesByIds(ids).subscribe({
+      next: recipes => {
+        this.recipes = recipes;
+        this.loading = false;
+      },
+      error: () => this.loading = false
+    });
   }
 
   removeFavorite(recipeId: string){
