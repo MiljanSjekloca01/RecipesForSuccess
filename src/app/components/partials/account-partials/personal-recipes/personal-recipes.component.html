@@ -8,7 +8,7 @@
 </div>
 <app-loading-spinner [visible]="loading"></app-loading-spinner>
 <div class="recipes" *ngIf="!loading && recipes?.length">
-    <div *ngFor="let recipe of recipes.slice().reverse()" class="container">
+    <div *ngFor="let recipe of recipes.slice().reverse().slice(0, shownCount)" class="container">
         <div class="recipe">
             <a class="recipe-link" routerLink="/recipe/{{recipe.id}}">
                 <div class="recipe-part">
@@ -31,6 +31,9 @@
                 </button>
             </div>
         </div>
+    </div>
+    <div class="show-more" *ngIf="recipes.length > shownCount">
+        <button type="button" (click)="showMore()">Show More</button>
     </div>
 </div>
 

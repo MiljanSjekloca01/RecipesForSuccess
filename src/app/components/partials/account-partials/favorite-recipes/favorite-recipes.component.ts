@@ -16,6 +16,7 @@ export class FavoriteRecipesComponent implements OnInit{
   recipes: Recipe[] = [];
   removingId: string = "";
   loading = true;
+  shownCount = 8;
     
   constructor(private authService: AuthService,private recipeService:RecipeService,private alertService: AlertService){
 
@@ -39,6 +40,10 @@ export class FavoriteRecipesComponent implements OnInit{
       },
       error: () => this.loading = false
     });
+  }
+
+  showMore(){
+    this.shownCount += 8;
   }
 
   removeFavorite(recipeId: string){

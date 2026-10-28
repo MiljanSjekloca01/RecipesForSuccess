@@ -15,6 +15,7 @@ export class ReviewsRecipesComponent implements OnInit{
   recipes: Recipe[] = [];
   pressed: boolean[] = [];
   loading = true;
+  shownCount = 8;
   
   constructor(private authService: AuthService,private recipeService: RecipeService){
 
@@ -31,6 +32,10 @@ export class ReviewsRecipesComponent implements OnInit{
       },
       error: () => this.loading = false
     });
+  }
+
+  showMore(){
+    this.shownCount += 8;
   }
 
   trackByRecipeId(index: number, recipe: Recipe): string {

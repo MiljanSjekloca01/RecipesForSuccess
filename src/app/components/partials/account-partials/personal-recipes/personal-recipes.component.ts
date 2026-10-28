@@ -18,6 +18,7 @@ export class PersonalRecipesComponent implements OnInit{
   pendingRecipe: Recipe | null = null;
   editingRecipe: Recipe | null = null;
   loading = true;
+  shownCount = 8;
 
   constructor(private recipeService: RecipeService,private authService: AuthService,private alertService: AlertService){
     this.authService.user.subscribe(user => {
@@ -38,6 +39,10 @@ export class PersonalRecipesComponent implements OnInit{
       },
       error: () => this.loading = false
     });
+  }
+
+  showMore(){
+    this.shownCount += 8;
   }
 
   askToDelete(recipe: Recipe){

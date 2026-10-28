@@ -9,7 +9,7 @@
 
 <app-loading-spinner [visible]="loading"></app-loading-spinner>
 <div class="container" *ngIf="!loading && recipes?.length">
-    <div *ngFor="let recipe of recipes;let i = index;  trackBy: trackByRecipeId" class="main">
+    <div *ngFor="let recipe of recipes.slice(0, shownCount);let i = index;  trackBy: trackByRecipeId" class="main">
         <div class="recipe-info">
             <img [srcWithFallback]="recipe.imageUrl" [alt]="recipe.title">
             <p>{{recipe.title}}</p>
@@ -40,6 +40,9 @@
                 </a>
             </div>
         </div>
+    </div>
+    <div class="show-more" *ngIf="recipes.length > shownCount">
+        <button type="button" (click)="showMore()">Show More</button>
     </div>
 </div>
 
